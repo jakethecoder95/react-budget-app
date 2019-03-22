@@ -1,8 +1,15 @@
-import React from "react";
+import React, { Fragment } from "react";
+import Top from "./Top";
+import Bottom from "./Bottom";
 
 class App extends React.Component {
   render() {
-    return <div>App</div>;
+    return (
+      <Fragment>
+        <Top />
+        <Bottom />
+      </Fragment>
+    );
   }
 }
 

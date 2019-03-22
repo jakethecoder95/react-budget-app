@@ -1,0 +1,12 @@
+.top {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url(../images/back.png);
+  background-position: center center;
+  background-size: cover;
+  box-sizing: border-box;
+  height: 40vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  color: white;
+}

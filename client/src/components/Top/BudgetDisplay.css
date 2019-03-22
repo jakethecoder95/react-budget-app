@@ -1,0 +1,36 @@
+.budget-display {
+  width: 90%;
+  height: 75%;
+  max-width: 300px;
+  text-align: center;
+  margin: auto;
+  transform: translateY(30%);
+}
+
+.available-budget h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.top-income,
+.top-expences {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding: 12px;
+}
+
+.top-income {
+  background-color: #28b9b5;
+  margin-bottom: 8px;
+}
+
+.top-expences {
+  background-color: #ff5049;
+}
+
+.top-income p,
+.top-expences p {
+  margin: 0;
+}
