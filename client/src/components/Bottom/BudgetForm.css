@@ -1,0 +1,21 @@
+.budget-form__container {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #e7e7e7;
+  box-sizing: border-box;
+  margin: 0;
+  display: flex;
+}
+
+.budget-form {
+  transform: translateY(14%);
+}
+
+.budget-form select:focus,
+.budget-form input:focus {
+  outline: #f7f7f7 !important;
+}
+
+.btn-add {
+  color: #28b9b5;
+  font-size: 35px;
+}
