@@ -7,17 +7,15 @@ const BudgetForm = props => {
       <div className="ui form container budget-form">
         <div className="inline fields">
           <div className="two wide field">
-            <select classname="ui fluid dropdown">
-              <option value="inc" selected>
-                +
-              </option>
+            <select className="ui fluid dropdown">
+              <option value="inc">+</option>
               <option value="exp">-</option>
             </select>
           </div>
           <div className="three wide field">
-            <select classname="ui fluid dropdown">
-              <option value="misc">Misc &amp; Checks</option>
-              <option value="home">Home &amp; Utilities</option>
+            <select className="ui fluid dropdown">
+              <option value="misc">Misc & Checks</option>
+              <option value="home">Home & Utilities</option>
               <option value="transport">Transportation</option>
               <option value="groceries">Groceries</option>
               <option value="insurance">Insurance</option>
@@ -26,12 +24,12 @@ const BudgetForm = props => {
             </select>
           </div>
           <div className="five wide field">
-            <input class="add__description" placeholder="Add description" />
+            <input className="add__description" placeholder="Add description" />
           </div>
           <div className="four wide field">
-            <input class="add__description" placeholder="value" />
+            <input className="add__description" placeholder="value" />
           </div>
-          <i class="btn-add ion-ios-checkmark-outline" />
+          <i className="btn-add ion-ios-checkmark-outline" />
         </div>
       </div>
     </div>
