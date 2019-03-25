@@ -1,19 +1,16 @@
 import React from "react";
+import ItemExp from "./ItemExp";
 
-const Expences = () => {
+const Expences = props => {
+  const renderItems = () => {
+    return props.items.map(item => {
+      return <ItemExp item={item} key={item.id} />;
+    });
+  };
   return (
     <div className="expences">
       <h3 className="exp-header">Expences</h3>
-      <div className="items content">
-        <div className="item item-exp">
-          <div>Gas</div>
-          <div className="item__value">- 45.00</div>
-        </div>
-        <div className="item item-exp">
-          <div>Gas</div>
-          <div className="item__value">- 45.00</div>
-        </div>
-      </div>
+      <div className="items">{renderItems()}</div>
     </div>
   );
 };

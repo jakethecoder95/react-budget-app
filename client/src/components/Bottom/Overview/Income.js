@@ -1,15 +1,17 @@
 import React from "react";
+import ItemInc from "./ItemInc";
 
-const Income = () => {
+const Income = props => {
+  const renderItems = () => {
+    return props.items.map(item => {
+      return <ItemInc item={item} key={item.id} />;
+    });
+  };
+
   return (
     <div className="income">
       <h3 className="inc-header">Income</h3>
-      <div className="items content">
-        <div className="item item-inc">
-          <div>Income</div>
-          <div className="item__value">+ 1,500.00</div>
-        </div>
-      </div>
+      <div className="items">{renderItems()}</div>
     </div>
   );
 };
