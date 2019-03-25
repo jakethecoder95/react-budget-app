@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import Top from "./Top";
-import Bottom from "./Bottom";
+import Top from "./Top/Top";
+import Bottom from "./Bottom/Bottom";
 
 class App extends React.Component {
   render() {

@@ -1,6 +1,6 @@
 import "./Top.css";
 import React from "react";
-import BudgetDisplay from "./Top/BudgetDisplay";
+import BudgetDisplay from "./BudgetDisplay";
 
 class Top extends React.Component {
   render() {
