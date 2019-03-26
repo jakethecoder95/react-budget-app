@@ -7,7 +7,7 @@
 }
 
 .income,
-.expences {
+.expenses {
   margin: 0 auto;
   width: 100%;
   max-width: 475px;
@@ -19,7 +19,7 @@
 }
 
 .exp-header,
-.expences .item__value {
+.expenses .item__value {
   color: #ff5049;
 }
 
@@ -32,6 +32,8 @@
   justify-content: space-between;
   border-bottom: 1px solid #e7e7e7;
   padding: 13px;
+  transition: 250ms;
+  max-height: 47px;
 }
 
 .item:first-child {
@@ -40,6 +42,74 @@
 
 .item:nth-child(even) {
   background-color: #f7f7f7;
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+}
+
+.item__value {
+  transition: transform 0.3s;
+}
+
+.item__percentage {
+  float: left;
+  margin-left: 20px;
+  transition: transform 0.3s;
+  font-size: 11px;
+  background-color: #ffdad9;
+  border-radius: 3px;
+  width: 32px;
+  text-align: center;
+}
+
+.income .item__value,
+.income .item__delete--btn {
+  color: #28b9b5;
+  vertical-align: middle;
+}
+
+.expenses .item__value,
+.expenses .item__percentage,
+.expenses .item__delete--btn {
+  color: #ff5049;
+  vertical-align: middle;
+}
+
+.item__delete {
+  float: left;
+}
+
+.item__delete--btn {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  display: none;
+}
+
+.item__delete--btn:focus {
+  outline: none;
+}
+
+.item__delete--btn:active {
+  transform: translateY(2px);
+}
+
+.item:hover .item__delete--btn {
+  display: inline-block;
+}
+
+.item:hover .item__value {
+  transform: translateX(-20px);
+}
+
+.item:hover .item__percentage {
+  transform: translateX(-20px);
 }
 
 @media (max-width: 1000px) {

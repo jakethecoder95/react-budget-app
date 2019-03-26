@@ -8,7 +8,7 @@ const Expences = props => {
     });
   };
   return (
-    <div className="expences">
+    <div className="expenses">
       <h3 className="exp-header">Expences</h3>
       <div className="items">{renderItems()}</div>
     </div>

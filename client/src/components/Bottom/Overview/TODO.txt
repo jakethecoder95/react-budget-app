@@ -1,5 +1,6 @@
 TODO
-- add percentage to ItemExp
-- add buttons and css
+x add percentage to ItemExp
+x add buttons and css
+- organize css
 - create redux store for incs and exps
 - add items with form to redux store

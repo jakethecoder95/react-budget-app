@@ -5,7 +5,14 @@ const ItemInc = props => {
   return (
     <div className="item item-inc">
       <div>{item.desc}</div>
-      <div className="item__value">+ {item.val}</div>
+      <div className="right">
+        <div className="item__value">+ {item.val}</div>
+        <div className="item__delete">
+          <button className="item__delete--btn">
+            <i className="ion-ios-close-outline" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
