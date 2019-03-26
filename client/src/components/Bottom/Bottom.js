@@ -1,11 +1,12 @@
+import "./Bottom.css";
 import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch, Link } from "react-router-dom";
 
 import history from "../../history";
 import BudgetOverview from "./Overview/BudgetOverview.js";
 import BudgetMonthChart from "./Charts/BudgetMonthChart";
-import BudgetYearChart from "./Charts/BudgetYearChart";
 import BudgetForm from "./Form/BudgetForm";
+import Navbar from "./Navbar";
 
 class Bottom extends React.Component {
   render() {
@@ -14,10 +15,10 @@ class Bottom extends React.Component {
         <Router history={history}>
           <div>
             <BudgetForm />
+            <Navbar />
             <Switch>
               <Route path="/" exact component={BudgetOverview} />
-              <Route path="/month" exact component={BudgetMonthChart} />
-              <Route path="/year" exact component={BudgetYearChart} />
+              <Route path="/charts" exact component={BudgetMonthChart} />
             </Switch>
           </div>
         </Router>

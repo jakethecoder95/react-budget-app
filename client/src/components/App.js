@@ -1,3 +1,4 @@
+import "./Global.css";
 import React, { Fragment } from "react";
 import Top from "./Top/Top";
 import Bottom from "./Bottom/Bottom";

@@ -1,0 +1,6 @@
+@media (max-width: 769px) {
+  .ui.secondary.pointing.menu {
+    max-width: 475px;
+    margin: 0 auto;
+  }
+}

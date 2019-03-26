@@ -1,39 +1,76 @@
 import "./BudgetForm.css";
 import React from "react";
+import { Form, Field } from "react-final-form";
 
-const BudgetForm = props => {
-  return (
-    <div className="budget-form__container">
-      <div className="ui form container budget-form">
-        <div className="inline fields">
-          <div className="two wide field">
-            <select className="ui fluid dropdown">
-              <option value="inc">+</option>
-              <option value="exp">-</option>
-            </select>
-          </div>
-          <div className="three wide field">
-            <select className="ui fluid dropdown">
-              <option value="misc">Misc & Checks</option>
-              <option value="home">Home & Utilities</option>
-              <option value="transport">Transportation</option>
-              <option value="groceries">Groceries</option>
-              <option value="insurance">Insurance</option>
-              <option value="dining">Restaurants and Dining</option>
-              <option value="entertainment">Entertainment</option>
-            </select>
-          </div>
-          <div className="five wide field">
-            <input className="add__description" placeholder="Add description" />
-          </div>
-          <div className="four wide field">
-            <input className="add__description" placeholder="value" />
-          </div>
-          <i className="btn-add ion-ios-checkmark-outline" />
+import SelectTypes from "./Fields/SelectTypes";
+import SelectCatagories from "./Fields/SelectCatagories";
+import InputDescription from "./Fields/InputDescription";
+import InputValue from "./Fields/InputValue";
+
+class BudgetForm extends React.Component {
+  state = { selectedType: "inc" };
+
+  onSubmit = item => {
+    console.log(item); // TODO: Insert action creator
+  };
+
+  onTypeChange = type => this.setState({ selectedType: type });
+
+  isEmpty = value => {
+    if (!value) {
+      return "Field is required";
+    }
+    return undefined;
+  };
+
+  render() {
+    const catagoryClass =
+      this.state.selectedType === "inc" ? "display-none" : "";
+
+    return (
+      <div className="budget-form__container">
+        <div className="ui form container">
+          <Form
+            initialValues={{
+              type: this.state.selectedType
+              // Handle unselected catagory in this.onSubmit
+            }}
+            onSubmit={this.onSubmit}
+            render={({ handleSubmit, invalid }) => (
+              <form
+                onSubmit={handleSubmit}
+                className="inline fields budget-form"
+              >
+                <Field
+                  name="type"
+                  component={SelectTypes}
+                  onTypeChange={this.onTypeChange}
+                />
+                <Field
+                  name="catagory"
+                  component={SelectCatagories}
+                  catagoryClass={catagoryClass}
+                />
+                <Field
+                  name="description"
+                  component={InputDescription}
+                  validate={this.isEmpty}
+                />
+                <Field
+                  name="value"
+                  component={InputValue}
+                  validate={this.isEmpty}
+                />
+                <button className="add__btn">
+                  <i className="ion-ios-checkmark-outline" />
+                </button>
+              </form>
+            )}
+          />
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default BudgetForm;
