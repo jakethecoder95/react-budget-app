@@ -35,3 +35,15 @@
 .top-expences p {
   margin: 0;
 }
+
+@media (max-height: 704px) {
+  .budget-display {
+    margin: -30px auto 0 auto;
+    height: auto;
+  }
+  .top-income,
+  .top-expences {
+    height: 30px;
+    padding: 10px;
+  }
+}
