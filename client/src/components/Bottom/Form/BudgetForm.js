@@ -1,26 +1,42 @@
 import "./BudgetForm.css";
 import React from "react";
+import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 
 import SelectTypes from "./Fields/SelectTypes";
 import SelectCatagories from "./Fields/SelectCatagories";
 import InputDescription from "./Fields/InputDescription";
 import InputValue from "./Fields/InputValue";
+import { addItem } from "../../../actions";
 
 class BudgetForm extends React.Component {
   state = { selectedType: "inc" };
 
-  onSubmit = item => {
-    console.log(item); // TODO: Insert action creator
-  };
-
   onTypeChange = type => this.setState({ selectedType: type });
 
-  isEmpty = value => {
-    if (!value) {
-      return "Field is required";
+  getNewId = items => {
+    let newId;
+    if (items) {
+      const keys = Object.keys(items);
+      newId = parseInt(keys[keys.length - 1]) + 1;
+    } else {
+      newId = 0;
     }
-    return undefined;
+    return newId;
+  };
+
+  onSubmit = item => {
+    console.log("here");
+    const { incomeItems, expenseItems } = this.props;
+    const itemId =
+      item.type === "inc"
+        ? this.getNewId(incomeItems)
+        : this.getNewId(expenseItems);
+    if (item.type === "exp") {
+      item.catagory = item.catagory || "misc";
+    }
+    item.id = itemId;
+    this.props.addItem(item);
   };
 
   render() {
@@ -33,12 +49,27 @@ class BudgetForm extends React.Component {
           <Form
             initialValues={{
               type: this.state.selectedType
-              // Handle unselected catagory in this.onSubmit
             }}
+            validate={({ description, value }) => {
+              const errors = {};
+              if (!description) {
+                errors.description = "Required";
+              }
+              if (!value) {
+                errors.value = "Required";
+              }
+              return errors;
+            }}
+            submitSucceeded
             onSubmit={this.onSubmit}
-            render={({ handleSubmit, invalid }) => (
+            render={({ handleSubmit, form, values, submitting }) => (
               <form
-                onSubmit={handleSubmit}
+                onSubmit={e => {
+                  handleSubmit(e);
+                  if (values.description && values.value) {
+                    form.reset();
+                  }
+                }}
                 className="inline fields budget-form"
               >
                 <Field
@@ -51,17 +82,13 @@ class BudgetForm extends React.Component {
                   component={SelectCatagories}
                   catagoryClass={catagoryClass}
                 />
-                <Field
-                  name="description"
-                  component={InputDescription}
-                  validate={this.isEmpty}
-                />
-                <Field
-                  name="value"
-                  component={InputValue}
-                  validate={this.isEmpty}
-                />
-                <button className="add__btn">
+                <Field name="description" component={InputDescription} />
+                <Field name="value" component={InputValue} />
+                <button
+                  className="add__btn"
+                  type="submit"
+                  disabled={submitting}
+                >
                   <i className="ion-ios-checkmark-outline" />
                 </button>
               </form>
@@ -73,4 +100,12 @@ class BudgetForm extends React.Component {
   }
 }
 
-export default BudgetForm;
+const mapStateToProps = state => ({
+  incomeItems: state.items.incomeItems,
+  expenseItems: state.items.expenseItems
+});
+
+export default connect(
+  mapStateToProps,
+  { addItem }
+)(BudgetForm);

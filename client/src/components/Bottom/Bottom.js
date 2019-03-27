@@ -1,6 +1,6 @@
 import "./Bottom.css";
 import React from "react";
-import { Router, Route, Switch, Link } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 
 import history from "../../history";
 import BudgetOverview from "./Overview/BudgetOverview.js";

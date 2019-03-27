@@ -1,9 +1,9 @@
 import React from "react";
 
-const SelectCatagories = ({ input, meta, catagoryClass }) => {
+const SelectCatagories = ({ input, catagoryClass }) => {
   return (
     <div className={`four wide field ${catagoryClass}`}>
-      <select name="catagory" component="select">
+      <select {...input} name="catagory" component="select">
         <option value="misc">Misc & Checks</option>
         <option value="home">Home & Utilities</option>
         <option value="transport">Transportation</option>

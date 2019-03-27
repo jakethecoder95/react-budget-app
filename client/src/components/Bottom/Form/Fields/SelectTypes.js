@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectTypes = ({ input, meta, onTypeChange }) => {
+const SelectTypes = ({ input, onTypeChange }) => {
   return (
     <div className="two wide field">
       <select
