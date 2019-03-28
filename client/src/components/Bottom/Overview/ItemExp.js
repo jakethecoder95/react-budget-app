@@ -2,7 +2,7 @@ import "./Item.css";
 import React from "react";
 import { connect } from "react-redux";
 
-import Percentage from "../../Util/Percentage";
+import Percentage from "../../UtilComponents/Percentage";
 import { deleteItem } from "../../../actions";
 
 const ItemExp = props => {

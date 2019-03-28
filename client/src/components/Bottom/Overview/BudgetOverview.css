@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Righteous");
+
 .overview {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -11,13 +13,37 @@
   margin: 0 auto;
   width: 100%;
   max-width: 475px;
+  min-height: 400px;
+  background-color: rgba(237, 237, 237, 0.5);
+  padding: 30px;
+  border-radius: 40px;
 }
 
-.inc-header {
+.empty {
+  font-family: "Righteous";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(128, 128, 128, 0.25);
+  font-size: 6em;
+  font-weight: 1000;
+  width: 100%;
+  height: 250px;
+}
+
+.inc-header__div,
+.exp-header__div {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid rgba(34, 36, 38, 0.15);
+  margin-bottom: 20px;
+}
+
+.inc-header__div {
   color: #28b9b5;
 }
 
-.exp-header {
+.exp-header__div {
   color: #ff5049;
 }
 
@@ -30,7 +56,8 @@
     grid-template-columns: 1fr;
   }
 
-  .overview h3 {
-    text-align: center;
+  .income,
+  .expenses {
+    min-height: 150px;
   }
 }

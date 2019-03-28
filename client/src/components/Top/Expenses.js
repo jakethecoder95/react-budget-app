@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import formatNumber from "./util/format-number";
-import Percentage from "../Util/Percentage";
+import formatNumber from "../util/format-number";
+import Percentage from "../UtilComponents/Percentage";
 
 const Expences = ({ totalExpenses, totalIncome }) => {
   return (

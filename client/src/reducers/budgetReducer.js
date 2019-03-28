@@ -12,6 +12,15 @@ const INITIAL_STATE = {
   items: {
     incomeItems: null,
     expenseItems: null
+  },
+  catagoryTotals: {
+    misc: 0,
+    home: 0,
+    transport: 0,
+    groceries: 0,
+    insurance: 0,
+    dining: 0,
+    entertainment: 0
   }
 };
 
@@ -33,6 +42,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         totalExpenses: state.totalExpenses + action.payload.value,
+        catagoryTotals: {
+          ...state.catagoryTotals,
+          [action.payload.catagory]:
+            state.catagoryTotals[action.payload.catagory] + action.payload.value
+        },
         items: {
           ...state.items,
           expenseItems: {
@@ -54,6 +68,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         totalExpenses: state.totalExpenses - action.payload.value,
+        catagoryTotals: {
+          ...state.catagoryTotals,
+          [action.payload.catagory]:
+            state.catagoryTotals[action.payload.catagory] - action.payload.value
+        },
         items: {
           ...state.items,
           expenseItems: _.omit(state.items.expenseItems, action.payload.id)

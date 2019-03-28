@@ -1,11 +1,3 @@
-.income .item__value {
-  color: #28b9b5;
-}
-
-.expenses .item__value {
-  color: #ff5049;
-}
-
 .income .item,
 .expenses .item {
   display: flex;
@@ -14,19 +6,28 @@
   padding: 13px;
   transition: 250ms;
   max-height: 47px;
+  background-color: #ffffffad;
 }
 
 .item:first-child {
   border-top: 1px solid #e7e7e7;
 }
 
-.item:nth-child(even) {
+/* .item:nth-child(even) {
   background-color: #f7f7f7;
-}
+} */
 
 .right {
   display: flex;
   flex-direction: row;
+}
+
+.income .item__value {
+  color: #28b9b5;
+}
+
+.expenses .item__value {
+  color: #ff5049;
 }
 
 .item__value {
@@ -79,4 +80,32 @@
 
 .item:hover .item__percentage {
   transform: translateX(-20px);
+}
+
+.misc {
+  border-left: solid 5px rgba(200, 200, 200, 0.6);
+}
+
+.home {
+  border-left: solid 5px rgba(255, 99, 132, 0.6);
+}
+
+.transport {
+  border-left: solid 5px rgba(54, 162, 235, 0.6);
+}
+
+.groceries {
+  border-left: solid 5px rgba(255, 206, 86, 0.6);
+}
+
+.insurance {
+  border-left: solid 5px rgba(75, 192, 192, 0.6);
+}
+
+.dining {
+  border-left: solid 5px rgba(153, 102, 255, 0.6);
+}
+
+.entertainment {
+  border-left: solid 5px rgba(255, 159, 64, 0.6);
 }
