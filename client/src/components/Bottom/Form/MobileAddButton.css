@@ -1,0 +1,45 @@
+.mobile-add-button {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  align-items: center;
+  background-color: #28b9b5;
+  border-radius: 50%;
+  border-width: 0;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+    rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  height: 56px;
+  justify-content: center;
+  letter-spacing: 0.02857em;
+  line-height: 1.75;
+  margin: 20px;
+  min-height: 36px;
+  min-width: 0;
+  outline: none;
+  padding: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition-delay: 0ms, 0ms, 0ms;
+  transition-duration: 250ms, 250ms, 250ms;
+  transition-property: background-color, box-shadow, border;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1),
+    cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  vertical-align: middle;
+  width: 56px;
+  display: none;
+}
+
+@media (max-width: 769px) {
+  .mobile-add-button {
+    display: inline-block;
+  }
+}

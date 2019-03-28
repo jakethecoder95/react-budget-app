@@ -1,4 +1,5 @@
 import "./BudgetForm.css";
+import "./MobileForm.css";
 import React from "react";
 import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
@@ -26,7 +27,6 @@ class BudgetForm extends React.Component {
   };
 
   onSubmit = item => {
-    console.log("here");
     const { incomeItems, expenseItems } = this.props;
     const itemId =
       item.type === "inc"
@@ -72,6 +72,7 @@ class BudgetForm extends React.Component {
                 }}
                 className="inline fields budget-form"
               >
+                <h2 className="mobile-form__header">Add an Item</h2>
                 <Field
                   name="type"
                   component={SelectTypes}
@@ -84,13 +85,18 @@ class BudgetForm extends React.Component {
                 />
                 <Field name="description" component={InputDescription} />
                 <Field name="value" component={InputValue} />
-                <button
-                  className="add__btn"
-                  type="submit"
-                  disabled={submitting}
-                >
-                  <i className="ion-ios-checkmark-outline" />
-                </button>
+                {this.props.mobile && (
+                  <button className="ui button">Submit</button>
+                )}
+                {!this.props.mobile && (
+                  <button
+                    className="add__btn"
+                    type="submit"
+                    disabled={submitting}
+                  >
+                    <i className="ion-ios-checkmark-outline" />
+                  </button>
+                )}
               </form>
             )}
           />

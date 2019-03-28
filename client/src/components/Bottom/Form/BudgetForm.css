@@ -17,9 +17,8 @@
   margin: 0 auto 10px auto;
 }
 
-.budget-form select:focus,
-.budget-form input:focus {
-  outline: #f7f7f7 !important;
+.ui.form .inline.fields > label {
+  display: none;
 }
 
 .add__btn {
@@ -45,5 +44,8 @@
 @media (max-width: 769px) {
   .budget-form__container {
     display: none;
+  }
+  .mobile-form .budget-form__container {
+    display: block;
   }
 }

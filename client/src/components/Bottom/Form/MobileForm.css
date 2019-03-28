@@ -1,0 +1,37 @@
+.mobile-form__container {
+  display: none;
+}
+.mobile-form .form {
+  padding-bottom: 70px;
+}
+.mobile-form__header {
+  display: none;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+.mobile-form .ui.form .inline.fields .wide.field {
+  padding: 0;
+}
+.mobile-form .ui.form .inline.fields > label {
+  display: block;
+  margin: 1em 0 0.5em 0;
+  width: 100%;
+  text-align: left;
+}
+.mobile-form .ui.button {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #28b9b5;
+  color: white;
+}
+@media (max-width: 769px) {
+  .mobile-form__container {
+    display: block;
+  }
+  .mobile-form .budget-form__container {
+    display: block;
+  }
+  .mobile-form__header {
+    display: block;
+  }
+}

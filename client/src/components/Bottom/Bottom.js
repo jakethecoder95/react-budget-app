@@ -5,6 +5,8 @@ import history from "../../history";
 import BudgetOverview from "./Overview/BudgetOverview.js";
 import BudgetMonthChart from "./Charts/BudgetMonthChart";
 import BudgetForm from "./Form/BudgetForm";
+import MobileForm from "./Form/MobileForm";
+import MobileAddButton from "./Form/MobileAddButton";
 import Navbar from "./Navbar";
 
 class Bottom extends React.Component {
@@ -18,7 +20,9 @@ class Bottom extends React.Component {
             <Switch>
               <Route path="/" exact component={BudgetOverview} />
               <Route path="/charts" exact component={BudgetMonthChart} />
+              <Route path="/mobile-form" component={MobileForm} />
             </Switch>
+            <MobileAddButton />
           </div>
         </Router>
       </div>
