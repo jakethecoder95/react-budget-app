@@ -8,7 +8,7 @@ import { deleteItem } from "../../../actions";
 const ItemExp = props => {
   const { item } = props;
   return (
-    <div className="item item-exp">
+    <div className={`item item-exp ${item.catagory}`}>
       <div>{item.description}</div>
       <div className="right">
         <div className="item__value">- {item.value.toFixed(2)}</div>
