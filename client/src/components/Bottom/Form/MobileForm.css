@@ -2,7 +2,7 @@
   display: none;
 }
 .mobile-form .form {
-  padding-bottom: 70px;
+  padding-bottom: 90px;
 }
 .mobile-form__header {
   display: none;
@@ -19,7 +19,7 @@
   text-align: left;
 }
 .mobile-form .ui.button {
-  margin-top: 20px;
+  margin-top: 40px;
   width: 100%;
   background-color: #28b9b5;
   color: white;

@@ -1,11 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import ItemInc from "./ItemInc";
 
 const Income = props => {
   const renderItems = () => {
-    return props.items.map(item => {
-      return <ItemInc item={item} key={item.id} />;
-    });
+    const { incomeItems } = props;
+    if (incomeItems) {
+      return Object.keys(incomeItems).map(item => {
+        return <ItemInc item={incomeItems[item]} key={incomeItems[item].id} />;
+      });
+    }
   };
 
   return (
@@ -16,4 +20,6 @@ const Income = props => {
   );
 };
 
-export default Income;
+const mapStateToProps = state => ({ incomeItems: state.items.incomeItems });
+
+export default connect(mapStateToProps)(Income);

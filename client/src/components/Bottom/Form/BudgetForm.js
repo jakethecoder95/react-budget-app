@@ -9,11 +9,18 @@ import SelectCatagories from "./Fields/SelectCatagories";
 import InputDescription from "./Fields/InputDescription";
 import InputValue from "./Fields/InputValue";
 import { addItem } from "../../../actions";
+import history from "../../../history";
 
 class BudgetForm extends React.Component {
   state = { selectedType: "inc" };
 
   onTypeChange = type => this.setState({ selectedType: type });
+
+  checkHistory = () => {
+    if (history.location.pathname === "/mobile-form") {
+      history.goBack();
+    }
+  };
 
   getNewId = items => {
     let newId;
@@ -37,6 +44,7 @@ class BudgetForm extends React.Component {
     }
     item.id = itemId;
     this.props.addItem(item);
+    this.checkHistory();
   };
 
   render() {

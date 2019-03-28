@@ -1,11 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
 import ItemExp from "./ItemExp";
 
 const Expences = props => {
   const renderItems = () => {
-    return props.items.map(item => {
-      return <ItemExp item={item} key={item.id} />;
-    });
+    const { expenseItems } = props;
+    if (expenseItems) {
+      return Object.keys(expenseItems).map(item => {
+        return (
+          <ItemExp item={expenseItems[item]} key={expenseItems[item].id} />
+        );
+      });
+    }
   };
   return (
     <div className="expenses">
@@ -15,4 +21,8 @@ const Expences = props => {
   );
 };
 
-export default Expences;
+const mapStateToProps = state => ({
+  expenseItems: state.items.expenseItems
+});
+
+export default connect(mapStateToProps)(Expences);

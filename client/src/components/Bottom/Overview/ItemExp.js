@@ -5,10 +5,10 @@ const ItemExp = props => {
   const { item } = props;
   return (
     <div className="item item-exp">
-      <div>{item.desc}</div>
+      <div>{item.description}</div>
       <div className="right">
-        <div className="item__value">- {item.val.toFixed(2)}</div>
-        <div className="item__percentage">{item.per}%</div>
+        <div className="item__value">- {parseInt(item.value).toFixed(2)}</div>
+        <div className="item__percentage">10%</div>
         <div className="item__delete">
           <button className="item__delete--btn">
             <i className="ion-ios-close-outline" />
