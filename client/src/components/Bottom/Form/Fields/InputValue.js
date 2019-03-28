@@ -12,6 +12,7 @@ const InputValue = ({ input, meta }) => {
           className="add__description"
           placeholder="Value"
           type="number"
+          step="0.01"
         />
       </div>
     </Fragment>

@@ -4,20 +4,21 @@ import { connect } from "react-redux";
 import formatNumber from "./util/format-number";
 import Percentage from "../Util/Percentage";
 
-const Income = ({ totalIncome }) => {
+const Expences = ({ totalExpenses, totalIncome }) => {
   return (
-    <div className="ui teal top-income">
-      <p>INCOME</p>
+    <div className="top-expences">
+      <p>EXPENSES</p>
       <div style={{ display: "flex" }}>
-        <p>+ {formatNumber(totalIncome)}</p>
-        <Percentage hidden />
+        <p>+ {formatNumber(totalExpenses)}</p>
+        <Percentage value={totalExpenses} total={totalIncome} />
       </div>
     </div>
   );
 };
 
 const mapStateToProps = ({ budget }) => ({
+  totalExpenses: budget.totalExpenses,
   totalIncome: budget.totalIncome
 });
 
-export default connect(mapStateToProps)(Income);
+export default connect(mapStateToProps)(Expences);

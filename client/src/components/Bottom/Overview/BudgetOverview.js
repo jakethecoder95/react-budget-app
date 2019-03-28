@@ -2,7 +2,7 @@ import "./BudgetOverview.css";
 import React from "react";
 
 import Income from "./Income";
-import Expences from "./Expences";
+import Expenses from "./Expenses";
 
 class BudgetOverview extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class BudgetOverview extends React.Component {
       <div className="ui container">
         <div className="overview ui fluid accordion">
           <Income />
-          <Expences />
+          <Expenses />
         </div>
       </div>
     );

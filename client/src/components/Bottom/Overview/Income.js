@@ -20,6 +20,8 @@ const Income = props => {
   );
 };
 
-const mapStateToProps = state => ({ incomeItems: state.items.incomeItems });
+const mapStateToProps = state => ({
+  incomeItems: state.budget.items.incomeItems
+});
 
 export default connect(mapStateToProps)(Income);

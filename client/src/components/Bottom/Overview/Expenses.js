@@ -15,14 +15,14 @@ const Expences = props => {
   };
   return (
     <div className="expenses">
-      <h3 className="exp-header">Expences</h3>
+      <h3 className="exp-header">Expenses</h3>
       <div className="items">{renderItems()}</div>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  expenseItems: state.items.expenseItems
+  expenseItems: state.budget.items.expenseItems
 });
 
 export default connect(mapStateToProps)(Expences);

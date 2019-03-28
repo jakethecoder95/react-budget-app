@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import addItemReducer from "./addItemReducer";
+import budgetReducers from "./budgetReducer";
 
 export default combineReducers({
-  items: addItemReducer
+  budget: budgetReducers
 });

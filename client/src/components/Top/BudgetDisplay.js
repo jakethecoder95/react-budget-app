@@ -3,7 +3,7 @@ import React from "react";
 
 import AvailableBudget from "./AvailableBudget";
 import Income from "./Income";
-import Expences from "./Expences";
+import Expenses from "./Expenses";
 
 class BudgetDisplay extends React.Component {
   getDate = () => {
@@ -30,7 +30,7 @@ class BudgetDisplay extends React.Component {
         <h4>{`Available Budget in ${this.getDate()}:`}</h4>
         <AvailableBudget />
         <Income />
-        <Expences />
+        <Expenses />
       </div>
     );
   }

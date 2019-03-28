@@ -43,6 +43,7 @@ class BudgetForm extends React.Component {
       item.catagory = item.catagory || "misc";
     }
     item.id = itemId;
+    item.value = Number(item.value);
     this.props.addItem(item);
     this.checkHistory();
   };
@@ -115,8 +116,8 @@ class BudgetForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  incomeItems: state.items.incomeItems,
-  expenseItems: state.items.expenseItems
+  incomeItems: state.budget.items.incomeItems,
+  expenseItems: state.budget.items.expenseItems
 });
 
 export default connect(
