@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 
-const SelectCatagories = ({ input, catagoryClass }) => {
+const SelectCatagories = ({ input, catagoryClass, selectedType }) => {
   const [resourse, setResourse] = useState("misc");
 
   return (
@@ -12,6 +12,9 @@ const SelectCatagories = ({ input, catagoryClass }) => {
           name="catagory"
           component="select"
           value={resourse}
+          className={`ui fluid dropdown input-item${
+            selectedType === "exp" ? "__red" : ""
+          }`}
           onChangeCapture={e => setResourse(e.target.value)}
         >
           <option value="misc">Misc & Checks</option>

@@ -86,14 +86,24 @@ class BudgetForm extends React.Component {
                   name="type"
                   component={SelectTypes}
                   onTypeChange={this.onTypeChange}
+                  selectedType={this.state.selectedType}
                 />
                 <Field
                   name="catagory"
                   component={SelectCatagories}
                   catagoryClass={catagoryClass}
+                  selectedType={this.state.selectedType}
                 />
-                <Field name="description" component={InputDescription} />
-                <Field name="value" component={InputValue} />
+                <Field
+                  name="description"
+                  component={InputDescription}
+                  selectedType={this.state.selectedType}
+                />
+                <Field
+                  name="value"
+                  component={InputValue}
+                  selectedType={this.state.selectedType}
+                />
                 {this.props.mobile && (
                   <button className="ui button">Submit</button>
                 )}
@@ -102,6 +112,12 @@ class BudgetForm extends React.Component {
                     className="add__btn"
                     type="submit"
                     disabled={submitting}
+                    style={{
+                      color:
+                        this.state.selectedType === "inc"
+                          ? "#28b9b5"
+                          : "#ff5049"
+                    }}
                   >
                     <i className="ion-ios-checkmark-outline" />
                   </button>

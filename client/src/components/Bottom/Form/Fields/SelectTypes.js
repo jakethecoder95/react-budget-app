@@ -1,13 +1,15 @@
 import React, { Fragment } from "react";
 
-const SelectTypes = ({ input, onTypeChange }) => {
+const SelectTypes = ({ input, onTypeChange, selectedType }) => {
   return (
     <Fragment>
       <label>Type</label>
       <div className="three wide field">
         <select
           {...input}
-          className="ui fluid dropdown"
+          className={`ui fluid dropdown input-item${
+            selectedType === "exp" ? "__red" : ""
+          }`}
           onChange={e => onTypeChange(e.target.value)}
         >
           <option value="inc">Add Income</option>

@@ -41,6 +41,14 @@
   outline: none;
 }
 
+.ui.form .input-item:focus {
+  border-color: #28b9b5 !important;
+}
+
+.ui.form .input-item__red:focus {
+  border-color: #ff5049 !important;
+}
+
 @media (max-width: 769px) {
   .budget-form__container {
     display: none;
