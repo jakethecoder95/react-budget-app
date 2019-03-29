@@ -6,12 +6,12 @@ import formatNumber from "../../util/format-number";
 const Income = props => {
   const renderItems = () => {
     const { incomeItems } = props;
-    if (incomeItems) {
+    if (Object.keys(incomeItems).length) {
       return Object.keys(incomeItems).map(item => {
         return <ItemInc item={incomeItems[item]} key={incomeItems[item].id} />;
       });
     } else {
-      return <div className="empty">EMPTY</div>;
+      return <div className="empty">No Income</div>;
     }
   };
 

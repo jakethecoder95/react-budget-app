@@ -4,14 +4,14 @@ const SelectTypes = ({ input, onTypeChange }) => {
   return (
     <Fragment>
       <label>Type</label>
-      <div className="two wide field">
+      <div className="three wide field">
         <select
           {...input}
           className="ui fluid dropdown"
           onChange={e => onTypeChange(e.target.value)}
         >
-          <option value="inc">+</option>
-          <option value="exp">-</option>
+          <option value="inc">Add Income</option>
+          <option value="exp">Add Expense</option>
         </select>
       </div>
     </Fragment>

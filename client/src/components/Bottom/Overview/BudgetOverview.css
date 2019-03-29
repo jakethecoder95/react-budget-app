@@ -25,10 +25,10 @@
   justify-content: center;
   align-items: center;
   color: rgba(128, 128, 128, 0.25);
-  font-size: 6em;
+  font-size: 5em;
   font-weight: 1000;
   width: 100%;
-  height: 250px;
+  min-height: 250px;
 }
 
 .inc-header__div,
@@ -51,6 +51,12 @@
   margin-top: 0;
 }
 
+@media (max-width: 1200px) {
+  .empty {
+    font-size: 3em;
+  }
+}
+
 @media (max-width: 1000px) {
   .overview {
     grid-template-columns: 1fr;
@@ -59,5 +65,16 @@
   .income,
   .expenses {
     min-height: 150px;
+  }
+
+  .empty {
+    min-height: 150px;
+  }
+}
+
+@media (max-width: 330px) {
+  .empty {
+    font-size: 2em;
+    min-height: 100px;
   }
 }

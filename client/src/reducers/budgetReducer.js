@@ -10,8 +10,8 @@ const INITIAL_STATE = {
   totalIncome: 0,
   totalExpenses: 0,
   items: {
-    incomeItems: null,
-    expenseItems: null
+    incomeItems: {},
+    expenseItems: {}
   },
   catagoryTotals: {
     misc: 0,

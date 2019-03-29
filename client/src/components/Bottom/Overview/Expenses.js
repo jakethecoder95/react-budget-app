@@ -3,17 +3,17 @@ import { connect } from "react-redux";
 import ItemExp from "./ItemExp";
 import formatNumber from "../../util/format-number";
 
-const Expences = props => {
+const Expenses = props => {
   const renderItems = () => {
     const { expenseItems } = props;
-    if (expenseItems) {
+    if (Object.keys(expenseItems).length) {
       return Object.keys(expenseItems).map(item => {
         return (
           <ItemExp item={expenseItems[item]} key={expenseItems[item].id} />
         );
       });
     } else {
-      return <div className="empty">EMPTY</div>;
+      return <div className="empty">No Expenses</div>;
     }
   };
   return (
@@ -34,4 +34,4 @@ const mapStateToProps = state => ({
   totalExpenses: state.budget.totalExpenses
 });
 
-export default connect(mapStateToProps)(Expences);
+export default connect(mapStateToProps)(Expenses);
