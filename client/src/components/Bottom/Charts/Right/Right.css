@@ -1,14 +1,11 @@
 .chart__right {
   margin-top: 66px;
 }
-
 .chart__right .row {
   display: grid;
   grid-template-columns: 15% 85%;
-  height: 100%;
   align-items: center;
-  max-width: 700px;
-  max-height: 103px;
+  height: 103px;
   cursor: pointer;
   padding-left: 10px;
   border-bottom: solid 2px rgba(128, 128, 128, 0.335);
@@ -19,99 +16,120 @@
 .chart__right .row:first-child {
   border-top: solid 2px rgba(128, 128, 128, 0.335);
 }
-
 .chart__right .content-div {
   display: grid;
   grid-template-rows: 50% 50%;
   align-items: center;
   margin-left: 14.4px;
 }
-
 .chart__right .title {
   font-size: 21.6px;
   font-weight: bold;
   transform: translateY(9.36px);
   margin-bottom: 14.4px;
 }
-
 .chart__right .description {
   font-size: 15.84px;
 }
-
 .chart__right .icon-div {
   z-index: 1;
 }
-
 .chart__right .fa {
   font-size: 79px;
   z-index: 102;
+  height: 79px;
+  width: 79px;
 }
-
 .chart__right.fa:hover {
   cursor: pointer;
 }
-
 .chart__right .fa-question-circle {
   color: rgba(200, 200, 200, 0.6);
 }
-/* .fa-question-circle:hover { color: rgba(136, 135, 135, 0.6);}
- */
 .chart__right .fa-shopping-basket {
   color: white;
   background: rgba(255, 206, 86, 0.6);
   font-size: 50.4px;
-  height: 79px;
-  width: 79px;
   border-radius: 39.6px;
   padding: 12px;
 }
-/* .fa-shopping-basket:hover { background: rgba(248, 195, 61, 0.6); } */
 .chart__right .fa-wrench {
   color: white;
   background: rgba(255, 99, 132, 0.6);
   font-size: 54px;
-  height: 79px;
-  width: 79px;
   border-radius: 39.6px;
   padding: 12px;
 }
-/* .fa-wrench:hover { background: rgba(255, 45, 90, 0.6); }*/
 .chart__right .fa-car {
   color: white;
   background: rgba(54, 162, 235, 0.6);
   font-size: 57.6px;
-  height: 79px;
-  width: 79px;
   border-radius: 39.6px;
   padding: 12px;
 }
-/* .fa-car:hover { background: rgba(4, 143, 235, 0.6); } */
 .chart__right .fa-piggy-bank {
   color: white;
   background: rgba(75, 192, 192, 0.6);
   font-size: 50.4px;
-  height: 79px;
-  width: 79px;
   border-radius: 55px;
   padding: 12px;
 }
-/* .fa-piggy-bank:hover { background: rgba(62, 204, 204, 0.6); } */
 .chart__right .fa-utensils {
   color: white;
   background: rgba(153, 102, 255, 0.6);
   font-size: 50.4px;
-  height: 79px;
-  width: 79px;
   border-radius: 39.6px;
   padding: 16px;
 }
-/* .fa-utensils:hover { background: rgba(129, 80, 228, 0.6); } */
 .chart__right .fa-theater-masks {
   color: white;
   background: rgba(255, 159, 64, 0.6);
   font-size: 50.4px;
-  height: 79px;
-  width: 79px;
   border-radius: 39.6px;
-  padding: 13px;
+  padding: 15px 10px;
+}
+
+@media (max-width: 500px) {
+  .chart__right .row {
+    grid-column-gap: 20px;
+    height: 95px;
+  }
+  .chart__right .title {
+    font-size: 20px;
+    transform: translateY(5px);
+    margin-bottom: 12px;
+  }
+  .chart__right .description {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .chart__right .fa {
+    font-size: 70px;
+    height: 70px;
+    width: 70px;
+  }
+  .chart__right .fa-shopping-basket {
+    font-size: 43px;
+    padding: 12px;
+  }
+  .chart__right .fa-wrench {
+    font-size: 46px;
+    padding: 12px;
+  }
+  .chart__right .fa-car {
+    font-size: 47px;
+    padding: 12px;
+  }
+  .chart__right .fa-piggy-bank {
+    font-size: 43px;
+    padding: 12px;
+  }
+  .chart__right .fa-utensils {
+    font-size: 45px;
+    padding: 16px;
+  }
+  .chart__right .fa-theater-masks {
+    font-size: 43px;
+    padding: 14px 12px;
+  }
 }

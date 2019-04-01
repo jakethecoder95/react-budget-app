@@ -19,7 +19,7 @@ const RankingsList = props => {
 
       <div class="row overview-1">
         <div class="icon-div">
-          <i class="fa fa-wrench" />
+          <i class="fa fa-theater-masks" />
         </div>
 
         <div class="content-div">
