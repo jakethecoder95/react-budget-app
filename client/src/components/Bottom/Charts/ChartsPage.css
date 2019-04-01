@@ -1,0 +1,27 @@
+.charts {
+  display: grid !important;
+  grid-template-columns: 520px 520px;
+  justify-content: center;
+}
+.charts h2 {
+  margin: 20px auto 5px auto;
+}
+
+.charts__left {
+  padding: 0 10%;
+  text-align: center;
+  position: relative;
+}
+
+@media (max-width: 1000px) {
+  .charts {
+    grid-template-columns: 100%;
+    justify-content: center;
+    max-width: 500px;
+    margin: auto;
+  }
+
+  .charts__left {
+    padding: 0 0;
+  }
+}

@@ -3,7 +3,7 @@ import { Router, Route, Switch } from "react-router-dom";
 
 import history from "../../history";
 import BudgetOverview from "./Overview/BudgetOverview.js";
-import BudgetMonthChart from "./Charts/BudgetMonthChart";
+import ChartsPage from "./Charts/ChartsPage";
 import BudgetForm from "./Form/BudgetForm";
 import MobileForm from "./Form/MobileForm";
 import MobileAddButton from "./Form/MobileAddButton";
@@ -19,7 +19,7 @@ class Bottom extends React.Component {
             <Navbar />
             <Switch>
               <Route path="/" exact component={BudgetOverview} />
-              <Route path="/charts" exact component={BudgetMonthChart} />
+              <Route path="/charts" exact component={ChartsPage} />
               <Route path="/mobile-form" component={MobileForm} />
             </Switch>
             <MobileAddButton />
