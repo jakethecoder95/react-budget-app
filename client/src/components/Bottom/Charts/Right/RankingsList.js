@@ -1,36 +1,75 @@
 import React from "react";
+import { connect } from "react-redux";
 
 const RankingsList = props => {
-  return (
-    <div className="chart__right">
-      <div class="row misc__overview">
-        <div class="icon-div">
-          <i class="fa fa-question-circle" />
-        </div>
+  const catagoryData = [
+    {
+      icon: "fa-question-circle",
+      title: "Misc & Checks",
+      value: props.chartData.misc
+    },
+    {
+      icon: "fa-wrench",
+      title: "Home & Utilities",
+      value: props.chartData.home
+    },
+    {
+      icon: "fa-car",
+      title: "Transportation",
+      value: props.chartData.transport
+    },
+    {
+      icon: "fa-shopping-basket",
+      title: "Groceries",
+      value: props.chartData.groceries
+    },
+    {
+      icon: "fa-piggy-bank",
+      title: "Insurance",
+      value: props.chartData.insurance
+    },
+    {
+      icon: "fa-utensils",
+      title: "Restaurants and Dining",
+      value: props.chartData.dining
+    },
+    {
+      icon: "fa-theater-masks",
+      title: "Entertainment",
+      value: props.chartData.entertainment
+    }
+  ];
 
-        <div class="content-div">
-          <div class="title">Misc & Checks</div>
-          <div class="description">
-            You spent a total of <b class="misc-exp">$800.00</b> on Misc &
-            Checks
+  const renderRankingsList = () => {
+    let items = catagoryData
+      .filter(catagory => catagory.value)
+      .sort((a, b) => b.value - a.value);
+    if (items.length > 0)
+      return items.map((item, i) => {
+        return (
+          <div className="row misc__overview" key={i}>
+            <div className="icon-div">
+              <i className={`fa ${item.icon}`} />
+            </div>
+
+            <div className="content-div">
+              <div className="title">{item.title}</div>
+              <div className="description">
+                You spent a total of <b className="misc-exp">${item.value}</b>{" "}
+                on Misc & Checks
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        );
+      });
+    else return <div className="empty">No Items</div>;
+  };
 
-      <div class="row overview-1">
-        <div class="icon-div">
-          <i class="fa fa-theater-masks" />
-        </div>
-
-        <div class="content-div">
-          <div class="title">Home & Utilities</div>
-          <div class="description">
-            You spent a total of <b class="home-exp">$400.00</b> on Home goods
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <div className="chart__right">{renderRankingsList()}</div>;
 };
 
-export default RankingsList;
+const mapStateToProps = ({ budget }) => ({
+  chartData: budget.catagoryTotals
+});
+
+export default connect(mapStateToProps)(RankingsList);
