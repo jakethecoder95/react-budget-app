@@ -2,11 +2,12 @@ import "./ChartsPage.css";
 import React from "react";
 import { connect } from "react-redux";
 
-import DoughnutChart from "./DoughnutChart";
+import Left from "./Left/Left";
+import Right from "./Right/Right";
 
 const ChartsPage = props => {
   const percentages = Object.values(props.catagoryTotals).map(el =>
-    ((el / props.totalExpenses) * 100).toFixed(2)
+    Math.round((el / props.totalExpenses) * 100)
   );
   !props.totalExpenses ? percentages.unshift(100) : percentages.unshift(0);
   return (
@@ -14,14 +15,9 @@ const ChartsPage = props => {
       <div className="charts">
         <div className="charts__left">
           <h2>Spendings: March 2019</h2>
-          <DoughnutChart
-            totalExpenses={props.totalExpenses}
-            percentages={percentages}
-          />
+          <Left totalExpenses={props.totalExpenses} percentages={percentages} />
         </div>
-        <div className="charts__right">
-          <h2>Charts section right</h2>
-        </div>
+        <Right />
       </div>
     </div>
   );
