@@ -24,8 +24,8 @@ class BudgetForm extends React.Component {
 
   getNewId = items => {
     let newId;
-    if (items) {
-      const keys = Object.keys(items);
+    const keys = Object.keys(items);
+    if (keys.length > 0) {
       newId = parseInt(keys[keys.length - 1]) + 1;
     } else {
       newId = 0;
@@ -39,6 +39,7 @@ class BudgetForm extends React.Component {
       item.type === "inc"
         ? this.getNewId(incomeItems)
         : this.getNewId(expenseItems);
+    item.date = new Date().toISOString();
     if (item.type === "exp") {
       item.catagory = item.catagory || "misc";
     }
