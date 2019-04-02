@@ -9,7 +9,7 @@ const Expences = ({ totalExpenses, totalIncome }) => {
     <div className="top-expences">
       <p>EXPENSES</p>
       <div style={{ display: "flex" }}>
-        <p>+ {formatNumber(totalExpenses)}</p>
+        <p>- {formatNumber(totalExpenses)}</p>
         <Percentage value={totalExpenses} total={totalIncome} />
       </div>
     </div>

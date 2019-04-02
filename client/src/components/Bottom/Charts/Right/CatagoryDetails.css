@@ -1,0 +1,44 @@
+.details__container {
+  display: flex;
+  perspective: 1000px;
+  flex-direction: column;
+  max-width: 100%;
+  height: 427px;
+}
+
+.details__container .row {
+  grid-template-columns: 15% 70% 15%;
+  background: #fff;
+  padding: 14.4px 0;
+}
+
+.details__container {
+  opacity: 1;
+  right: -45.5%;
+}
+
+.details__container .item {
+  font-size: 17.26px;
+  height: 57.6px;
+  max-width: 700px;
+  padding-top: 17.26px;
+}
+
+.details__container .item__delete--btn {
+  margin: 7px 0;
+  font-size: 17.26px;
+  color: #ff5049;
+}
+
+.details__container .percent {
+  font-size: 25.92px;
+  height: 25.92px;
+}
+
+.details__container .item__percentage {
+  margin-left: 14.4px;
+  font-size: 14.4px;
+  padding: 2.16px;
+  border-radius: 2.16px;
+  width: 46.8px;
+}

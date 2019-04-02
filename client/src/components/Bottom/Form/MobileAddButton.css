@@ -1,6 +1,7 @@
 .mobile-add-button {
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
+  z-index: 999;
   align-items: center;
   background-color: #28b9b5;
   border-radius: 50%;
