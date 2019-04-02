@@ -30,6 +30,9 @@ const CatagoryDetails = props => {
 
   return (
     <div className="details__container">
+      <div className="back-icon column" onClick={props.deactivateDetails}>
+        <i className="arrow left icon" />
+      </div>
       <div className="header">
         <div className="row">
           <div className="icon-div">
@@ -51,10 +54,6 @@ const CatagoryDetails = props => {
       </div>
 
       {renderItems()}
-
-      <div className="back-icon" onClick={props.deactivateDetails}>
-        <i className="fa fa-caret-left" />
-      </div>
     </div>
   );
 };
