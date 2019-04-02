@@ -5,43 +5,43 @@ import { connect } from "react-redux";
 const RankingsList = props => {
   const catagoryData = [
     {
-      type: "misc",
+      catagory: "misc",
       icon: "fa-question-circle",
       title: "Misc & Checks",
       value: props.chartData.misc
     },
     {
-      type: "home",
+      catagory: "home",
       icon: "fa-wrench",
       title: "Home & Utilities",
       value: props.chartData.home
     },
     {
-      type: "transport",
+      catagory: "transport",
       icon: "fa-car",
       title: "Transportation",
       value: props.chartData.transport
     },
     {
-      type: "groceries",
+      catagory: "groceries",
       icon: "fa-shopping-basket",
       title: "Groceries",
       value: props.chartData.groceries
     },
     {
-      type: "insurance",
+      catagory: "insurance",
       icon: "fa-piggy-bank",
       title: "Insurance",
       value: props.chartData.insurance
     },
     {
-      type: "dining",
+      catagory: "dining",
       icon: "fa-utensils",
       title: "Restaurants and Dining",
       value: props.chartData.dining
     },
     {
-      type: "entertainment",
+      catagory: "entertainment",
       icon: "fa-theater-masks",
       title: "Entertainment",
       value: props.chartData.entertainment
@@ -58,7 +58,7 @@ const RankingsList = props => {
           <div
             className="row misc__overview"
             key={i}
-            onClick={props.activateDetails}
+            onClick={() => props.activateDetails(item)}
           >
             <div className="icon-div">
               <i className={`fa ${item.icon}`} />
@@ -68,13 +68,13 @@ const RankingsList = props => {
               <div className="title">{item.title}</div>
               <div className="description">
                 You spent a total of <b className="misc-exp">${item.value}</b>{" "}
-                on Misc & Checks
+                on {item.title}
               </div>
             </div>
           </div>
         );
       });
-    else return <div className="empty">No Items</div>;
+    else return <div className="empty">No Expenses</div>;
   };
 
   return <div className="rankings-list">{renderRankingsList()}</div>;

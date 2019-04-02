@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   transition: 250ms ease-out;
+  margin-bottom: 70px;
 }
 
 .chart__right .details__container {

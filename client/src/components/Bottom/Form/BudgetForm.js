@@ -12,9 +12,10 @@ import { addItem } from "../../../actions";
 import history from "../../../history";
 
 class BudgetForm extends React.Component {
-  state = { selectedType: "inc" };
+  state = { selectedType: "inc", selectedCatagory: "misc" };
 
   onTypeChange = type => this.setState({ selectedType: type });
+  onCatagoryChange = cat => this.setState({ selectedCatagory: cat });
 
   checkHistory = () => {
     if (history.location.pathname === "/mobile-form") {
@@ -58,7 +59,8 @@ class BudgetForm extends React.Component {
         <div className="ui form container">
           <Form
             initialValues={{
-              type: this.state.selectedType
+              type: this.state.selectedType,
+              catagory: this.state.selectedCatagory
             }}
             validate={({ description, value }) => {
               const errors = {};
@@ -93,7 +95,9 @@ class BudgetForm extends React.Component {
                   name="catagory"
                   component={SelectCatagories}
                   catagoryClass={catagoryClass}
+                  onCatagoryChange={this.onCatagoryChange}
                   selectedType={this.state.selectedType}
+                  selectedCatagory={this.state.selectedCatagory}
                 />
                 <Field
                   name="description"

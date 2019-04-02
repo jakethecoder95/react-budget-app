@@ -4,20 +4,25 @@ import RankingsList from "./RankingsList";
 import CatagoryDetails from "./CatagoryDetails";
 
 class ChartRight extends React.Component {
-  state = { detailsActive: false };
+  state = { detailsActive: false, selectedCatagory: null /* type object */ };
 
-  activateDetails = () => this.setState({ detailsActive: true });
+  activateDetails = selected => {
+    this.setState({ detailsActive: true, selectedCatagory: selected });
+  };
   deactivateDetails = () => this.setState({ detailsActive: false });
 
   render() {
     return (
       <div
-        class={`chart__right ${
+        className={`chart__right ${
           this.state.detailsActive ? "details-active" : ""
         }`}
       >
         <RankingsList activateDetails={this.activateDetails} />
-        <CatagoryDetails deactivateDetails={this.deactivateDetails} />
+        <CatagoryDetails
+          deactivateDetails={this.deactivateDetails}
+          selectedCatagory={this.state.selectedCatagory}
+        />
       </div>
     );
   }

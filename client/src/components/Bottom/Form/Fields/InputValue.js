@@ -16,6 +16,7 @@ const InputValue = ({ input, meta, selectedType }) => {
           type="number"
           step="0.01"
           autoComplete="off"
+          min="0"
         />
       </div>
     </Fragment>
