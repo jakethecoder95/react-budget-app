@@ -132,3 +132,14 @@
     padding: 14px 12px;
   }
 }
+
+/* Animations */
+.chart__right .rankings-list {
+  transition: 250ms ease-out;
+  transition-delay: 100ms;
+}
+
+.details-active .rankings-list {
+  transition: 250ms ease-out;
+  opacity: 0;
+}

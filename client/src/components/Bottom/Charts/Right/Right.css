@@ -8,32 +8,7 @@
   margin-bottom: 70px;
 }
 
-.chart__right .details__container {
-  transition: 250ms ease-out;
-  opacity: 0;
-}
-
-.chart__right .rankings-list {
-  transition: 250ms ease-out;
-  transition-delay: 100ms;
-}
-
+/* Animations */
 .details-active {
   transform: translateX(-50%);
-}
-
-.details-active .rankings-list {
-  transition: 250ms ease-out;
-  opacity: 0;
-}
-
-.details-active .details__container {
-  transition: 250ms ease-out;
-  opacity: 1;
-}
-
-.details-active .details__container .back-icon {
-  transition: 350ms;
-  transition-delay: 250ms;
-  opacity: 0.5;
 }

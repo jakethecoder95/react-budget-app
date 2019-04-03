@@ -20,7 +20,15 @@
 .chart__right {
   z-index: 0;
 }
-
+@media (max-width: 1200px) {
+  .charts {
+    grid-template-columns: 450px 450px;
+    grid-column-gap: 38px;
+  }
+  .charts__left {
+    padding: 0;
+  }
+}
 @media (max-width: 1000px) {
   .charts {
     grid-template-columns: 100%;

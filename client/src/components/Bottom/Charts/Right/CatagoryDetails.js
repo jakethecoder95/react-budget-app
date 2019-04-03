@@ -9,27 +9,34 @@ const CatagoryDetails = props => {
     selectedCatagory,
     totalExpenses,
     expenseItems,
-    deactivateDetails
+    deactivateDetails,
+    chartData
   } = props;
 
-  const renderItems = () => {
-    const { catagory } = selectedCatagory;
-    return Object.keys(expenseItems)
-      .filter(expense => expenseItems[expense].catagory === catagory)
-      .map((expense, i) => {
-        return (
-          <ItemExp
-            item={expenseItems[expense]}
-            key={expenseItems[expense].id}
-          />
-        );
-      });
+  const itemsOfSelectedCatagory = () => {
+    return Object.keys(expenseItems).filter(
+      expense => expenseItems[expense].catagory === selectedCatagory.catagory
+    );
   };
 
-  if (!selectedCatagory || !Object.keys(expenseItems).length) {
+  const renderItems = () => {
+    return itemsOfSelectedCatagory().map((expense, i) => {
+      return (
+        <ItemExp item={expenseItems[expense]} key={expenseItems[expense].id} />
+      );
+    });
+  };
+
+  if (!selectedCatagory) {
+    return <div />;
+  }
+
+  if (itemsOfSelectedCatagory().length === 0) {
     deactivateDetails();
     return <div />;
   }
+
+  console.log(chartData[selectedCatagory.catagory]);
 
   return (
     <div className="details__container">
@@ -51,7 +58,10 @@ const CatagoryDetails = props => {
             </div>
           </div>
           <div className="percent">
-            {Math.round((selectedCatagory.value / totalExpenses) * 100)}%
+            {Math.round(
+              (chartData[selectedCatagory.catagory] / totalExpenses) * 100
+            )}
+            %
           </div>
         </div>
       </div>
@@ -63,7 +73,8 @@ const CatagoryDetails = props => {
 
 const mapStateToProps = ({ budget }) => ({
   totalExpenses: budget.totalExpenses,
-  expenseItems: budget.items.expenseItems
+  expenseItems: budget.items.expenseItems,
+  chartData: budget.catagoryTotals
 });
 
 export default connect(mapStateToProps)(CatagoryDetails);
