@@ -5,32 +5,35 @@ import { connect } from "react-redux";
 import ItemExp from "../../Overview/ItemExp";
 
 const CatagoryDetails = props => {
-  const { selectedCatagory, totalExpenses } = props;
+  const {
+    selectedCatagory,
+    totalExpenses,
+    expenseItems,
+    deactivateDetails
+  } = props;
 
   const renderItems = () => {
-    const { expenseItems } = props;
     const { catagory } = selectedCatagory;
-    if (Object.keys(expenseItems).length) {
-      return Object.keys(expenseItems)
-        .filter(expense => expenseItems[expense].catagory === catagory)
-        .map(expense => {
-          return (
-            <ItemExp
-              item={expenseItems[expense]}
-              key={expenseItems[expense].id}
-            />
-          );
-        });
-    }
+    return Object.keys(expenseItems)
+      .filter(expense => expenseItems[expense].catagory === catagory)
+      .map((expense, i) => {
+        return (
+          <ItemExp
+            item={expenseItems[expense]}
+            key={expenseItems[expense].id}
+          />
+        );
+      });
   };
 
-  if (!selectedCatagory) {
+  if (!selectedCatagory || !Object.keys(expenseItems).length) {
+    deactivateDetails();
     return <div />;
   }
 
   return (
     <div className="details__container">
-      <div className="back-icon column" onClick={props.deactivateDetails}>
+      <div className="back-icon column" onClick={deactivateDetails}>
         <i className="arrow left icon" />
       </div>
       <div className="header">
