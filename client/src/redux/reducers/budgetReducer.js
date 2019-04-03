@@ -4,7 +4,7 @@ import {
   ADD_EXPENSE_ITEM,
   DELETE_INCOME_ITEM,
   DELETE_EXPENSE_ITEM
-} from "../actions/types";
+} from "../types";
 
 const INITIAL_STATE = {
   totalIncome: 0,

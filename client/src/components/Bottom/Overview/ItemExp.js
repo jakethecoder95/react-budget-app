@@ -1,9 +1,10 @@
 import "./Item.css";
 import React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+import { deleteItem } from "../../../redux/actions";
 import Percentage from "../../UtilComponents/Percentage";
-import { deleteItem } from "../../../actions";
 
 const ItemExp = props => {
   const { item } = props;
@@ -26,11 +27,19 @@ const ItemExp = props => {
   );
 };
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      deleteItem
+    },
+    dispatch
+  );
+
 const mapStateToProps = state => ({
   totalExpenses: state.budget.totalExpenses
 });
 
 export default connect(
   mapStateToProps,
-  { deleteItem }
+  mapDispatchToProps
 )(ItemExp);
