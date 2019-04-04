@@ -34,6 +34,9 @@
   z-index: 1;
 }
 .chart__right .fa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 79px;
   z-index: 102;
   height: 79px;
@@ -50,42 +53,36 @@
   background: rgba(255, 206, 86, 0.6);
   font-size: 50.4px;
   border-radius: 39.6px;
-  padding: 12px;
 }
 .chart__right .fa-wrench {
   color: white;
   background: rgba(255, 99, 132, 0.6);
   font-size: 54px;
   border-radius: 39.6px;
-  padding: 12px;
 }
 .chart__right .fa-car {
   color: white;
   background: rgba(54, 162, 235, 0.6);
   font-size: 57.6px;
   border-radius: 39.6px;
-  padding: 12px;
 }
 .chart__right .fa-piggy-bank {
   color: white;
   background: rgba(75, 192, 192, 0.6);
   font-size: 50.4px;
   border-radius: 55px;
-  padding: 12px;
 }
 .chart__right .fa-utensils {
   color: white;
   background: rgba(153, 102, 255, 0.6);
   font-size: 50.4px;
   border-radius: 39.6px;
-  padding: 16px;
 }
 .chart__right .fa-theater-masks {
   color: white;
   background: rgba(255, 159, 64, 0.6);
   font-size: 50.4px;
   border-radius: 39.6px;
-  padding: 15px 10px;
 }
 
 @media (max-width: 500px) {
@@ -109,27 +106,21 @@
   }
   .chart__right .fa-shopping-basket {
     font-size: 43px;
-    padding: 12px;
   }
   .chart__right .fa-wrench {
     font-size: 46px;
-    padding: 12px;
   }
   .chart__right .fa-car {
     font-size: 47px;
-    padding: 12px;
   }
   .chart__right .fa-piggy-bank {
     font-size: 43px;
-    padding: 12px;
   }
   .chart__right .fa-utensils {
     font-size: 45px;
-    padding: 16px;
   }
   .chart__right .fa-theater-masks {
     font-size: 43px;
-    padding: 14px 12px;
   }
 }
 
