@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import ItemExp from "./ItemExp";
-import formatNumber from "../../util/format-number";
+import formatNumber from "../../Util/format-number";
 
 const Expenses = props => {
   const renderItems = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import formatNumber from "../util/format-number";
+import formatNumber from "../Util/format-number";
 
 const AvailableBudget = ({ availableBudget }) => {
   const icon = availableBudget >= 0 ? "+" : "-";
