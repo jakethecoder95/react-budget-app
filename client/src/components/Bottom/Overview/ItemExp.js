@@ -13,7 +13,10 @@ const ItemExp = props => {
       <div>{item.description}</div>
       <div className="right">
         <div className="item__value">- {item.value.toFixed(2)}</div>
-        <Percentage value={item.value} total={props.totalExpenses} />
+        <Percentage
+          value={item.value}
+          total={!props.setTotal ? props.totalExpenses : props.setTotal}
+        />
         <div className="item__delete">
           <button
             className="item__delete--btn"

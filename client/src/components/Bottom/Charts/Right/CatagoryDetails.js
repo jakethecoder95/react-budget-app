@@ -22,7 +22,11 @@ const CatagoryDetails = props => {
   const renderItems = () => {
     return itemsOfSelectedCatagory().map((expense, i) => {
       return (
-        <ItemExp item={expenseItems[expense]} key={expenseItems[expense].id} />
+        <ItemExp
+          item={expenseItems[expense]}
+          key={expenseItems[expense].id}
+          setTotal={chartData[selectedCatagory.catagory]}
+        />
       );
     });
   };

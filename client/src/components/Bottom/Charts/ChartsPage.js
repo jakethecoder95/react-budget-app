@@ -13,10 +13,7 @@ const ChartsPage = props => {
   return (
     <div className="ui container">
       <div className="charts">
-        <div className="charts__left">
-          <h2>Spendings: March 2019</h2>
-          <Left totalExpenses={props.totalExpenses} percentages={percentages} />
-        </div>
+        <Left totalExpenses={props.totalExpenses} percentages={percentages} />
         <Right />
       </div>
     </div>
