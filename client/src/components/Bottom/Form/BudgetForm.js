@@ -26,9 +26,9 @@ class BudgetForm extends React.Component {
 
   getNewId = items => {
     let newId;
-    const keys = Object.keys(items);
+    const keys = Object.values(items);
     if (keys.length > 0) {
-      newId = parseInt(keys[keys.length - 1]) + 1;
+      newId = parseInt(keys[keys.length - 1].id) + 1;
     } else {
       newId = 0;
     }
