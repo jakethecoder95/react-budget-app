@@ -36,8 +36,6 @@ const CatagoryDetails = props => {
     return <div />;
   }
 
-  console.log(chartData[selectedCatagory.catagory]);
-
   return (
     <div className="details__container">
       <div className="back-icon column" onClick={deactivateDetails}>

@@ -1,5 +1,6 @@
 import _ from "lodash";
 import {
+  SET_INITIAL_BUDGET,
   ADD_INCOME_ITEM,
   ADD_EXPENSE_ITEM,
   DELETE_INCOME_ITEM,
@@ -26,6 +27,9 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case SET_INITIAL_BUDGET:
+      const budget = JSON.parse(action.payload);
+      return { ...budget };
     case ADD_INCOME_ITEM:
       return {
         ...state,
