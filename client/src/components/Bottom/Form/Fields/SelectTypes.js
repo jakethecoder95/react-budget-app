@@ -10,7 +10,7 @@ const SelectTypes = ({ input, onTypeChange, selectedType }) => {
           className={`ui fluid dropdown input-item${
             selectedType === "exp" ? "__red" : ""
           }`}
-          onChange={e => onTypeChange(e.target.value)}
+          onClick={e => onTypeChange(e.target.value)}
         >
           <option value="inc">Add Income</option>
           <option value="exp">Add Expense</option>

@@ -9,14 +9,20 @@ import SelectTypes from "./Fields/SelectTypes";
 import SelectCatagories from "./Fields/SelectCatagories";
 import InputDescription from "./Fields/InputDescription";
 import InputValue from "./Fields/InputValue";
+import RadioPersistItem from "./Fields/RadioPersistItem";
 import { addItem } from "../../../redux/actions";
 import history from "../../../history";
 
 class BudgetForm extends React.Component {
-  state = { selectedType: "inc", selectedCatagory: "misc" };
+  state = {
+    selectedType: "inc",
+    selectedCatagory: "misc",
+    selectedPersist: false
+  };
 
-  onTypeChange = type => this.setState({ selectedType: type });
-  onCatagoryChange = cat => this.setState({ selectedCatagory: cat });
+  onTypeChange = selectedType => this.setState({ selectedType });
+  onCatagoryChange = selectedCatagory => this.setState({ selectedCatagory });
+  onPersistChange = selectedPersist => this.setState({ selectedPersist });
 
   checkHistory = () => {
     if (history.location.pathname === "/mobile-form") {
@@ -36,17 +42,20 @@ class BudgetForm extends React.Component {
   };
 
   onSubmit = item => {
+    const { selectedType, selectedCatagory, selectedPersist } = this.state;
     const { incomeItems, expenseItems } = this.props;
+
+    item.type = selectedType;
     const itemId =
       item.type === "inc"
         ? this.getNewId(incomeItems)
         : this.getNewId(expenseItems);
     item.date = new Date().toISOString();
-    if (item.type === "exp") {
-      item.catagory = item.catagory || "misc";
-    }
     item.id = itemId;
     item.value = Number(item.value);
+    if (item.type === "exp") item.catagory = selectedCatagory;
+    item.persist = selectedPersist;
+
     this.props.addItem(item);
     this.checkHistory();
   };
@@ -59,10 +68,6 @@ class BudgetForm extends React.Component {
       <div className="budget-form__container">
         <div className="ui form container">
           <Form
-            initialValues={{
-              type: this.state.selectedType,
-              catagory: this.state.selectedCatagory
-            }}
             validate={({ description, value }) => {
               const errors = {};
               if (!description) {
@@ -110,8 +115,20 @@ class BudgetForm extends React.Component {
                   component={InputValue}
                   selectedType={this.state.selectedType}
                 />
+                <Field
+                  name="persist"
+                  component={RadioPersistItem}
+                  onPersistChange={this.onPersistChange}
+                  type="checkbox"
+                />
                 {this.props.mobile && (
-                  <button className="ui button">Submit</button>
+                  <button
+                    className="ui button"
+                    type="submit"
+                    disabled={submitting}
+                  >
+                    Submit
+                  </button>
                 )}
                 {!this.props.mobile && (
                   <button
@@ -145,9 +162,9 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-const mapStateToProps = state => ({
-  incomeItems: state.budget.items.incomeItems,
-  expenseItems: state.budget.items.expenseItems
+const mapStateToProps = ({ budget }) => ({
+  incomeItems: budget.items.incomeItems,
+  expenseItems: budget.items.expenseItems
 });
 
 export default connect(

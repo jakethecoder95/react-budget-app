@@ -15,13 +15,11 @@ const SelectCatagories = props => {
       <div className={`four wide field ${catagoryClass}`}>
         <select
           {...input}
-          name="catagory"
-          component="select"
           value={selectedCatagory}
           className={`ui fluid dropdown input-item${
             selectedType === "exp" ? "__red" : ""
           }`}
-          onChangeCapture={e => onCatagoryChange(e.target.value)}
+          onChange={e => onCatagoryChange(e.target.value)}
         >
           <option value="misc">Misc & Checks</option>
           <option value="home">Home & Utilities</option>

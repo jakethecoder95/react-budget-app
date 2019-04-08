@@ -11,6 +11,11 @@
   max-width: 800px;
 }
 
+.ui.form .inline.fields .field > label.checkbox-label {
+  color: rgba(128, 128, 128, 0.685);
+  margin-right: 0;
+}
+
 .ui.form .inline.fields {
   display: flex;
   justify-content: center;
@@ -55,5 +60,8 @@
   }
   .mobile-form .budget-form__container {
     display: block;
+  }
+  .mobile-form .checkbox {
+    max-width: 50px;
   }
 }
