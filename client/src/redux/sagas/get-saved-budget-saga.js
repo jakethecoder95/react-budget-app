@@ -14,20 +14,20 @@ function* checkLocalStorage() {
     // Omit any income item not in the current month
     const incomes = Object.values(incomeItems).filter(item => {
       const itemMonth = new Date(item.date).getMonth();
-      if (itemMonth !== currentMonth) {
+      if (!item.persist && itemMonth !== currentMonth) {
         storedBudget.totalIncome -= item.value;
       }
-      return itemMonth === currentMonth;
+      return item.persist || itemMonth === currentMonth;
     });
 
     // Omit any expense item not in the current month
     const expenses = Object.values(expenseItems).filter(item => {
       const itemMonth = new Date(item.date).getMonth();
-      if (itemMonth !== currentMonth) {
+      if (!item.persist && itemMonth !== currentMonth) {
         storedBudget.totalExpenses -= item.value;
         storedBudget.catagoryTotals[item.catagory] -= item.value;
       }
-      return itemMonth === currentMonth;
+      return item.persist || itemMonth === currentMonth;
     });
 
     if (storedBudget) {
