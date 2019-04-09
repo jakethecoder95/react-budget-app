@@ -7,7 +7,6 @@ function* checkLocalStorage() {
   let storedBudget = store.get("budget");
 
   if (storedBudget) {
-    storedBudget = JSON.parse(storedBudget);
     const currentMonth = new Date().getMonth();
     const { incomeItems, expenseItems } = storedBudget.items;
 
