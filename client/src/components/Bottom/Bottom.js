@@ -18,9 +18,9 @@ class Bottom extends React.Component {
             <BudgetForm />
             <Navbar />
             <Switch>
-              <Route path="/" exact component={BudgetOverview} />
-              <Route path="/charts" exact component={ChartsPage} />
-              <Route path="/mobile-form" component={MobileForm} />
+              <Route path="/budget" exact component={BudgetOverview} />
+              <Route path="/budget/charts" exact component={ChartsPage} />
+              <Route path="/budget/mobile-form" component={MobileForm} />
             </Switch>
             <MobileAddButton />
           </div>

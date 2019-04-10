@@ -15,14 +15,14 @@ class Navbar extends React.Component {
       <div className="ui container">
         <div className="ui secondary pointing menu">
           <Link
-            to="/"
+            to="/budget"
             className={`item ${this.state.active === "/" ? "active" : ""}`}
             onClick={() => this.changeActive("/")}
           >
             Overview
           </Link>
           <Link
-            to="/charts"
+            to="/budget/charts"
             className={`item ${
               this.state.active === "/charts" ? "active" : ""
             }`}

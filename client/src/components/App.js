@@ -1,11 +1,15 @@
 import "./Global.css";
 import React, { Fragment } from "react";
+import { Router, Switch, Route } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import Top from "./Top/Top";
 import Bottom from "./Bottom/Bottom";
+import Login from "./Auth/Login";
+import Signup from "./Auth/Signup";
 import { checkLocalStorage } from "../redux/actions";
+import history from "../history";
 
 class App extends React.Component {
   componentDidMount() {
@@ -13,10 +17,20 @@ class App extends React.Component {
   }
 
   render() {
+    const location = history.location.pathname;
+    history.location.pathname = location === "/" ? "/budget" : location;
     return (
       <Fragment>
-        <Top />
-        <Bottom />
+        <Router history={history}>
+          <Switch>
+            <Route path="/budget" exact>
+              <Top />
+              <Bottom />
+            </Route>
+            <Route path="/login" exact component={Login} />
+            <Route path="/sugnup" eact component={Signup} />
+          </Switch>
+        </Router>
       </Fragment>
     );
   }
