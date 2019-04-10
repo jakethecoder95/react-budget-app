@@ -17,7 +17,7 @@ function* addItem({ payload }) {
     yield put({ type: ADD_EXPENSE_ITEM, payload });
   }
   let state = yield select();
-  store.set("budget", JSON.stringify(state.budget));
+  store.set("budget", state.budget);
 }
 
 function* deleteItem({ payload }) {
@@ -27,7 +27,7 @@ function* deleteItem({ payload }) {
     yield put({ type: DELETE_EXPENSE_ITEM, payload });
   }
   let state = yield select();
-  store.set("budget", JSON.stringify(state.budget));
+  store.set("budget", state.budget);
 }
 
 export function createUpdateBudgetSaga() {
