@@ -1,0 +1,8 @@
+.ui.form {
+  width: 500px;
+  border-radius: 50px;
+  margin: -120px auto 0 auto;
+  background: #f7f7f7;
+  padding: 40px;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
