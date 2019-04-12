@@ -1,10 +1,11 @@
 import "./Form.css";
 import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
+import { connect } from "react-redux";
 
 const Signup = props => {
-  const onSubmit = info => {
-    console.log(info);
+  const onSubmit = userInfo => {
+    props.signUp(userInfo);
   };
 
   return (
@@ -17,12 +18,16 @@ const Signup = props => {
             <form onSubmit={handleSubmit} className="ui form">
               <h2 className="ui dividing header">Signup</h2>
               <div className="field">
-                <label>Email</label>
-                <Field name="email" component="input" placeholder="Email" />
+                <label>Username</label>
+                <Field
+                  name="username"
+                  component="input"
+                  placeholder="Username"
+                />
               </div>
               <div className="field">
-                <label>First Name</label>
-                <Field name="name" component="input" placeholder="Fist Name" />
+                <label>Email</label>
+                <Field name="email" component="input" placeholder="Email" />
               </div>
               <div className="field">
                 <label>Password</label>
@@ -47,4 +52,11 @@ const Signup = props => {
   );
 };
 
-export default Signup;
+const mapDispatchToProps = dispatch => ({
+  signUp: userInfo => dispatch({ type: "SIGN_UP", payload: userInfo })
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Signup);
