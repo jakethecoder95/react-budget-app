@@ -1,15 +1,19 @@
-import { takeEvery } from "redux-saga/effects";
+import { takeEvery, call } from "redux-saga/effects";
 import server from "../../apis/server";
 
-function* signup({ payload }) {
-  console.log(payload);
-  const response = yield server.post("/signup", {
-    ...payload
+import { SIGNUP, SIGNUP_FAILED, SIGNUP_SUCCESS } from "../types";
+
+const signupCall = async userInfo =>
+  await server.post("/signup", {
+    ...userInfo
   });
+
+function* signup({ payload }) {
+  const response = yield call(signupCall, payload);
 
   console.log(response);
 }
 
 export function createAuthenticationsSaga() {
-  return [takeEvery("SIGN_UP", signup)];
+  return [takeEvery(SIGNUP, signup)];
 }

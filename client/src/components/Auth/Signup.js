@@ -15,7 +15,7 @@ const Signup = props => {
         <Form
           onSubmit={onSubmit}
           render={({ handleSubmit, pristine, invalid, submitting }) => (
-            <form onSubmit={handleSubmit} className="ui form">
+            <form onSubmit={handleSubmit} className="ui form auth-form">
               <h2 className="ui dividing header">Signup</h2>
               <div className="field">
                 <label>Username</label>
@@ -53,7 +53,7 @@ const Signup = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  signUp: userInfo => dispatch({ type: "SIGN_UP", payload: userInfo })
+  signUp: userInfo => dispatch({ type: "SIGNUP", payload: userInfo })
 });
 
 export default connect(

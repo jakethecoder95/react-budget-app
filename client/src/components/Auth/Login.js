@@ -14,7 +14,7 @@ const Login = props => {
         <Form
           onSubmit={onSubmit}
           render={({ handleSubmit, pristine, invalid, submitting }) => (
-            <form onSubmit={handleSubmit} className="ui form">
+            <form onSubmit={handleSubmit} className="ui form auth-form">
               <h2 className="ui dividing header">Login</h2>
               <div className="field">
                 <label>Email</label>
