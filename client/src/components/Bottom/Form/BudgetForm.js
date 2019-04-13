@@ -61,9 +61,6 @@ class BudgetForm extends React.Component {
   };
 
   render() {
-    const catagoryClass =
-      this.state.selectedType === "inc" ? "display-none" : "";
-
     return (
       <div className="budget-form__container">
         <div className="ui form container">
@@ -97,14 +94,16 @@ class BudgetForm extends React.Component {
                   onTypeChange={this.onTypeChange}
                   selectedType={this.state.selectedType}
                 />
-                <Field
-                  name="catagory"
-                  component={SelectCatagories}
-                  catagoryClass={catagoryClass}
-                  onCatagoryChange={this.onCatagoryChange}
-                  selectedType={this.state.selectedType}
-                  selectedCatagory={this.state.selectedCatagory}
-                />
+                {this.state.selectedType === "exp" && (
+                  <Field
+                    name="catagory"
+                    component={SelectCatagories}
+                    onCatagoryChange={this.onCatagoryChange}
+                    selectedType={this.state.selectedType}
+                    selectedCatagory={this.state.selectedCatagory}
+                  />
+                )}
+
                 <Field
                   name="description"
                   component={InputDescription}

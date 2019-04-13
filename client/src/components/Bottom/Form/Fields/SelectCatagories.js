@@ -1,18 +1,12 @@
 import React, { Fragment } from "react";
 
 const SelectCatagories = props => {
-  const {
-    input,
-    catagoryClass,
-    selectedType,
-    selectedCatagory,
-    onCatagoryChange
-  } = props;
+  const { input, selectedType, selectedCatagory, onCatagoryChange } = props;
 
   return (
     <Fragment>
-      <label className={catagoryClass}>Catagory</label>
-      <div className={`four wide field ${catagoryClass}`}>
+      <label>Catagory</label>
+      <div className={`four wide field`}>
         <select
           {...input}
           value={selectedCatagory}
