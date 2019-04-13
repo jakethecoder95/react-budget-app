@@ -23,12 +23,12 @@ class App extends React.Component {
       <Fragment>
         <Router history={history}>
           <Switch>
-            <Route path="/budget" exact>
+            <Route path="/budget">
               <Top />
               <Bottom />
             </Route>
             <Route path="/login" exact component={Login} />
-            <Route path="/signup" eact component={Signup} />
+            <Route path="/signup" exact component={Signup} />
           </Switch>
         </Router>
       </Fragment>
