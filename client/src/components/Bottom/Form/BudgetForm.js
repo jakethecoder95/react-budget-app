@@ -75,6 +75,9 @@ class BudgetForm extends React.Component {
               }
               return errors;
             }}
+            initialValues={{
+              type: this.state.selectedType
+            }}
             submitSucceeded
             onSubmit={this.onSubmit}
             render={({ handleSubmit, form, values, submitting }) => (
