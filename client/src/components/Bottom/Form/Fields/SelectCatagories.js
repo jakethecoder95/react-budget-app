@@ -13,7 +13,7 @@ const SelectCatagories = props => {
           className={`ui fluid dropdown input-item${
             selectedType === "exp" ? "__red" : ""
           }`}
-          onChange={e => onCatagoryChange(e.target.value)}
+          onSelect={e => onCatagoryChange(e.target.value)}
         >
           <option value="misc">Misc & Checks</option>
           <option value="home">Home & Utilities</option>
