@@ -1,0 +1,16 @@
+.ui.auth-form {
+  width: 500px;
+  border-radius: 50px;
+  margin: -120px auto 0 auto;
+  background: #f7f7f7;
+  padding: 40px;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+.auth-form.ui.form .fields {
+  display: block;
+}
+
+.auth-form label {
+  margin: 1em 0 0.5em 0 !important;
+}
