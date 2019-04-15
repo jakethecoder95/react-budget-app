@@ -42,15 +42,13 @@ class BudgetForm extends React.Component {
   };
 
   onSubmit = item => {
-    const { selectedCatagory, selectedPersist } = this.state;
+    console.log(item);
     const { incomeItems, expenseItems } = this.props;
-    item.catagory =
-      item.type === "exp" && !item.catagory ? selectedCatagory : item.catagory;
-    item.persist = !item.persist ? selectedPersist : item.persist;
     const itemId =
       item.type === "inc"
         ? this.getNewId(incomeItems)
         : this.getNewId(expenseItems);
+
     item.id = itemId;
     item.date = new Date().toISOString();
     item.value = Number(item.value);
@@ -60,7 +58,6 @@ class BudgetForm extends React.Component {
       selectedType: item.type,
       selectedPersist: item.persist
     });
-    item.persist = selectedPersist;
 
     this.props.addItem(item);
     this.checkHistory();
@@ -86,7 +83,8 @@ class BudgetForm extends React.Component {
             submitSucceeded
             initialValues={{
               type: this.state.selectedType,
-              catagory: this.state.selectedCatagory
+              catagory: this.state.selectedCatagory,
+              persist: this.state.selectedPersist
             }}
             onSubmit={this.onSubmit}
             render={({ handleSubmit, form, values, submitting }) => (
@@ -123,12 +121,20 @@ class BudgetForm extends React.Component {
                   component={InputValue}
                   selectedType={values.type}
                 />
-                <Field
-                  name="persist"
-                  component={RadioPersistItem}
-                  onPersistChange={this.onPersistChange}
-                  type="checkbox"
-                />
+                <div className="two wide field" style={{ margin: "1em 0" }}>
+                  <label
+                    style={{ display: "block" }}
+                    className="checkbox-label"
+                  >
+                    Monthly:
+                  </label>
+                  <Field
+                    name="persist"
+                    component="input"
+                    className="checkbox"
+                    type="checkbox"
+                  />
+                </div>
                 {this.props.mobile && (
                   <button
                     className="ui button"
