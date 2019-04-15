@@ -9,7 +9,6 @@ import SelectTypes from "./Fields/SelectTypes";
 import SelectCatagories from "./Fields/SelectCatagories";
 import InputDescription from "./Fields/InputDescription";
 import InputValue from "./Fields/InputValue";
-import RadioPersistItem from "./Fields/RadioPersistItem";
 import { addItem } from "../../../redux/actions";
 import history from "../../../history";
 
