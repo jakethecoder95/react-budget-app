@@ -6,11 +6,7 @@ const RadioPersistItem = ({ onPersistChange }) => {
       <label style={{ display: "block" }} className="checkbox-label">
         Monthly:
       </label>
-      <input
-        className="checkbox"
-        type="checkbox"
-        onChange={e => onPersistChange(e.target.checked)}
-      />
+      <input name="persist" className="checkbox" type="checkbox" />
     </div>
   );
 };

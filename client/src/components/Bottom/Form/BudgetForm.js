@@ -9,7 +9,6 @@ import SelectTypes from "./Fields/SelectTypes";
 import SelectCatagories from "./Fields/SelectCatagories";
 import InputDescription from "./Fields/InputDescription";
 import InputValue from "./Fields/InputValue";
-import RadioPersistItem from "./Fields/RadioPersistItem";
 import { addItem } from "../../../redux/actions";
 import history from "../../../history";
 
@@ -42,43 +41,50 @@ class BudgetForm extends React.Component {
   };
 
   onSubmit = item => {
-    const { selectedType, selectedCatagory, selectedPersist } = this.state;
+    console.log(item);
     const { incomeItems, expenseItems } = this.props;
-
-    item.type = selectedType;
     const itemId =
       item.type === "inc"
         ? this.getNewId(incomeItems)
         : this.getNewId(expenseItems);
-    item.date = new Date().toISOString();
+
     item.id = itemId;
+    item.date = new Date().toISOString();
     item.value = Number(item.value);
-    if (item.type === "exp") item.catagory = selectedCatagory;
-    item.persist = selectedPersist;
+
+    this.setState({
+      selectedCatagory: item.catagory,
+      selectedType: item.type,
+      selectedPersist: item.persist
+    });
 
     this.props.addItem(item);
     this.checkHistory();
   };
 
-  render() {
-    const catagoryClass =
-      this.state.selectedType === "inc" ? "display-none" : "";
+  validate = ({ description, value }) => {
+    const errors = {};
+    if (!description) {
+      errors.description = "Required";
+    }
+    if (!value) {
+      errors.value = "Required";
+    }
+    return errors;
+  };
 
+  render() {
     return (
       <div className="budget-form__container">
         <div className="ui form container">
           <Form
-            validate={({ description, value }) => {
-              const errors = {};
-              if (!description) {
-                errors.description = "Required";
-              }
-              if (!value) {
-                errors.value = "Required";
-              }
-              return errors;
-            }}
+            validate={this.validate}
             submitSucceeded
+            initialValues={{
+              type: this.state.selectedType,
+              catagory: this.state.selectedCatagory,
+              persist: this.state.selectedPersist
+            }}
             onSubmit={this.onSubmit}
             render={({ handleSubmit, form, values, submitting }) => (
               <form
@@ -94,33 +100,40 @@ class BudgetForm extends React.Component {
                 <Field
                   name="type"
                   component={SelectTypes}
-                  onTypeChange={this.onTypeChange}
-                  selectedType={this.state.selectedType}
+                  selectedType={values.type}
                 />
-                <Field
-                  name="catagory"
-                  component={SelectCatagories}
-                  catagoryClass={catagoryClass}
-                  onCatagoryChange={this.onCatagoryChange}
-                  selectedType={this.state.selectedType}
-                  selectedCatagory={this.state.selectedCatagory}
-                />
+                {values.type === "exp" && (
+                  <Field
+                    name="catagory"
+                    component={SelectCatagories}
+                    selectedType={values.type}
+                  />
+                )}
+
                 <Field
                   name="description"
                   component={InputDescription}
-                  selectedType={this.state.selectedType}
+                  selectedType={values.type}
                 />
                 <Field
                   name="value"
                   component={InputValue}
-                  selectedType={this.state.selectedType}
+                  selectedType={values.type}
                 />
-                <Field
-                  name="persist"
-                  component={RadioPersistItem}
-                  onPersistChange={this.onPersistChange}
-                  type="checkbox"
-                />
+                <div className="two wide field" style={{ margin: "1em 0" }}>
+                  <label
+                    style={{ display: "block" }}
+                    className="checkbox-label"
+                  >
+                    Monthly:
+                  </label>
+                  <Field
+                    name="persist"
+                    component="input"
+                    className="checkbox"
+                    type="checkbox"
+                  />
+                </div>
                 {this.props.mobile && (
                   <button
                     className="ui button"
@@ -136,10 +149,7 @@ class BudgetForm extends React.Component {
                     type="submit"
                     disabled={submitting}
                     style={{
-                      color:
-                        this.state.selectedType === "inc"
-                          ? "#28b9b5"
-                          : "#ff5049"
+                      color: values.type === "inc" ? "#28b9b5" : "#ff5049"
                     }}
                   >
                     <i className="ion-ios-checkmark-outline" />
