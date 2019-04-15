@@ -150,10 +150,7 @@ class BudgetForm extends React.Component {
                     type="submit"
                     disabled={submitting}
                     style={{
-                      color:
-                        this.state.selectedType === "inc"
-                          ? "#28b9b5"
-                          : "#ff5049"
+                      color: values.type === "inc" ? "#28b9b5" : "#ff5049"
                     }}
                   >
                     <i className="ion-ios-checkmark-outline" />
