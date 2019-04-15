@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
 const SelectCatagories = props => {
-  const { input, selectedType, selectedCatagory, onCatagoryChange } = props;
+  const { input, selectedType } = props;
 
   return (
     <Fragment>
@@ -9,11 +9,10 @@ const SelectCatagories = props => {
       <div className={`four wide field`}>
         <select
           {...input}
-          value={selectedCatagory}
+          name="catagory"
           className={`ui fluid dropdown input-item${
             selectedType === "exp" ? "__red" : ""
           }`}
-          onSelect={e => onCatagoryChange(e.target.value)}
         >
           <option value="misc">Misc & Checks</option>
           <option value="home">Home & Utilities</option>

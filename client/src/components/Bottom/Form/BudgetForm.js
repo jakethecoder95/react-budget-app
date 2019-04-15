@@ -42,22 +42,39 @@ class BudgetForm extends React.Component {
   };
 
   onSubmit = item => {
-    const { selectedType, selectedCatagory, selectedPersist } = this.state;
+    const { selectedCatagory, selectedPersist } = this.state;
     const { incomeItems, expenseItems } = this.props;
-
-    item.type = selectedType;
+    item.catagory =
+      item.type === "exp" && !item.catagory ? selectedCatagory : item.catagory;
+    item.persist = !item.persist ? selectedPersist : item.persist;
     const itemId =
       item.type === "inc"
         ? this.getNewId(incomeItems)
         : this.getNewId(expenseItems);
-    item.date = new Date().toISOString();
     item.id = itemId;
+    item.date = new Date().toISOString();
     item.value = Number(item.value);
-    if (item.type === "exp") item.catagory = selectedCatagory;
+
+    this.setState({
+      selectedCatagory: item.catagory,
+      selectedType: item.type,
+      selectedPersist: item.persist
+    });
     item.persist = selectedPersist;
 
     this.props.addItem(item);
     this.checkHistory();
+  };
+
+  validate = ({ description, value }) => {
+    const errors = {};
+    if (!description) {
+      errors.description = "Required";
+    }
+    if (!value) {
+      errors.value = "Required";
+    }
+    return errors;
   };
 
   render() {
@@ -65,17 +82,12 @@ class BudgetForm extends React.Component {
       <div className="budget-form__container">
         <div className="ui form container">
           <Form
-            validate={({ description, value }) => {
-              const errors = {};
-              if (!description) {
-                errors.description = "Required";
-              }
-              if (!value) {
-                errors.value = "Required";
-              }
-              return errors;
-            }}
+            validate={this.validate}
             submitSucceeded
+            initialValues={{
+              type: this.state.selectedType,
+              catagory: this.state.selectedCatagory
+            }}
             onSubmit={this.onSubmit}
             render={({ handleSubmit, form, values, submitting }) => (
               <form
@@ -91,28 +103,25 @@ class BudgetForm extends React.Component {
                 <Field
                   name="type"
                   component={SelectTypes}
-                  onTypeChange={this.onTypeChange}
-                  selectedType={this.state.selectedType}
+                  selectedType={values.type}
                 />
-                {this.state.selectedType === "exp" && (
+                {values.type === "exp" && (
                   <Field
                     name="catagory"
                     component={SelectCatagories}
-                    onCatagoryChange={this.onCatagoryChange}
-                    selectedType={this.state.selectedType}
-                    selectedCatagory={this.state.selectedCatagory}
+                    selectedType={values.type}
                   />
                 )}
 
                 <Field
                   name="description"
                   component={InputDescription}
-                  selectedType={this.state.selectedType}
+                  selectedType={values.type}
                 />
                 <Field
                   name="value"
                   component={InputValue}
-                  selectedType={this.state.selectedType}
+                  selectedType={values.type}
                 />
                 <Field
                   name="persist"
