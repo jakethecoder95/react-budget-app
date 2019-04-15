@@ -2,9 +2,9 @@
   width: 500px;
   border-radius: 50px;
   margin: -120px auto 0 auto;
-  background: #f7f7f7;
+  background: rgb(247, 247, 247);
   padding: 40px;
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
 }
 
 .auth-form.ui.form .fields {
