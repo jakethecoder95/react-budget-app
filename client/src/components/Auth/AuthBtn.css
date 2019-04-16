@@ -1,11 +1,8 @@
-/* .auth-button {
-  position: absolute;
-  right: 20px;
-  top: 10px;
-  color: white;
-  font-size: 1.1em;
-  font-weight: bold;
+.auth-button.ui.button {
+  height: 75%;
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
-.auth-button:hover {
-  color: white;
-} */

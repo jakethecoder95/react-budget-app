@@ -1,17 +1,20 @@
-import { takeEvery, call } from "redux-saga/effects";
+import { takeEvery, put, call } from "redux-saga/effects";
 import server from "../../apis/server";
 
 import { SIGNUP, SIGNUP_FAILED, SIGNUP_SUCCESS } from "../types";
 
-const signupCall = async userInfo =>
-  await server.post("/signup", {
+const putSignup = async userInfo =>
+  await server.put("/signup", {
     ...userInfo
   });
 
 function* signup({ payload }) {
-  const response = yield call(signupCall, payload);
-
-  console.log(response);
+  try {
+    const response = yield call(putSignup, payload);
+    yield put({ type: SIGNUP_SUCCESS, payload: response });
+  } catch (error) {
+    yield put({ type: SIGNUP_FAILED, payload: error.response });
+  }
 }
 
 export function createAuthenticationsSaga() {

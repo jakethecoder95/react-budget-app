@@ -2,22 +2,34 @@ import "./Form.css";
 import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import AuthField from "./AuthField";
 import isEmail from "../Util/regexEmail";
 
 const Signup = props => {
-  const onSubmit = userInfo => {
-    console.log(userInfo);
-    props.signUp(userInfo);
-  };
+  if (props.signupResponse.success) {
+    return <Redirect to="/budget" />;
+  }
+
+  const onSubmit = async userInfo => props.signup(userInfo);
 
   const validate = ({ username, email, password }) => {
+    const asyncErrors = props.signupResponse.data
+      ? props.signupResponse.data.data
+      : [];
     const errors = {};
+    if (asyncErrors) {
+      asyncErrors.forEach(err => {
+        if (email === err.value) errors[err.param] = err.msg;
+      });
+    }
     if (!username) {
       errors.username = "Required";
     } else if (username.length < 3) {
       errors.username = "Must be longer than 2 characters";
+    } else if (username.length > 60) {
+      errors.username = "Must be shorter than 60 characters";
     }
     if (!email) {
       errors.email = "Required";
@@ -64,10 +76,14 @@ const Signup = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  signUp: userInfo => dispatch({ type: "SIGNUP", payload: userInfo })
+  signup: userInfo => dispatch({ type: "SIGNUP", payload: userInfo })
+});
+
+const mapStateToProps = state => ({
+  signupResponse: state.auth.signupResponse
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Signup);
