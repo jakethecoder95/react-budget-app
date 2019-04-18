@@ -1,6 +1,6 @@
 .auth-button.ui.button {
-  height: 75%;
-  margin-top: 5%;
+  margin-top: 5px;
+  margin-bottom: 5px;
   display: flex;
   justify-content: center;
   align-items: center;

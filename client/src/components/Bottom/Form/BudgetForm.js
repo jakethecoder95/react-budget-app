@@ -41,7 +41,6 @@ class BudgetForm extends React.Component {
   };
 
   onSubmit = item => {
-    console.log(item);
     const { incomeItems, expenseItems } = this.props;
     const itemId =
       item.type === "inc"

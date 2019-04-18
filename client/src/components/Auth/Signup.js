@@ -8,11 +8,11 @@ import AuthField from "./AuthField";
 import isEmail from "../Util/regexEmail";
 
 const Signup = props => {
-  if (props.signupResponse.success) {
+  if (props.isLoggedIn) {
     return <Redirect to="/budget" />;
   }
 
-  const onSubmit = async userInfo => props.signup(userInfo);
+  const onSubmit = userInfo => props.signup(userInfo);
 
   const validate = ({ username, email, password }) => {
     const asyncErrors = props.signupResponse.data
@@ -79,8 +79,9 @@ const mapDispatchToProps = dispatch => ({
   signup: userInfo => dispatch({ type: "SIGNUP", payload: userInfo })
 });
 
-const mapStateToProps = state => ({
-  signupResponse: state.auth.signupResponse
+const mapStateToProps = ({ auth }) => ({
+  signupResponse: auth.signupResponse,
+  isLoggedIn: auth.isLoggedIn
 });
 
 export default connect(

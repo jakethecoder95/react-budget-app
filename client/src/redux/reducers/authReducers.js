@@ -1,28 +1,28 @@
-import { SIGNUP_SUCCESS, SIGNUP_FAILED } from "../types";
+import { LOGIN_FAILED, LOGIN_SUCCESS, SIGNUP_FAILED, LOGOUT } from "../types";
 
 const initialValue = {
   isLoggedIn: false,
-  signupResponse: { success: false },
+  signupResponse: {},
   loginResponse: {}
 };
 
-const signupReducer = (state = initialValue, action) => {
+export default (state = initialValue, action) => {
   switch (action.type) {
-    case SIGNUP_SUCCESS:
+    case LOGIN_FAILED:
+      return { ...state, loginResponse: action.payload };
+    case LOGOUT:
+      return { ...state, isLoggedIn: false };
+    case LOGIN_SUCCESS:
       return {
         ...state,
-        isLoggedIn: true,
-        signupResponse: { ...action.payload, success: true }
+        isLoggedIn: true
       };
     case SIGNUP_FAILED:
       return {
         ...state,
-        isLoggedIn: true,
-        signupResponse: { ...action.payload, success: false }
+        signupResponse: { ...action.payload }
       };
     default:
       return state;
   }
 };
-
-export default signupReducer;

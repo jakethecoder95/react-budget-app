@@ -9,7 +9,6 @@ const { MONGODB_URI } = require("./secrets");
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -24,6 +23,16 @@ app.use((req, res, next) => {
 
 app.use(authRoutes);
 app.use(budgetRoutes);
+
+app.use((error, req, res, next) => {
+  console.log(error);
+  const status = error.statusCode || 500;
+  const msg = error.message;
+  const param = error.param;
+  const value = error.value;
+  const data = error.data;
+  res.status(status).json({ msg, param, value, data });
+});
 
 mongoose
   .connect(MONGODB_URI)
