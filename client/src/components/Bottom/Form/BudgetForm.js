@@ -3,13 +3,12 @@ import "./MobileForm.css";
 import React from "react";
 import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
-import { bindActionCreators } from "redux";
 
 import SelectTypes from "./Fields/SelectTypes";
 import SelectCatagories from "./Fields/SelectCatagories";
 import InputDescription from "./Fields/InputDescription";
 import InputValue from "./Fields/InputValue";
-import { addItem } from "../../../redux/actions";
+import { ADD_ITEM } from "../../../redux/types";
 import history from "../../../history";
 
 class BudgetForm extends React.Component {
@@ -41,7 +40,6 @@ class BudgetForm extends React.Component {
   };
 
   onSubmit = item => {
-    console.log(item);
     const { incomeItems, expenseItems } = this.props;
     const itemId =
       item.type === "inc"
@@ -164,13 +162,9 @@ class BudgetForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      addItem
-    },
-    dispatch
-  );
+const mapDispatchToProps = dispatch => ({
+  addItem: item => dispatch({ type: ADD_ITEM, payload: item })
+});
 
 const mapStateToProps = ({ budget }) => ({
   incomeItems: budget.items.incomeItems,

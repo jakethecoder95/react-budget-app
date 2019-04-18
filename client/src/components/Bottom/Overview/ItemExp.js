@@ -1,9 +1,8 @@
 import "./Item.css";
 import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
-import { deleteItem } from "../../../redux/actions";
+import { DELETE_ITEM } from "../../../redux/types";
 import Percentage from "../../UtilComponents/Percentage";
 
 const ItemExp = props => {
@@ -30,13 +29,9 @@ const ItemExp = props => {
   );
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      deleteItem
-    },
-    dispatch
-  );
+const mapDispatchToProps = dispatch => ({
+  deleteItem: item => dispatch({ type: DELETE_ITEM, payload: item })
+});
 
 const mapStateToProps = state => ({
   totalExpenses: state.budget.totalExpenses
