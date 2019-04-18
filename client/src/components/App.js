@@ -1,15 +1,14 @@
 import "./Global.css";
 import React, { Fragment } from "react";
 import { Router, Switch, Route } from "react-router-dom";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import Top from "./Top/Top";
 import Bottom from "./Bottom/Bottom";
 import Login from "./Auth/Login";
 import Signup from "./Auth/Signup";
-import { checkLocalStorage } from "../redux/actions";
 import history from "../history";
+import { CHECK_LOCAL_STORAGE } from "../redux/types";
 
 class App extends React.Component {
   componentDidMount() {
@@ -36,13 +35,9 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      checkLocalStorage
-    },
-    dispatch
-  );
+const mapDispatchToProps = dispatch => ({
+  checkLocalStorage: () => dispatch({ type: CHECK_LOCAL_STORAGE })
+});
 
 export default connect(
   null,
