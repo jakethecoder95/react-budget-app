@@ -2,10 +2,11 @@ import "./Form.css";
 import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import AuthField from "./AuthField";
 import isEmail from "../Util/regexEmail";
+import BackBtn from "../UtilComponents/BackBtn";
 
 const Signup = props => {
   if (props.isLoggedIn) {
@@ -46,7 +47,9 @@ const Signup = props => {
 
   return (
     <Fragment>
-      <div className="top" />
+      <div className="top">
+        <BackBtn />
+      </div>
       <div className="ui container">
         <Form
           onSubmit={onSubmit}
@@ -67,6 +70,9 @@ const Signup = props => {
               >
                 Signup
               </button>
+              <div className="field" style={{ marginTop: "10px" }}>
+                <Link to="/login">Login</Link>
+              </div>
             </form>
           )}
         />

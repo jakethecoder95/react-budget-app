@@ -14,3 +14,14 @@
 .auth-form label {
   margin: 1em 0 0.5em 0 !important;
 }
+
+@media (max-width: 500px) {
+  .ui.auth-form {
+    position: absolute;
+    width: 95vw;
+    margin: 0;
+    top: 12vh;
+    left: 2.5vw;
+    border-radius: 10px;
+  }
+}
