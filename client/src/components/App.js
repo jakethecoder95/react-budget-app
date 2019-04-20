@@ -8,11 +8,17 @@ import Bottom from "./Bottom/Bottom";
 import Login from "./Auth/Login";
 import Signup from "./Auth/Signup";
 import history from "../history";
-import { CHECK_LOCAL_STORAGE } from "../redux/types";
+import { INIT_USER_BUDGET } from "../redux/types";
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.checkLocalStorage();
+    this.props.initUserBudget();
+  }
+
+  componentWillUpdate(newProps) {
+    if (newProps.isLoggedIn && !this.props.isLoggedIn) {
+      this.props.initUserBudget();
+    }
   }
 
   render() {
@@ -36,10 +42,14 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  checkLocalStorage: () => dispatch({ type: CHECK_LOCAL_STORAGE })
+  initUserBudget: () => dispatch({ type: INIT_USER_BUDGET })
+});
+
+const mapStateToProps = ({ auth }) => ({
+  isLoggedIn: auth.isLoggedIn
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);

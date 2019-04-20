@@ -8,7 +8,7 @@ const Income = props => {
     const { incomeItems } = props;
     if (Object.keys(incomeItems).length) {
       return Object.keys(incomeItems).map(item => {
-        return <ItemInc item={incomeItems[item]} key={incomeItems[item].id} />;
+        return <ItemInc item={incomeItems[item]} key={incomeItems[item]._id} />;
       });
     } else {
       return <div className="empty">No Income</div>;

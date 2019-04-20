@@ -14,7 +14,7 @@ const Login = props => {
     return <Redirect to="/budget" />;
   }
 
-  const onSubmit = info => props.login(info);
+  const onSubmit = async info => await props.login(info);
 
   const validate = values => {
     const { email, password } = values;

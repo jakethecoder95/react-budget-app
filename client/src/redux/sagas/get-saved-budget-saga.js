@@ -1,7 +1,29 @@
-import { takeEvery, put } from "redux-saga/effects";
+import { takeLatest, put } from "redux-saga/effects";
+import { getUserBudgetAsync } from "../../apis/server";
 import store from "store";
 
-import { SET_INITIAL_BUDGET, CHECK_LOCAL_STORAGE } from "../types";
+import {
+  CHECK_LOCAL_STORAGE,
+  INIT_USER_BUDGET,
+  LOGIN_SUCCESS,
+  SET_INITIAL_BUDGET
+} from "../types";
+
+function* initUserBudget() {
+  const token = store.get("token");
+  if (!token) {
+    return yield put({ type: CHECK_LOCAL_STORAGE });
+  }
+  const authString = `Bearer ${token}`;
+  try {
+    const response = yield getUserBudgetAsync(authString);
+    yield put({ type: LOGIN_SUCCESS });
+    yield put({ type: SET_INITIAL_BUDGET, payload: { ...response.data } });
+    console.log(response);
+  } catch (err) {
+    console.log(err.response);
+  }
+}
 
 function* checkLocalStorage() {
   let storedBudget = store.get("budget");
@@ -42,5 +64,8 @@ function* checkLocalStorage() {
 }
 
 export function createGetSavedBudgetSaga() {
-  return [takeEvery(CHECK_LOCAL_STORAGE, checkLocalStorage)];
+  return [
+    takeLatest(INIT_USER_BUDGET, initUserBudget),
+    takeLatest(CHECK_LOCAL_STORAGE, checkLocalStorage)
+  ];
 }

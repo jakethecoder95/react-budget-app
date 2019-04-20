@@ -24,7 +24,7 @@ const CatagoryDetails = props => {
       return (
         <ItemExp
           item={expenseItems[expense]}
-          key={expenseItems[expense].id}
+          key={expenseItems[expense]._id}
           setTotal={chartData[selectedCatagory.catagory]}
         />
       );

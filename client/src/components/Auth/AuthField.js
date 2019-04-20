@@ -1,7 +1,7 @@
 import React from "react";
 
 const AuthField = ({ meta, input }) => {
-  const alertError = meta.error && meta.submitFailed && !meta.active;
+  const alertError = meta.error && meta.submitFailed;
   const { name } = input;
   const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1);
 

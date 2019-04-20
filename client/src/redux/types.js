@@ -6,6 +6,7 @@ export const CLEAR_BUDGET = "CLEAR_BUDGET";
 export const DELETE_ITEM = "DELETE_ITEM";
 export const DELETE_INCOME_ITEM = "DELETE_INCOME_ITEM";
 export const DELETE_EXPENSE_ITEM = "DELETE_EXPESE_ITEM";
+export const INIT_USER_BUDGET = "INIT_USER_BUDGET";
 export const LOGIN = "LOGIN";
 export const LOGIN_FAILED = "LOGIN_FAILE";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

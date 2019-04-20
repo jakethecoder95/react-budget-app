@@ -15,7 +15,6 @@ import {
 function* login({ payload }) {
   try {
     const response = yield call(postLogin, payload);
-    yield put({ type: LOGIN_SUCCESS, payload: response });
     yield put({
       type: LOGIN_SUCCESS,
       payload: { token: response.data.token, userId: response.data.userId }
@@ -26,8 +25,10 @@ function* login({ payload }) {
 }
 
 function* loginSuccess({ payload }) {
-  yield store.set("token", payload.token);
-  yield store.set("userId", payload.userId);
+  if (!store.get("token")) {
+    yield store.set("token", payload.token);
+    yield store.set("userId", payload.userId);
+  }
 }
 
 function* logout() {

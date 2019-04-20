@@ -39,7 +39,7 @@ export default (state = INITIAL_STATE, action) => {
           ...state.items,
           incomeItems: {
             ...state.items.incomeItems,
-            [action.payload.id]: action.payload
+            [action.payload._id]: action.payload
           }
         }
       };
@@ -56,7 +56,7 @@ export default (state = INITIAL_STATE, action) => {
           ...state.items,
           expenseItems: {
             ...state.items.expenseItems,
-            [action.payload.id]: action.payload
+            [action.payload._id]: action.payload
           }
         }
       };
@@ -66,7 +66,7 @@ export default (state = INITIAL_STATE, action) => {
         totalIncome: state.totalIncome - action.payload.value,
         items: {
           ...state.items,
-          incomeItems: _.omit(state.items.incomeItems, action.payload.id)
+          incomeItems: _.omit(state.items.incomeItems, action.payload._id)
         }
       };
     case DELETE_EXPENSE_ITEM:
@@ -80,7 +80,7 @@ export default (state = INITIAL_STATE, action) => {
         },
         items: {
           ...state.items,
-          expenseItems: _.omit(state.items.expenseItems, action.payload.id)
+          expenseItems: _.omit(state.items.expenseItems, action.payload._id)
         }
       };
     case CLEAR_BUDGET:

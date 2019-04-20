@@ -11,3 +11,27 @@ export const putSignup = async userInfo =>
 
 export const postLogin = async userInfo =>
   await server.post("/login", { ...userInfo });
+
+export const putItemAsync = async (item, authString) =>
+  await server.put(
+    "/add-item",
+    {
+      item
+    },
+    {
+      headers: { Authorization: authString }
+    }
+  );
+
+export const deleteItemAsync = async (itemId, authString) =>
+  await server.delete("/delete-item", {
+    data: {
+      itemId,
+      authString
+    }
+  });
+
+export const getUserBudgetAsync = async authString =>
+  await server.get("/get-budget", {
+    headers: { Authorization: authString }
+  });
