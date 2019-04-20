@@ -10,19 +10,23 @@ const userSchema = new Schema({
     type: String,
     require: true
   },
+  catagory: {
+    type: String
+    // not required if item.type === "inc"
+  },
   description: {
     type: String,
     required: true
   },
   value: {
-    type: Double,
+    type: Number,
     ref: "Post"
   },
   date: {
     type: Date,
     require: false
   },
-  persistant: {
+  persist: {
     type: Boolean,
     default: false
   }

@@ -31,7 +31,8 @@ export const deleteItemAsync = async (itemId, authString) =>
     }
   });
 
-export const getUserBudgetAsync = async authString =>
+export const getUserBudgetAsync = async (date, authString) =>
   await server.get("/get-budget", {
-    headers: { Authorization: authString }
+    headers: { Authorization: authString },
+    params: { ...date }
   });

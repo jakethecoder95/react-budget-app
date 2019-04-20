@@ -6,7 +6,8 @@ import {
   CHECK_LOCAL_STORAGE,
   INIT_USER_BUDGET,
   LOGIN_SUCCESS,
-  SET_INITIAL_BUDGET
+  SET_INITIAL_BUDGET,
+  LOGOUT
 } from "../types";
 
 function* initUserBudget() {
@@ -16,12 +17,15 @@ function* initUserBudget() {
   }
   const authString = `Bearer ${token}`;
   try {
-    const response = yield getUserBudgetAsync(authString);
+    const date = { all: false, from: new Date().toISOString(), to: null }; // TODO: This will be done dynamically when user settings are set up
+    const response = yield getUserBudgetAsync(date, authString);
     yield put({ type: LOGIN_SUCCESS });
     yield put({ type: SET_INITIAL_BUDGET, payload: { ...response.data } });
-    console.log(response);
   } catch (err) {
-    console.log(err.response);
+    yield alert(
+      "Looks like there was an error logging you in. Please log back in."
+    );
+    yield put({ type: LOGOUT });
   }
 }
 
