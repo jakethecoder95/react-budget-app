@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const MobileAddButton = () => {
   return (
-    <Link to="/mobile-form">
+    <Link to="/budget/mobile-form">
       <button className="mobile-add-button primary">
         <span>
           <svg

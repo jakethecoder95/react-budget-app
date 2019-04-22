@@ -2,25 +2,40 @@ import "./Form.css";
 import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
-import hasError from "../Bottom/Form/util/has-error";
+import { Redirect, Link } from "react-router-dom";
+
+import AuthField from "./AuthField";
+import isEmail from "../Util/regexEmail";
+import BackBtn from "../UtilComponents/BackBtn";
 
 const Signup = props => {
-  const onSubmit = userInfo => {
-    props.signUp(userInfo);
-  };
+  if (props.isLoggedIn) {
+    return <Redirect to="/budget" />;
+  }
 
-  const hasError = meta => {
-    console.log(meta);
-    return "field ui error";
-  };
+  const onSubmit = userInfo => props.signup(userInfo);
 
   const validate = ({ username, email, password }) => {
+    const asyncErrors = props.signupResponse.data
+      ? props.signupResponse.data.data
+      : [];
     const errors = {};
+    if (asyncErrors) {
+      asyncErrors.forEach(err => {
+        if (email === err.value) errors[err.param] = err.msg;
+      });
+    }
     if (!username) {
       errors.username = "Required";
+    } else if (username.length < 3) {
+      errors.username = "Must be longer than 2 characters";
+    } else if (username.length > 60) {
+      errors.username = "Must be shorter than 60 characters";
     }
     if (!email) {
       errors.email = "Required";
+    } else if (!isEmail(email)) {
+      errors.email = "Please enter a valid email";
     }
     if (!password) {
       errors.password = "Required";
@@ -32,7 +47,9 @@ const Signup = props => {
 
   return (
     <Fragment>
-      <div className="top" />
+      <div className="top">
+        <BackBtn />
+      </div>
       <div className="ui container">
         <Form
           onSubmit={onSubmit}
@@ -41,43 +58,21 @@ const Signup = props => {
             <form onSubmit={handleSubmit} className="ui form auth-form">
               <h2 className="ui dividing header">Signup</h2>
               <div className="fields">
-                <div className="field">
-                  <label>Username</label>
-                  <Field
-                    name="username"
-                    component="input"
-                    placeholder="Username"
-                  />
-                </div>
-                <div className="field">
-                  <label>Email</label>
-                  <Field name="email" component="input" placeholder="Email" />
-                </div>
-                <Field
-                  name="password"
-                  render={({ meta, input }) => (
-                    <div className="field ui error">
-                      <label>Password</label>
-                      <input
-                        component="input"
-                        placeholder="Password"
-                        type="password"
-                        {...input}
-                      />
-                      {errors.password && (
-                        <p className="ui red message mini">{errors.password}</p>
-                      )}
-                    </div>
-                  )}
-                />
+                <Field name="username" component={AuthField} />
+                <Field name="email" component={AuthField} />
+                <Field name="password" component={AuthField} />
               </div>
               <button
                 type="submit"
-                disabled={pristine || invalid || submitting}
+                disabled={pristine || submitting}
                 className="ui button primary"
+                style={{ marginTop: "1em" }}
               >
                 Signup
               </button>
+              <div className="field" style={{ marginTop: "10px" }}>
+                <Link to="/login">Login</Link>
+              </div>
             </form>
           )}
         />
@@ -87,10 +82,15 @@ const Signup = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  signUp: userInfo => dispatch({ type: "SIGNUP", payload: userInfo })
+  signup: userInfo => dispatch({ type: "SIGNUP", payload: userInfo })
+});
+
+const mapStateToProps = ({ auth }) => ({
+  signupResponse: auth.signupResponse,
+  isLoggedIn: auth.isLoggedIn
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Signup);

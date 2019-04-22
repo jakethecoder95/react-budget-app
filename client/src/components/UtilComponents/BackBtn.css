@@ -1,0 +1,11 @@
+.back-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 1.2em;
+}
+
+.back-btn .ui.inverted.button {
+  box-shadow: none !important;
+}

@@ -32,7 +32,7 @@ class BudgetForm extends React.Component {
     let newId;
     const keys = Object.values(items);
     if (keys.length > 0) {
-      newId = parseInt(keys[keys.length - 1].id) + 1;
+      newId = parseInt(keys[keys.length - 1]._id) + 1;
     } else {
       newId = 0;
     }
@@ -40,13 +40,15 @@ class BudgetForm extends React.Component {
   };
 
   onSubmit = item => {
-    const { incomeItems, expenseItems } = this.props;
-    const itemId =
-      item.type === "inc"
-        ? this.getNewId(incomeItems)
-        : this.getNewId(expenseItems);
+    if (!this.props.isLoggedIn) {
+      const { incomeItems, expenseItems } = this.props;
+      const itemId =
+        item.type === "inc"
+          ? this.getNewId(incomeItems)
+          : this.getNewId(expenseItems);
 
-    item.id = itemId;
+      item._id = itemId;
+    }
     item.date = new Date().toISOString();
     item.value = Number(item.value);
 
@@ -166,9 +168,10 @@ const mapDispatchToProps = dispatch => ({
   addItem: item => dispatch({ type: ADD_ITEM, payload: item })
 });
 
-const mapStateToProps = ({ budget }) => ({
+const mapStateToProps = ({ budget, auth }) => ({
   incomeItems: budget.items.incomeItems,
-  expenseItems: budget.items.expenseItems
+  expenseItems: budget.items.expenseItems,
+  isLoggedIn: auth.isLoggedIn
 });
 
 export default connect(

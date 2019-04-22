@@ -1,10 +1,11 @@
 import _ from "lodash";
 import {
-  SET_INITIAL_BUDGET,
   ADD_INCOME_ITEM,
   ADD_EXPENSE_ITEM,
+  CLEAR_BUDGET,
   DELETE_INCOME_ITEM,
-  DELETE_EXPENSE_ITEM
+  DELETE_EXPENSE_ITEM,
+  SET_INITIAL_BUDGET
 } from "../types";
 
 const INITIAL_STATE = {
@@ -38,7 +39,7 @@ export default (state = INITIAL_STATE, action) => {
           ...state.items,
           incomeItems: {
             ...state.items.incomeItems,
-            [action.payload.id]: action.payload
+            [action.payload._id]: action.payload
           }
         }
       };
@@ -55,7 +56,7 @@ export default (state = INITIAL_STATE, action) => {
           ...state.items,
           expenseItems: {
             ...state.items.expenseItems,
-            [action.payload.id]: action.payload
+            [action.payload._id]: action.payload
           }
         }
       };
@@ -65,7 +66,7 @@ export default (state = INITIAL_STATE, action) => {
         totalIncome: state.totalIncome - action.payload.value,
         items: {
           ...state.items,
-          incomeItems: _.omit(state.items.incomeItems, action.payload.id)
+          incomeItems: _.omit(state.items.incomeItems, action.payload._id)
         }
       };
     case DELETE_EXPENSE_ITEM:
@@ -79,9 +80,11 @@ export default (state = INITIAL_STATE, action) => {
         },
         items: {
           ...state.items,
-          expenseItems: _.omit(state.items.expenseItems, action.payload.id)
+          expenseItems: _.omit(state.items.expenseItems, action.payload._id)
         }
       };
+    case CLEAR_BUDGET:
+      return { ...INITIAL_STATE };
     default:
       return state;
   }

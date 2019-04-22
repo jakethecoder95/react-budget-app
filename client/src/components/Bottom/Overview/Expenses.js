@@ -9,7 +9,7 @@ const Expenses = props => {
     if (Object.keys(expenseItems).length) {
       return Object.keys(expenseItems).map(item => {
         return (
-          <ItemExp item={expenseItems[item]} key={expenseItems[item].id} />
+          <ItemExp item={expenseItems[item]} key={expenseItems[item]._id} />
         );
       });
     } else {
