@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha",
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "push-heroku": "cd .. && git subtree push --prefix pythonapp heroku master && cd server"
   },
   "keywords": [],
   "author": "",

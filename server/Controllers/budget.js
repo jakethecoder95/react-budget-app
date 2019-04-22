@@ -14,7 +14,9 @@ exports.getUserBudget = async (req, res, next) => {
     const { all, from, to } = req.query;
     const currentDate = new Date();
     user.items.forEach(item => {
+      // Get All
       if (all === "true") return budget.addItem(item);
+      // Fetch only current month and persist.
       const itemDate = new Date(item.date);
       if (
         item.persist ||

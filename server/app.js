@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const authRoutes = require("./routes/auth");
 const budgetRoutes = require("./routes/budget");
 
-const { MONGODB_URI } = require("./secrets");
+// const { MONGODB_URI } = require("./secrets");
 
 const app = express();
 
@@ -35,9 +35,9 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(MONGODB_URI)
+  .connect(process.env.MONGODB_URI) //  || MONGODB_URI
   .then(() => {
-    app.listen(8000);
+    app.listen(process.env.PORT || 8000);
   })
   .catch(err => {
     console.log(err);

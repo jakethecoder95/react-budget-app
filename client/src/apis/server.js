@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const server = axios.create({
-  baseURL: "http://localhost:8000/"
+  // baseURL: "http://localhost:8000/" // development
+  baseURL: "https://mymoneycharts.herokuapp.com/" // production
 });
 
 export const putSignup = async userInfo =>
