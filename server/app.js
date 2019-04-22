@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const authRoutes = require("./routes/auth");
 const budgetRoutes = require("./routes/budget");
 
-// const { MONGODB_URI } = require("./secrets");
+const { MONGODB_URI } = process.env.MONGODB_URI || require("./secrets");
 
 const app = express();
 
@@ -35,7 +35,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.MONGODB_URI) //  || MONGODB_URI
+  .connect(MONGODB_URI)
   .then(() => {
     app.listen(process.env.PORT || 8000);
   })
