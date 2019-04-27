@@ -8,7 +8,7 @@ import Percentage from "../../UtilComponents/Percentage";
 const ItemExp = props => {
   const { item } = props;
   return (
-    <div className={`item item-exp ${item.catagory}`} ontouchstart="">
+    <div className={`item item-exp ${item.catagory}`} onTouchStart="">
       <div>{item.description}</div>
       <div className="right">
         <div className="item__value">- {item.value.toFixed(2)}</div>
