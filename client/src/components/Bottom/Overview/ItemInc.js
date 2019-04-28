@@ -7,7 +7,7 @@ import { DELETE_ITEM } from "../../../redux/types";
 const ItemInc = props => {
   const { item } = props;
   return (
-    <div className="item item-inc" onTouchStart="">
+    <div className="item item-inc" onTouchStart={() => ""}>
       <div>{item.description}</div>
       <div className="right">
         <div className="item__value">+ {item.value.toFixed(2)}</div>

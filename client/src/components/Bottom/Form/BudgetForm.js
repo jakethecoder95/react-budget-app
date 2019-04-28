@@ -77,6 +77,12 @@ class BudgetForm extends React.Component {
     return (
       <div className="budget-form__container">
         <div className="ui form container">
+          {this.props.mobile && (
+            <div
+              className="x-icon ion-ios-close-outline"
+              onClick={history.goBack}
+            />
+          )}
           <Form
             validate={this.validate}
             submitSucceeded
