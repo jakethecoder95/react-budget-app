@@ -54,6 +54,14 @@
   border-color: #ff5049 !important;
 }
 
+.x-icon {
+  position: absolute;
+  top: 11px;
+  right: 0;
+  font-size: 1.75em;
+  color: rgb(128, 128, 128);
+}
+
 @media (max-width: 769px) {
   .budget-form__container {
     display: none;

@@ -22,8 +22,6 @@ class App extends React.Component {
   }
 
   render() {
-    const location = history.location.pathname;
-    history.location.pathname = location === "/" ? "/budget" : location;
     return (
       <Fragment>
         <Router history={history}>
