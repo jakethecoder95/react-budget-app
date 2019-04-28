@@ -54,6 +54,17 @@
   border-color: #ff5049 !important;
 }
 
+<<<<<<< HEAD
+=======
+.x-icon {
+  position: absolute;
+  top: 11px;
+  right: 0;
+  font-size: 1.75em;
+  color: rgb(128, 128, 128);
+}
+
+>>>>>>> f5ca869... Added x button for MobileForm
 @media (max-width: 769px) {
   .budget-form__container {
     display: none;
