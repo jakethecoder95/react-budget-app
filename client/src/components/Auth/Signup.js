@@ -71,7 +71,7 @@ const Signup = props => {
                 Signup
               </button>
               <div className="field" style={{ marginTop: "10px" }}>
-                <Link to="/login">Login</Link>
+                <Link to="/auth/login">Login</Link>
               </div>
             </form>
           )}

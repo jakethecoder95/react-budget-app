@@ -1,6 +1,6 @@
 import React from "react";
 
-const AuthField = ({ meta, input }) => {
+const AuthField = ({ meta, input, displayLabel }) => {
   const alertError = meta.error && meta.submitFailed;
   const { name } = input;
   const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1);
@@ -8,10 +8,10 @@ const AuthField = ({ meta, input }) => {
   return (
     <div className={`field ${alertError ? "ui error" : ""}`}>
       <label>
-        {nameCapitalized}
+        {displayLabel && nameCapitalized}
         <i
           style={{
-            visibility: alertError ? "visible" : "hidden",
+            display: alertError ? "inline" : "none",
             marginLeft: "15px"
           }}
         >
@@ -25,6 +25,10 @@ const AuthField = ({ meta, input }) => {
       />
     </div>
   );
+};
+
+AuthField.defaultProps = {
+  displayLabel: true
 };
 
 export default AuthField;

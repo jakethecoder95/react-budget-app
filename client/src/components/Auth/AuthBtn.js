@@ -9,10 +9,10 @@ const SignupBtn = props => {
   if (!props.isLoggedIn) {
     return (
       <Fragment>
-        <Link to="/signup" className="auth-button ui button">
+        <Link to="/auth/signup" className="auth-button ui button">
           Signup
         </Link>
-        <Link to="/login" className="auth-button ui button primary">
+        <Link to="/auth/login" className="auth-button ui button primary">
           Login
         </Link>
       </Fragment>

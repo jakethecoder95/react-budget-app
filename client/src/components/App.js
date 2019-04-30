@@ -1,12 +1,11 @@
 import "./Global.css";
-import React, { Fragment } from "react";
+import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Top from "./Top/Top";
 import Bottom from "./Bottom/Bottom";
-import Login from "./Auth/Login";
-import Signup from "./Auth/Signup";
+import Auth from "./Auth/Auth";
 import history from "../history";
 import { INIT_USER_BUDGET } from "../redux/types";
 
@@ -23,18 +22,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <Fragment>
-        <Router history={history}>
-          <Switch>
-            <Route path="/budget">
-              <Top />
-              <Bottom />
-            </Route>
-            <Route path="/login" exact component={Login} />
-            <Route path="/signup" exact component={Signup} />
-          </Switch>
-        </Router>
-      </Fragment>
+      <Router history={history}>
+        <Switch>
+          <Route path="/budget">
+            <Top />
+            <Bottom />
+          </Route>
+          <Route path="/auth" component={Auth} />
+        </Switch>
+      </Router>
     );
   }
 }

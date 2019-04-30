@@ -2,40 +2,39 @@ import "./Form.css";
 import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import { LOGIN } from "../../redux/types";
 import AuthField from "./AuthField";
 import BackBtn from "../UtilComponents/BackBtn";
 import isEmail from "../Util/regexEmail";
 
-const Login = props => {
+const ForgotPassword = props => {
   if (props.isLoggedIn) {
     return <Redirect to="/budget" />;
   }
 
-  const onSubmit = async info => await props.login(info);
+  const authField = props => <AuthField {...props} displayLabel={false} />;
+
+  const onSubmit = async email => await props.postForgotPassword(email);
 
   const validate = values => {
-    const { email, password } = values;
+    const { email } = values;
     const errors = {};
-    // Async errors
-    const { loginResponse } = props;
-    if (loginResponse.data) {
-      if (
-        loginResponse.status === 401 &&
-        values[loginResponse.data.param] === loginResponse.data.value
-      ) {
-        errors[loginResponse.data.param] = loginResponse.data.msg;
-      }
-    }
+    // // Async errors
+    // const { loginResponse } = props;
+    // if (loginResponse.data) {
+    //   if (
+    //     loginResponse.status === 401 &&
+    //     values[loginResponse.data.param] === loginResponse.data.value
+    //   ) {
+    //     errors[loginResponse.data.param] = loginResponse.data.msg;
+    //   }
+    // }
     if (!email) {
       errors.email = "Required";
     } else if (!isEmail(email)) {
       errors.email = "Please enter a valid email";
-    }
-    if (!password) {
-      errors.password = "Required";
     }
     return errors;
   };
@@ -49,12 +48,13 @@ const Login = props => {
         <Form
           onSubmit={onSubmit}
           validate={validate}
-          render={({ handleSubmit, pristine, submitting, form }) => (
+          render={({ handleSubmit, pristine, submitting }) => (
             <form onSubmit={handleSubmit} className="ui form auth-form">
-              <h2 className="ui dividing header">Login</h2>
+              <h4 className="ui dividing header">
+                Please enter the email address connected to your account
+              </h4>
               <div className="fields">
-                <Field name="email" component={AuthField} />
-                <Field name="password" component={AuthField} />
+                <Field name="email" component={authField} />
               </div>
 
               <button
@@ -66,11 +66,6 @@ const Login = props => {
               >
                 Login
               </button>
-              <div className="field" style={{ marginTop: "20px" }}>
-                <Link to="/auth/signup">Signup</Link>{" "}
-                <i style={{ margin: "auto 10px", opacity: ".4" }}>|</i>
-                <Link to="/auth/forgot-password">Forgot Password?</Link>
-              </div>
             </form>
           )}
         />
@@ -80,15 +75,15 @@ const Login = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  login: userInfo => dispatch({ type: LOGIN, payload: userInfo })
+  postForgotPassword: email => dispatch({ type: LOGIN, payload: email })
 });
 
 const mapStateToProps = ({ auth }) => ({
-  loginResponse: auth.loginResponse,
+  forgotPasswordResponse: auth.forgotPasswordResponse,
   isLoggedIn: auth.isLoggedIn
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(ForgotPassword);
