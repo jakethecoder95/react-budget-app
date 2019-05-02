@@ -4,7 +4,7 @@ import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { LOGIN } from "../../redux/types";
+import { FORGOT_PASSWORD } from "../../redux/types";
 import AuthField from "./AuthField";
 import BackBtn from "../UtilComponents/BackBtn";
 import isEmail from "../Util/regexEmail";
@@ -16,7 +16,7 @@ const ForgotPassword = props => {
 
   const authField = props => <AuthField {...props} displayLabel={false} />;
 
-  const onSubmit = async email => await props.postForgotPassword(email);
+  const onSubmit = async ({ email }) => await props.postForgotPassword(email);
 
   const validate = values => {
     const { email } = values;
@@ -75,7 +75,8 @@ const ForgotPassword = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  postForgotPassword: email => dispatch({ type: LOGIN, payload: email })
+  postForgotPassword: email =>
+    dispatch({ type: FORGOT_PASSWORD, payload: email })
 });
 
 const mapStateToProps = ({ auth }) => ({

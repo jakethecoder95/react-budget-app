@@ -37,3 +37,6 @@ export const getUserBudgetAsync = async (date, authString) =>
     headers: { Authorization: authString },
     params: { ...date }
   });
+
+export const postForgotPassword = async email =>
+  await server.post("/forgot-password", { email });
