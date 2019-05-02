@@ -14,8 +14,6 @@ const ForgotPassword = props => {
     return <Redirect to="/budget" />;
   }
 
-  const authField = props => <AuthField {...props} displayLabel={false} />;
-
   const onSubmit = async ({ email }) => await props.postForgotPassword(email);
 
   const validate = values => {
@@ -39,6 +37,7 @@ const ForgotPassword = props => {
     return errors;
   };
 
+  const authField = props => <AuthField {...props} displayLabel={false} />;
   return (
     <Fragment>
       <div className="top">
