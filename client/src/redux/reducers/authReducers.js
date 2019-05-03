@@ -9,7 +9,8 @@ import {
 const initialValue = {
   isLoggedIn: false,
   signupResponse: {},
-  loginResponse: {}
+  loginResponse: {},
+  forgotPasswordResponse: { msg: null }
 };
 
 export default (state = initialValue, action) => {

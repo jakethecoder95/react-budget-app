@@ -5,6 +5,7 @@ import { putSignup, postLogin, postForgotPassword } from "../../apis/server";
 import {
   CLEAR_BUDGET,
   FORGOT_PASSWORD,
+  FORGOT_PASSWORD_RESPONSE,
   LOGOUT,
   LOGIN,
   LOGIN_SUCCESS,
@@ -14,7 +15,6 @@ import {
 } from "../types";
 
 function* login({ payload }) {
-  console.log("login");
   try {
     const response = yield call(postLogin, payload);
     yield put({
@@ -51,12 +51,14 @@ function* signup({ payload }) {
 }
 
 function* forgotPassword({ payload }) {
-  console.log("forgotPassword");
   try {
     const response = yield call(postForgotPassword, payload);
-    console.log(response);
+    yield put({ type: FORGOT_PASSWORD_RESPONSE, payload: response.data });
   } catch (err) {
-    console.log(err.response);
+    yield put({
+      type: FORGOT_PASSWORD_RESPONSE,
+      payload: err.response.data
+    });
   }
 }
 

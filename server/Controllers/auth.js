@@ -73,3 +73,22 @@ exports.signup = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.forgotPassword = async (req, res, next) => {
+  const email = req.body.email;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      const error = new Error("A user with this email could not be found");
+      error.statusCode = 401;
+      error.value = email;
+      throw error;
+    }
+    res.status(200).json({ msg: "Success", value: email });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};

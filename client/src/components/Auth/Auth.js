@@ -4,7 +4,7 @@ import history from "../../history";
 
 import Login from "./Login";
 import Signup from "./Signup";
-import ForgotPassword from "./ForgotPassword";
+import ForgotPassword from "./ForgotPassword/ForgotPassword";
 
 const Auth = () => {
   return (
