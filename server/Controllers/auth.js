@@ -111,7 +111,7 @@ exports.forgotPassword = (req, res, next) => {
         from: "MyMoneyCarts@mymoneycharts.com",
         subject: "Password reset",
         html: `<p>You requested a password reset</p>
-               <p>Click this <a href='http://localhost:3000/auth/reset-password/${token}'>link</a> to reset your password</p>
+               <p>Click this <a href='https://mymoneycharts.herokuapp.com/auth/reset-password/${token}'>link</a> to reset your password</p>
                `
       });
     });
