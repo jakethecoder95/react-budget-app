@@ -1,8 +1,21 @@
+const crypto = require("crypto");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
+const sendgridTransport = require("nodemailer-sendgrid-transport");
 const { validationResult } = require("express-validator/check");
+const { SENDGRID_KEY } = process.env.SENDGRID_KEY || require("../secrets");
 
 const User = require("../Models/User");
+
+const transporter = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key: SENDGRID_KEY
+    }
+  })
+);
 
 exports.login = async (req, res, next) => {
   const email = req.body.email;
@@ -74,17 +87,34 @@ exports.signup = async (req, res, next) => {
   }
 };
 
-exports.forgotPassword = async (req, res, next) => {
-  const email = req.body.email;
+exports.forgotPassword = (req, res, next) => {
+  const email = req.body.email.trim();
   try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      const error = new Error("A user with this email could not be found");
-      error.statusCode = 401;
-      error.value = email;
-      throw error;
-    }
-    res.status(200).json({ msg: "Success", value: email });
+    crypto.randomBytes(32, async (err, buffer) => {
+      if (err) {
+        console.log(err);
+      }
+      const token = buffer.toString("hex");
+      const user = await User.findOne({ email });
+      if (!user) {
+        const error = new Error("A user with this email could not be found");
+        error.statusCode = 401;
+        error.value = email;
+        throw error;
+      }
+      user.resetToken = token;
+      user.resetTokenExpiration = Date.now() + 3600000;
+      await user.save();
+      res.status(200).json({ msg: "Success", value: email });
+      await transporter.sendMail({
+        to: email,
+        from: "MyMoneyCarts@mymoneycharts.com",
+        subject: "Password reset",
+        html: `<p>You requested a password reset</p>
+               <p>Click this <a href='http://localhost:3000/auth/password-reset/${token}'>link</a> to reset your password</p>
+               `
+      });
+    });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
