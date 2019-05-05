@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 const SuccessMessage = ({ message }) => {
   return (
     <Fragment>
-      <h3>{message}</h3>
+      <h3 className="success-message">{message}</h3>
       <div className="success-checkmark">
         <div className="check-icon">
           <span className="icon-line line-tip" />

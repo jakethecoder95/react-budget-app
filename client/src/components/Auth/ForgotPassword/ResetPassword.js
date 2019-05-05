@@ -1,25 +1,28 @@
 import "../Form.css";
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
 
 import { RESET_PASSWORD } from "../../../redux/types";
 import AuthField from "../AuthField";
+import BackBtn from "../../UtilComponents/BackBtn";
+import SuccessMessage from "../../UtilComponents/SuccessMessage";
+import history from "../../../history";
 
 const ResetPassword = props => {
-  const onSubmit = async values => await props.postResetPassword(values);
+  if (props.passwordWasReset === false) {
+    alert("Oops, looks like that token has expired. Please try again.");
+    history.replace("/auth/forgot-password");
+  }
 
-  const validate = (values, other) => {
+  const { token } = props.match.params;
+  const onSubmit = async ({ password }) =>
+    await props.postResetPassword(password, token);
+
+  const validate = values => {
     const { password, confirmPassword } = values;
     const errors = {};
-    // Async errors
-    const asyncErrors = props.resetPasswordResponse;
-    if (asyncErrors) {
-      asyncErrors.forEach(err => {
-        if (values[err.param] === err.value) errors[err.param] = err.msg;
-      });
-    }
-    // Normal errors
     if (!password) {
       errors.password = "Required";
     } else if (password.length < 6) {
@@ -35,28 +38,45 @@ const ResetPassword = props => {
 
   return (
     <Fragment>
-      <div className="top" />
+      <div className="top">
+        <BackBtn />
+      </div>
       <div className="ui container">
         <Form
           onSubmit={onSubmit}
           validate={validate}
           render={({ handleSubmit, pristine, submitting }) => (
             <form onSubmit={handleSubmit} className="ui form auth-form">
-              <h1 className="ui dividing header">Reset Password</h1>
-              <div className="fields">
-                <Field name="password" component={AuthField} />
-                <Field name="confirmPassword" component={AuthField} />
-              </div>
+              {(!props.passwordWasReset && (
+                <Fragment>
+                  <h1 className="ui dividing header">Reset Password</h1>
+                  <div className="fields">
+                    <Field name="password" component={AuthField} />
+                    <Field name="confirmPassword" component={AuthField} />
+                  </div>
 
-              <button
-                type="submit"
-                id="button"
-                disabled={pristine || submitting}
-                className="ui button primary"
-                style={{ marginTop: "1em" }}
-              >
-                Submit
-              </button>
+                  <button
+                    type="submit"
+                    id="button"
+                    disabled={pristine || submitting}
+                    className="ui button primary"
+                    style={{ marginTop: "1em" }}
+                  >
+                    Submit
+                  </button>
+                </Fragment>
+              )) || (
+                <Fragment>
+                  <SuccessMessage message="Password was reset!" />
+                  <Link
+                    to="/auth/login"
+                    className="ui button primary"
+                    style={{ width: "100%", marginTop: "2em" }}
+                  >
+                    Go to Login
+                  </Link>
+                </Fragment>
+              )}
             </form>
           )}
         />
@@ -66,12 +86,12 @@ const ResetPassword = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  postForgotPassword: values =>
-    dispatch({ type: RESET_PASSWORD, payload: values })
+  postResetPassword: (newPassword, token) =>
+    dispatch({ type: RESET_PASSWORD, payload: { newPassword, token } })
 });
 
 const mapStateToProps = ({ auth }) => ({
-  resetPasswordResponse: auth.resetPasswordResponse
+  passwordWasReset: auth.passwordWasReset
 });
 
 export default connect(

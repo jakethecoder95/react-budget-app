@@ -25,16 +25,6 @@ const ForgotPassword = props => {
       )) || <EnterEmail />}
     </Fragment>
   );
-
-  // return <Fragment>
-  // <div className="top">
-  //   <BackBtn />
-  // </div>
-  // <Fragment />
-  // if (props.forgotPasswordResponse.msg === "Success") {
-  //   return <div>success</div>;
-  // }
-  // return <EnterEmail />;
 };
 
 const mapStateToProps = ({ auth }) => ({

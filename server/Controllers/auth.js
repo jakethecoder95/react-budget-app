@@ -111,10 +111,36 @@ exports.forgotPassword = (req, res, next) => {
         from: "MyMoneyCarts@mymoneycharts.com",
         subject: "Password reset",
         html: `<p>You requested a password reset</p>
-               <p>Click this <a href='http://localhost:3000/auth/password-reset/${token}'>link</a> to reset your password</p>
+               <p>Click this <a href='http://localhost:3000/auth/reset-password/${token}'>link</a> to reset your password</p>
                `
       });
     });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.resetPassword = async (req, res, next) => {
+  const { token, newPassword } = req.body;
+  try {
+    const user = await User.findOne({
+      resetToken: token,
+      resetTokenExpiration: { $gt: Date.now() }
+    });
+    if (!user) {
+      const error = new Error("Token has expired");
+      error.statusCode = 403;
+      throw error;
+    }
+    newHashedPassword = await bcrypt.hash(newPassword, 12);
+    user.password = newHashedPassword;
+    user.resetToken = undefined;
+    user.resetTokenExpiration = undefined;
+    await user.save();
+    res.status(200).json({ msg: "Password was reset!" });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

@@ -40,3 +40,9 @@ export const getUserBudgetAsync = async (date, authString) =>
 
 export const postForgotPassword = async email =>
   await server.post("/forgot-password", { email });
+
+export const postResetPassword = async (newPassword, token) =>
+  await server.post("/reset-password", {
+    newPassword,
+    token
+  });

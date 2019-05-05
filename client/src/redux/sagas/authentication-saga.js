@@ -1,6 +1,11 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import store from "store";
-import { putSignup, postLogin, postForgotPassword } from "../../apis/server";
+import {
+  putSignup,
+  postLogin,
+  postForgotPassword,
+  postResetPassword
+} from "../../apis/server";
 
 import {
   CLEAR_BUDGET,
@@ -10,6 +15,9 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
+  RESET_PASSWORD,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAILED,
   SIGNUP,
   SIGNUP_FAILED
 } from "../types";
@@ -62,12 +70,22 @@ function* forgotPassword({ payload }) {
   }
 }
 
+function* resetPassword({ payload }) {
+  try {
+    yield call(postResetPassword, payload.newPassword, payload.token);
+    yield put({ type: RESET_PASSWORD_SUCCESS });
+  } catch (err) {
+    yield put({ type: RESET_PASSWORD_FAILED });
+  }
+}
+
 export function createAuthenticationsSaga() {
   return [
     takeLatest(SIGNUP, signup),
     takeLatest(LOGOUT, logout),
     takeLatest(LOGIN, login),
     takeLatest(LOGIN_SUCCESS, loginSuccess),
-    takeLatest(FORGOT_PASSWORD, forgotPassword)
+    takeLatest(FORGOT_PASSWORD, forgotPassword),
+    takeLatest(RESET_PASSWORD, resetPassword)
   ];
 }

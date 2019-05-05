@@ -3,7 +3,9 @@ import {
   LOGIN_SUCCESS,
   SIGNUP_FAILED,
   LOGOUT,
-  FORGOT_PASSWORD_RESPONSE
+  FORGOT_PASSWORD_RESPONSE,
+  RESET_PASSWORD_FAILED,
+  RESET_PASSWORD_SUCCESS
 } from "../types";
 
 const initialValue = {
@@ -33,6 +35,16 @@ export default (state = initialValue, action) => {
       return {
         ...state,
         forgotPasswordResponse: action.payload
+      };
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        passwordWasReset: true
+      };
+    case RESET_PASSWORD_FAILED:
+      return {
+        ...state,
+        passwordWasReset: false
       };
     default:
       return state;
