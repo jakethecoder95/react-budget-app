@@ -6,13 +6,8 @@ import { connect } from "react-redux";
 import { FORGOT_PASSWORD } from "../../../redux/types";
 import AuthField from "../AuthField";
 import isEmail from "../../Util/regexEmail";
-import history from "../../../history";
 
 const EnterEmail = props => {
-  if (props.forgotPasswordResponse.msg === "Success") {
-    history.replace("/auth/forgot-password-enter-pin");
-  }
-
   const onSubmit = async ({ email }) => await props.postForgotPassword(email);
 
   const validate = values => {
@@ -56,7 +51,7 @@ const EnterEmail = props => {
               className="ui button primary"
               style={{ marginTop: "1em" }}
             >
-              Login
+              Submit
             </button>
           </form>
         )}

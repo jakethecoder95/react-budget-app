@@ -20,7 +20,11 @@ const AuthField = ({ meta, input, displayLabel }) => {
       </label>
       <input
         placeholder={nameCapitalized}
-        type={name === "password" ? name : "text"}
+        type={
+          name === "password" || name === "confirmPassword"
+            ? "password"
+            : "text"
+        }
         {...input}
       />
     </div>
