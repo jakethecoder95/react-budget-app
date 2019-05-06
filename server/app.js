@@ -33,7 +33,7 @@ app.use((error, req, res, next) => {
   const data = error.data;
   res.status(status).json({ msg, param, value, data });
 });
-console.log(MONGODB_URI);
+console.log("mongodb_uri = " + MONGODB_URI);
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
