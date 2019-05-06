@@ -5,7 +5,9 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 const { validationResult } = require("express-validator/check");
-const { SENDGRID_KEY } = process.env.SENDGRID_KEY || require("../secrets");
+const { SENDGRID_KEY } = process.env.SENDGRID_KEY
+  ? process.env
+  : require("../secrets");
 
 const User = require("../Models/User");
 

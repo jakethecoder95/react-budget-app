@@ -5,7 +5,9 @@ const bodyParser = require("body-parser");
 const authRoutes = require("./routes/auth");
 const budgetRoutes = require("./routes/budget");
 
-const { MONGODB_URI } = process.env || require("./secrets");
+const { MONGODB_URI } = process.env.MONGODB_URI
+  ? process.env
+  : require("./secrets");
 
 const app = express();
 
