@@ -33,10 +33,11 @@ app.use((error, req, res, next) => {
   const data = error.data;
   res.status(status).json({ msg, param, value, data });
 });
-
+console.log(MONGODB_URI);
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
+    console.log("success");
     app.listen(process.env.PORT || 8000);
   })
   .catch(err => {
