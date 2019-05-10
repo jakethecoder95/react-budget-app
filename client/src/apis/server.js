@@ -1,8 +1,12 @@
 import axios from "axios";
 
+const prodURL = "https://mymoneycharts.herokuapp.com/";
+const devURL = "http://localhost:8000/";
+const location = window.location.href;
+const regex = /mymoneycharts.com/;
+
 const server = axios.create({
-  // baseURL: "http://localhost:8000/" // development
-  baseURL: "https://mymoneycharts.herokuapp.com/" // production
+  baseURL: regex.test(location) ? prodURL : devURL
 });
 
 export const putSignup = async userInfo =>
@@ -46,3 +50,14 @@ export const postResetPassword = async (newPassword, token) =>
     newPassword,
     token
   });
+
+export const mergeBudgetAsync = async (items, authString) =>
+  await server.put(
+    "/merge-budget",
+    {
+      items
+    },
+    {
+      headers: { Authorization: authString }
+    }
+  );

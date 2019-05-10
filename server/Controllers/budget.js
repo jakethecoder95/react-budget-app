@@ -98,3 +98,29 @@ exports.deleteItem = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.mergeBudget = async (req, res, next) => {
+  const { items } = req.body;
+  const { incomeItems, expenseItems } = items;
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) {
+      const error = new Error("No user found");
+      error.statusCode = 401;
+      throw error;
+    }
+    const newItems = [...incomeItems, ...expenseItems].map(item => ({
+      ...item,
+      owner: user.id
+    }));
+    const items = await Item.insertMany(newItems);
+    items.forEach(item => user.items.push(item._id));
+    user.save();
+    res.status(200).json({ msg: "working", items: req.body.items });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};

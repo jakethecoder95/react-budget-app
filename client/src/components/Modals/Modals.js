@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { connect } from "react-redux";
 
 import Confirm from "./Confirm";
 import history from "../../history";
+import { MERGE_BUDGET_NO, MERGE_BUDGET_YES } from "../../redux/types";
 
 class Modals extends React.Component {
   state = { show: true };
@@ -15,11 +17,15 @@ class Modals extends React.Component {
   with budget with your own?"
       yesBtnMessage="Yes, merge it"
       noBtnMessage="Nah, get rid of it"
+      yesSaga={this.props.mergeBudgetYes}
+      noSaga={this.props.mergeBudgetNo}
     />
   );
 
   render() {
-    if (this.state.show) {
+    const { mergeBudgetConfirm, showModal } = this.props;
+
+    if (showModal) {
       return ReactDOM.createPortal(
         <div className="modal__container">
           <div
@@ -30,7 +36,9 @@ class Modals extends React.Component {
               className="standard modal visible active"
               onClick={e => e.stopPropagation()}
             >
-              <div className="modal">{this.confirmMergeLocalStorage}</div>
+              <div className="modal">
+                {mergeBudgetConfirm && this.confirmMergeLocalStorage}
+              </div>
             </div>
           </div>
         </div>,
@@ -42,4 +50,17 @@ class Modals extends React.Component {
   }
 }
 
-export default Modals;
+const mapDispatchToProps = dispatch => ({
+  mergeBudgetYes: () => dispatch({ type: MERGE_BUDGET_YES }),
+  mergeBudgetNo: () => dispatch({ type: MERGE_BUDGET_NO })
+});
+
+const mapStateToProps = ({ modals }) => ({
+  showModal: modals.showModal,
+  mergeBudgetConfirm: modals.mergeBudgetConfirm
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Modals);

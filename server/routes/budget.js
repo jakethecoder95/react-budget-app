@@ -11,4 +11,6 @@ router.put("/add-item", isAuth, budgetControllers.putItem);
 
 router.delete("/delete-item", isAuth, budgetControllers.deleteItem);
 
+router.put("/merge-budget", isAuth, budgetControllers.mergeBudget);
+
 module.exports = router;

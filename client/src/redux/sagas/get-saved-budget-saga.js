@@ -1,5 +1,7 @@
-import { takeLatest, put } from "redux-saga/effects";
-import { getUserBudgetAsync } from "../../apis/server";
+import { takeLatest, put, race, take, call } from "redux-saga/effects";
+import _ from "lodash";
+
+import { getUserBudgetAsync, mergeBudgetAsync } from "../../apis/server";
 import store from "store";
 
 import {
@@ -7,6 +9,9 @@ import {
   INIT_USER_BUDGET,
   LOGIN_SUCCESS,
   LOGOUT,
+  MERGE_BUDGET_CONFIRM,
+  MERGE_BUDGET_NO,
+  MERGE_BUDGET_YES,
   SET_INITIAL_BUDGET
 } from "../types";
 
@@ -16,6 +21,7 @@ function* initUserBudget() {
     return yield put({ type: CHECK_LOCAL_STORAGE });
   }
   const authString = `Bearer ${token}`;
+  yield confirmMergeBudget(authString);
   try {
     const date = { all: false, from: new Date().toISOString(), to: null }; // TODO: This will be done dynamically when user settings are set up
     const response = yield getUserBudgetAsync(date, authString);
@@ -63,6 +69,42 @@ function* checkLocalStorage() {
       items: { incomeItems: { ...incomes }, expenseItems: { ...expenses } }
     }
   });
+}
+
+function* confirmMergeBudget(authString) {
+  const localBudget = store.get("budget");
+  if (localBudget) {
+    yield put({ type: MERGE_BUDGET_CONFIRM });
+
+    const { yes } = yield race({
+      yes: take(MERGE_BUDGET_YES),
+      no: take(MERGE_BUDGET_NO)
+    });
+
+    if (yes) {
+      yield mergeLocalStorageWithUserBudget(localBudget.items, authString);
+    }
+  }
+  store.remove("budget");
+}
+
+function* mergeLocalStorageWithUserBudget(items, authString) {
+  const incomeItems = Object.values(items.incomeItems).map(item =>
+    _.omit(item, "_id")
+  );
+  const expenseItems = Object.values(items.expenseItems).map(item =>
+    _.omit(item, "_id")
+  );
+
+  try {
+    yield call(
+      mergeBudgetAsync,
+      { ...items, incomeItems, expenseItems },
+      authString
+    );
+  } catch (err) {
+    console.log(err.response);
+  }
 }
 
 export function createGetSavedBudgetSaga() {
