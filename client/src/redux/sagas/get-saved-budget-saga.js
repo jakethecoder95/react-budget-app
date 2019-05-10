@@ -6,8 +6,8 @@ import {
   CHECK_LOCAL_STORAGE,
   INIT_USER_BUDGET,
   LOGIN_SUCCESS,
-  SET_INITIAL_BUDGET,
-  LOGOUT
+  LOGOUT,
+  SET_INITIAL_BUDGET
 } from "../types";
 
 function* initUserBudget() {
@@ -63,10 +63,6 @@ function* checkLocalStorage() {
       items: { incomeItems: { ...incomes }, expenseItems: { ...expenses } }
     }
   });
-}
-
-function* mergeLocalStorageToUserBudget(budget) {
-  console.log("here");
 }
 
 export function createGetSavedBudgetSaga() {
