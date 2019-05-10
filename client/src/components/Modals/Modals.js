@@ -5,7 +5,7 @@ import Confirm from "./Confirm";
 import history from "../../history";
 
 class Modals extends React.Component {
-  state = { show: false };
+  state = { show: true };
 
   confirmMergeLocalStorage = (
     <Confirm

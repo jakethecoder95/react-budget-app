@@ -24,7 +24,6 @@ class App extends React.Component {
   render() {
     return (
       <Router history={history}>
-        <Modals />
         <Switch>
           <Route path="/budget">
             <Top />
