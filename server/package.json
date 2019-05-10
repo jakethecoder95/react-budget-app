@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "start": "node app.js",
-    "push-heroku": "git push heroku `git subtree split --prefix server master`:master --force (copy and paste this command into bash"
+    "push-heroku": "git push heroku `git subtree split --prefix server master`:master --force (copy and paste this command into bash)"
   },
   "keywords": [],
   "author": "",
