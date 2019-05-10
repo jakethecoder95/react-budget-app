@@ -1,0 +1,10 @@
+.modal {
+    background-color: #f7f7f7;
+    max-width: 600px; 
+    padding: 20px;
+    border-radius: 10px;
+
+    @media (max-width: 600px) {
+        padding: 20px 10px;
+    }
+}
