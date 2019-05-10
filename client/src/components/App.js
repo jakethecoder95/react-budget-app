@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import Top from "./Top/Top";
 import Bottom from "./Bottom/Bottom";
+import Modals from "./Modals/Modals";
 import Auth from "./Auth/Auth";
 import history from "../history";
 import { INIT_USER_BUDGET } from "../redux/types";
@@ -23,6 +24,7 @@ class App extends React.Component {
   render() {
     return (
       <Router history={history}>
+        <Modals />
         <Switch>
           <Route path="/budget">
             <Top />
