@@ -12,8 +12,8 @@ class Modals extends React.Component {
   confirmMergeLocalStorage = (
     <Confirm
       title="Don't loose your work!"
-      description="Looks like their is already a budget saved on your browser.
-  When you log in this will be lost. Would you like merge that
+      description="Looks like there is already a budget saved on your browser.
+  When you log in this will be lost. Would you like to merge that
   with budget with your own?"
       yesBtnMessage="Yes, merge it"
       noBtnMessage="Nah, get rid of it"
