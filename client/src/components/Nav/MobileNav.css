@@ -1,0 +1,21 @@
+.mobile-nav_backdrop.ui.dimmer {
+  position: fixed;
+  background-color: #00000000;
+  transform: translateX(-100vw);
+  transition: 250ms;
+}
+.mobile-nav_backdrop.ui.dimmer.show {
+  transform: translateX(0);
+}
+.mobile-nav-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+  background-color: #f7f7f7fa;
+  height: 100vh;
+  width: 75vw;
+}
+.links {
+  height: 70vh;
+}

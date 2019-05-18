@@ -7,7 +7,7 @@ import ChartsPage from "./Charts/ChartsPage";
 import BudgetForm from "./Form/BudgetForm";
 import MobileForm from "./Form/MobileForm";
 import MobileAddButton from "./Form/MobileAddButton";
-import Navbar from "./Navbar";
+import Navbar from "../Nav/Navbar";
 
 class Bottom extends React.Component {
   render() {
