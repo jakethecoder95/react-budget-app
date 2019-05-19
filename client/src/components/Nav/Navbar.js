@@ -45,9 +45,17 @@ class Navbar extends React.Component {
               </div>
             </Fragment>
           )) || (
-            <div className="menu-btn item" onClick={this.props.mobileMenuShow}>
-              <i className="fa fa-bars" />
-            </div>
+            <Fragment>
+              <div
+                className="menu-btn item"
+                onClick={this.props.mobileMenuShow}
+              >
+                <i className="fa fa-bars" />
+              </div>
+              <div className="right menu">
+                <AuthBtn />
+              </div>
+            </Fragment>
           )}
         </div>
       </div>
