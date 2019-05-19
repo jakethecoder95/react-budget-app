@@ -14,6 +14,11 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  settings: {
+    budgetDates: { type: String, required: true, default: "month" }, // "all", "month", or "personalize"
+    from: String, // "[month] [year]"
+    to: String // "[month] [year]" or "now"
+  },
   items: [
     {
       type: Schema.Types.ObjectId,
