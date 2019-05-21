@@ -26,7 +26,9 @@ exports.getUserBudget = async (req, res, next) => {
         return budget.addItem(item);
       }
     });
-    res.status(200).json(budget);
+    res
+      .status(200)
+      .json({ budget, user: { username: user.username, email: user.email } });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

@@ -47,7 +47,12 @@ exports.login = async (req, res, next) => {
       "secret"
     );
 
-    res.status(200).json({ token: token, userId: user._id.toString() });
+    res.status(200).json({
+      token: token,
+      userId: user._id.toString(),
+      email: user.email,
+      username: user.username
+    });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
