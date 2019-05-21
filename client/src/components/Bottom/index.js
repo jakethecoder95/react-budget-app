@@ -7,6 +7,7 @@ import ChartsPage from "./Charts/ChartsPage";
 import BudgetForm from "./Form/BudgetForm";
 import MobileForm from "./Form/MobileForm";
 import MobileAddButton from "./Form/MobileAddButton";
+import Settings from "./Settings";
 import Navbar from "../Nav/Navbar";
 
 class Bottom extends React.Component {
@@ -20,6 +21,7 @@ class Bottom extends React.Component {
             <Switch>
               <Route path="/budget" exact component={BudgetOverview} />
               <Route path="/budget/charts" exact component={ChartsPage} />
+              <Route path="/budget/settings" exact component={Settings} />
               <Route path="/budget/mobile-form" component={MobileForm} />
             </Switch>
             <MobileAddButton />

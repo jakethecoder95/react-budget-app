@@ -1,0 +1,10 @@
+.settings-menu {
+  max-width: 900px;
+  margin: 50px auto;
+}
+
+@media (max-width: 770px) {
+  .settings-menu {
+    margin: 10px auto;
+  }
+}

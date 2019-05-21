@@ -4,7 +4,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Top from "./Top/Top";
-import Bottom from "./Bottom/Bottom";
+import Bottom from "./Bottom";
 import Modals from "./Modals/Modals";
 import MobileNav from "./Nav/MobileNav";
 import Auth from "./Auth/Auth";
@@ -26,9 +26,9 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <Modals />
-        <MobileNav />
         <Switch>
           <Route path="/budget">
+            <MobileNav />
             <Top />
             <Bottom />
           </Route>
