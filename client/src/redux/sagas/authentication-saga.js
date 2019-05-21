@@ -27,7 +27,7 @@ function* login({ payload }) {
     const response = yield call(postLogin, payload);
     yield put({
       type: LOGIN_SUCCESS,
-      payload: { token: response.data.token, userId: response.data.userId }
+      payload: { ...response.data }
     });
   } catch (error) {
     yield put({ type: LOGIN_FAILED, payload: error.response });

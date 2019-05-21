@@ -24,9 +24,12 @@ function* initUserBudget() {
   yield confirmMergeBudget(authString);
   try {
     const date = { all: false, from: new Date().toISOString(), to: null }; // TODO: This will be done dynamically when user settings are set up
-    const response = yield getUserBudgetAsync(date, authString);
-    yield put({ type: LOGIN_SUCCESS });
-    yield put({ type: SET_INITIAL_BUDGET, payload: { ...response.data } });
+    const response = yield call(getUserBudgetAsync, date, authString);
+    yield put({ type: LOGIN_SUCCESS, payload: { ...response.data.user } });
+    yield put({
+      type: SET_INITIAL_BUDGET,
+      payload: { ...response.data.budget }
+    });
   } catch (err) {
     yield alert(
       "Looks like there was an error logging you in. Please log back in."

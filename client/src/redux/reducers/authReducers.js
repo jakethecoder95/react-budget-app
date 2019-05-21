@@ -10,6 +10,7 @@ import {
 
 const initialValue = {
   isLoggedIn: false,
+  user: {},
   signupResponse: {},
   loginResponse: {},
   forgotPasswordResponse: { msg: null }
@@ -24,7 +25,8 @@ export default (state = initialValue, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isLoggedIn: true
+        isLoggedIn: true,
+        user: { email: action.payload.email, username: action.payload.username }
       };
     case SIGNUP_FAILED:
       return {
