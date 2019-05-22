@@ -28,8 +28,8 @@ const mapDispatchToProps = dispatch => ({
   resetSettingsRedux: () => dispatch({ type: UPDATE_SETTINGS_RESET })
 });
 
-const mapStateToProps = ({ auth }) => ({
-  updateSuccessfull: auth.user.updateSuccessfull
+const mapStateToProps = ({ userSettings }) => ({
+  updateSuccessfull: userSettings.updateSuccessfull
 });
 
 export default connect(

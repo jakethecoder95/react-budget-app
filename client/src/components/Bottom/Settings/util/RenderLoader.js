@@ -13,9 +13,9 @@ const RenderLoader = ({ updating, email }) => {
   return null;
 };
 
-const mapStateToProps = ({ auth }) => ({
-  updating: auth.user.updating,
-  email: auth.user.email
+const mapStateToProps = ({ userSettings }) => ({
+  updating: userSettings.updating,
+  email: userSettings.email
 });
 
 export default connect(mapStateToProps)(RenderLoader);

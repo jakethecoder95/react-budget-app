@@ -43,9 +43,9 @@ const Settings = props => {
   );
 };
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth, userSettings }) => ({
   isLoggedIn: auth.isLoggedIn,
-  updating: auth.user.updating
+  updating: userSettings.updating
 });
 
 export default connect(mapStateToProps)(Settings);

@@ -87,11 +87,11 @@ const mapDispatchToProps = dispatch => ({
   updateUserBio: values => dispatch({ type: UPDATE_USER_BIO, payload: values })
 });
 
-const mapStateToProps = ({ auth }) => ({
-  email: auth.user.email,
-  username: auth.user.username,
-  updating: auth.user.updating,
-  updateSuccessfull: auth.user.updateSuccessfull
+const mapStateToProps = ({ userSettings }) => ({
+  email: userSettings.email,
+  username: userSettings.username,
+  updating: userSettings.updating,
+  updateSuccessfull: userSettings.updateSuccessfull
 });
 
 export default connect(

@@ -5,10 +5,7 @@ import {
   LOGOUT,
   FORGOT_PASSWORD_RESPONSE,
   RESET_PASSWORD_FAILED,
-  RESET_PASSWORD_SUCCESS,
-  UPDATE_USER_BIO,
-  UPDATE_USER_SETTINGS_SUCCESS,
-  UPDATE_SETTINGS_RESET
+  RESET_PASSWORD_SUCCESS
 } from "../types";
 
 const initialValue = {
@@ -28,8 +25,7 @@ export default (state = initialValue, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isLoggedIn: true,
-        user: { email: action.payload.email, username: action.payload.username }
+        isLoggedIn: true
       };
     case SIGNUP_FAILED:
       return {
@@ -50,24 +46,6 @@ export default (state = initialValue, action) => {
       return {
         ...state,
         passwordWasReset: false
-      };
-    case UPDATE_USER_BIO:
-      return { ...state, user: { ...state.user, updating: true } };
-    case UPDATE_USER_SETTINGS_SUCCESS:
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          email: action.payload.email,
-          username: action.payload.username,
-          updating: undefined,
-          updateSuccessfull: true
-        }
-      };
-    case UPDATE_SETTINGS_RESET:
-      return {
-        ...state,
-        user: { email: state.user.email, username: state.user.username }
       };
     default:
       return state;
