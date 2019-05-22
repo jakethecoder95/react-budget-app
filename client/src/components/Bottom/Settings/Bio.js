@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
 
 import isEmail from "../../Util/regexEmail";
 import { UPDATE_USER_BIO } from "../../../redux/types";
+import RenderSuccessMessage from "./util/RenderSuccessMessage";
 
 const Bio = props => {
   const onSubmit = values => props.updateUserBio(values);
@@ -28,38 +29,57 @@ const Bio = props => {
     return errors;
   };
   return (
-    <Form
-      initialValues={{ email: props.email, username: props.username }}
-      onSubmit={onSubmit}
-      validate={validate}
-      render={({ handleSubmit, pristine, invalid, errors, form }) => (
-        <form onSubmit={handleSubmit} className="ui form">
-          <div className={`ui field ${errors.email ? "error" : ""}`}>
-            <label>
-              Email <i>{errors.email ? "*" + errors.email : ""}</i>
-            </label>
-            <Field name="email" component="input" className="input" />
-          </div>
-          <div className={`ui field ${errors.username ? "error" : ""}`}>
-            <label>
-              Username <i>{errors.username ? "*" + errors.username : ""}</i>
-            </label>
-            <Field name="username" component="input" className="input" />
-          </div>
-          <button
-            type="submit"
-            disabled={pristine || invalid}
-            className="ui button"
-            style={{ backgroundColor: "#28b9b5", color: "#fff" }}
+    <Fragment>
+      <RenderSuccessMessage />
+      <Form
+        initialValues={{ email: props.email, username: props.username }}
+        onSubmit={onSubmit}
+        validate={validate}
+        render={({ handleSubmit, pristine, invalid, errors, form }) => (
+          <form
+            onSubmit={values => {
+              handleSubmit(values);
+              form.reset();
+            }}
+            className="ui form"
           >
-            Save
-          </button>
-          <div className="ui button" onClick={form.reset}>
-            Reset
-          </div>
-        </form>
-      )}
-    />
+            <div className={`ui field ${errors.email ? "error" : ""}`}>
+              <label>
+                Email <i>{errors.email ? "*" + errors.email : ""}</i>
+              </label>
+              <Field
+                name="email"
+                component="input"
+                className="input"
+                autoComplete="off"
+              />
+            </div>
+            <div className={`ui field ${errors.username ? "error" : ""}`}>
+              <label>
+                Username <i>{errors.username ? "*" + errors.username : ""}</i>
+              </label>
+              <Field
+                name="username"
+                component="input"
+                className="input"
+                autoComplete="off"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={pristine || invalid}
+              className="ui button"
+              style={{ backgroundColor: "#28b9b5", color: "#fff" }}
+            >
+              Save
+            </button>
+            <div className="ui button" onClick={form.reset}>
+              Reset
+            </div>
+          </form>
+        )}
+      />
+    </Fragment>
   );
 };
 
@@ -69,7 +89,9 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = ({ auth }) => ({
   email: auth.user.email,
-  username: auth.user.username
+  username: auth.user.username,
+  updating: auth.user.updating,
+  updateSuccessfull: auth.user.updateSuccessfull
 });
 
 export default connect(

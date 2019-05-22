@@ -1,12 +1,14 @@
-import "./Settings.css";
+import "./Settings.scss";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import Bio from "./Bio";
 import Budget from "./Budget";
+import RenderLoader from "./util/RenderLoader";
 
 const Settings = props => {
   const [active, setActive] = useState("bio");
-  const desktopView = window.innerWidth > 770;
+  const desktopView = window.innerWidth > 992;
   return (
     <div className="settings-menu">
       <div className={`ui container ${desktopView ? "grid" : ""}`}>
@@ -32,6 +34,7 @@ const Settings = props => {
         </div>
         <div className="twelve wide stretched column">
           <div className="ui segment">
+            <RenderLoader />
             {(active === "bio" && <Bio />) || <Budget />}
           </div>
         </div>
@@ -40,4 +43,9 @@ const Settings = props => {
   );
 };
 
-export default Settings;
+const mapStateToProps = ({ auth }) => ({
+  isLoggedIn: auth.isLoggedIn,
+  updating: auth.user.updating
+});
+
+export default connect(mapStateToProps)(Settings);

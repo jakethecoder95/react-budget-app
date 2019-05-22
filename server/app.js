@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 
 const authRoutes = require("./routes/auth");
 const budgetRoutes = require("./routes/budget");
+const userSettingsRoutes = require("./routes/settings");
 
 const { MONGODB_URI } = process.env.MONGODB_URI
   ? process.env
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 
 app.use(authRoutes);
 app.use(budgetRoutes);
+app.use(userSettingsRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);

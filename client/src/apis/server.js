@@ -61,3 +61,12 @@ export const mergeBudgetAsync = async (items, authString) =>
       headers: { Authorization: authString }
     }
   );
+
+export const postUpdateUserBio = async (values, authString) =>
+  await server.post(
+    "/update-user-bio",
+    {
+      ...values
+    },
+    { headers: { Authorization: authString } }
+  );
