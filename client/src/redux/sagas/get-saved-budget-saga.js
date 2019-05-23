@@ -1,4 +1,4 @@
-import { takeLatest, put, race, take, call } from "redux-saga/effects";
+import { takeLatest, put, race, take, call, select } from "redux-saga/effects";
 import _ from "lodash";
 
 import { getUserBudgetAsync, mergeBudgetAsync } from "../../apis/server";
@@ -25,7 +25,10 @@ function* initUserBudget() {
   try {
     const date = { all: false, from: new Date().toISOString(), to: null }; // TODO: This will be done dynamically when user settings are set up
     const response = yield call(getUserBudgetAsync, date, authString);
-    yield put({ type: LOGIN_SUCCESS, payload: { ...response.data.user } });
+    yield put({
+      type: LOGIN_SUCCESS,
+      payload: { ...response.data.userSettings }
+    });
     yield put({
       type: SET_INITIAL_BUDGET,
       payload: { ...response.data.budget }

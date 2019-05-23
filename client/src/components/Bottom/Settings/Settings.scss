@@ -9,3 +9,9 @@
     margin: 10px auto;
   }
 }
+
+.settings-menu input[type="number"]::-webkit-inner-spin-button,
+.settings-menu input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: block;
+  margin: 0;
+}

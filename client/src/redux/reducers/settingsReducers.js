@@ -12,7 +12,8 @@ export default (state = {}, action) => {
       return {
         ...state,
         email: action.payload.email,
-        username: action.payload.username
+        username: action.payload.username,
+        budgetSettings: action.payload.budgetSettings
       };
     case LOGOUT:
       return {};

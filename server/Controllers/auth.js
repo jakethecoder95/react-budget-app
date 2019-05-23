@@ -51,7 +51,8 @@ exports.login = async (req, res, next) => {
       token: token,
       userId: user._id.toString(),
       email: user.email,
-      username: user.username
+      username: user.username,
+      budgetSettings: user.settings
     });
   } catch (err) {
     if (!err.statusCode) {
