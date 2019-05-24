@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
-import { Field } from "react-final-form";
 
-const SelectType = props => {
+const SelectType = ({ selectedType, onTypeChange }) => {
   const mobileView = window.innerWidth < 500;
   return (
     <Fragment>
@@ -12,33 +11,36 @@ const SelectType = props => {
         )}
         <div className="field">
           <div className="ui radio checkbox">
-            <Field
-              component="input"
+            <input
               type="radio"
               name="selectedType"
               value="month"
+              checked={selectedType === "month"}
+              onChange={() => onTypeChange("month")}
             />
             <label>Month</label>
           </div>
         </div>
         <div className="field">
           <div className="ui radio checkbox">
-            <Field
-              component="input"
+            <input
               type="radio"
               name="selectedType"
               value="all"
+              checked={selectedType === "all"}
+              onChange={() => onTypeChange("all")}
             />
             <label>All</label>
           </div>
         </div>
         <div className="field">
           <div className="ui radio checkbox">
-            <Field
-              component="input"
+            <input
               type="radio"
               name="selectedType"
               value="personalize"
+              checked={selectedType === "personalize"}
+              onChange={() => onTypeChange("personalize")}
             />
             <label>Personalize</label>
           </div>

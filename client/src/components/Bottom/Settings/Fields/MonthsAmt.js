@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 
-const MonthsAmt = ({ months, increment, decrement }) => {
+const MonthsAmt = ({ months, onValueChange }) => {
   const mobileView = window.innerWidth < 500;
+
   return (
     <Fragment>
       {mobileView && <label>Select how many months:</label>}
@@ -20,14 +21,14 @@ const MonthsAmt = ({ months, increment, decrement }) => {
           <div
             className="circular ui icon button"
             style={{ fontSize: ".65rem", marginLeft: "25px" }}
-            onClick={decrement}
+            onClick={() => onValueChange(months > 1 ? months - 1 : months)}
           >
             <i className="icon minus" />
           </div>
           <div
             className="circular ui icon button"
             style={{ fontSize: ".65rem" }}
-            onClick={increment}
+            onClick={() => onValueChange(months + 1)}
           >
             <i className="icon plus" />
           </div>
