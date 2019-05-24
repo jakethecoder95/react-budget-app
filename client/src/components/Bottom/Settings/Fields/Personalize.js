@@ -29,7 +29,7 @@ const Personalize = ({ from, to, onToChange, onFromChange }) => {
     const year = now.getFullYear();
 
     for (let i = 0; i < 50; i++) {
-      years[i] = year - i + 1;
+      years[i] = year - i;
     }
 
     return years.map((el, i) => {
