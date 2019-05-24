@@ -9,6 +9,7 @@ import RenderLoader from "./util/RenderLoader";
 const Settings = props => {
   const [active, setActive] = useState("bio");
   const desktopView = window.innerWidth > 992;
+
   return (
     <div className="settings-menu">
       <div className={`ui container ${desktopView ? "grid" : ""}`}>

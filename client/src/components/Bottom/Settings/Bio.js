@@ -43,6 +43,7 @@ const Bio = props => {
             }}
             className="ui form"
           >
+            <h3>Your Bio Settings</h3>
             <div className={`ui field ${errors.email ? "error" : ""}`}>
               <label>
                 Email <i>{errors.email ? "*" + errors.email : ""}</i>
