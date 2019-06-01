@@ -27,9 +27,14 @@ function* updateUserBio({ payload }) {
       type: UPDATE_USER_SETTINGS_SUCCESS,
       payload: { ...response.data.user }
     });
-  } catch (err) {
-    console.log(err);
-    console.log(err.response);
+  } catch (error) {
+    if (!error.response) {
+      return alert(
+        "We could not connect to the server. Please check your internet and try again"
+      );
+    }
+    console.log(error);
+    console.log(error.response);
   }
 }
 

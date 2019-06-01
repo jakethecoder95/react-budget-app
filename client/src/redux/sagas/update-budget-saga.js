@@ -19,14 +19,20 @@ function* addItem({ payload }) {
       const authString = `Bearer ${store.get("token")}`;
       const response = yield putItemAsync(payload, authString);
       payload._id = response.data._id;
-    } catch (err) {
+    } catch (error) {
       yield put({ type: LOGOUT });
-      if (err.response.status === 401) {
-        yield alert(
+      if (!error.response) {
+        alert(
+          "We could not connect to the server. Please check your internet and try again"
+        );
+      }
+      if (error.response.status === 401) {
+        alert(
           "401 Error: Looks like there was an issue.  Please log back in a try again."
         );
-      } else if (err.response.status === 500) {
-        yield alert(
+      }
+      if (error.response.status === 500) {
+        alert(
           "500 Error: Looks like there was a server issue. Please check your internet connection."
         );
       }
@@ -56,14 +62,20 @@ function* deleteItem({ payload }) {
   try {
     const authString = `Bearer ${store.get("token")}`;
     yield deleteItemAsync(payload._id, authString);
-  } catch (err) {
+  } catch (error) {
     yield put({ type: LOGOUT });
-    if (err.response.status === 401) {
-      yield alert(
+    if (!error.response) {
+      return alert(
+        "We could not connect to the server. Please check your internet and try again"
+      );
+    }
+    if (error.response.status === 401) {
+      return alert(
         "401 Error: Looks like there was an issue.  Please log back in a try again."
       );
-    } else if (err.response.status === 500) {
-      yield alert(
+    }
+    if (error.response.status === 500) {
+      return alert(
         "500 Error: Looks like there was a server issue. Please check your internet connection."
       );
     }

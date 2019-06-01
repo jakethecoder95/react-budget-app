@@ -30,6 +30,11 @@ function* login({ payload }) {
       payload: { ...response.data }
     });
   } catch (error) {
+    if (!error.response) {
+      return alert(
+        "We could not connect to the server. Please check your internet and try again"
+      );
+    }
     yield put({ type: LOGIN_FAILED, payload: error.response });
   }
 }
@@ -54,6 +59,11 @@ function* signup({ payload }) {
       payload: { token: response.data.token, userId: response.data.userId }
     });
   } catch (error) {
+    if (!error.response) {
+      return alert(
+        "We could not connect to the server. Please check your internet and try again"
+      );
+    }
     yield put({ type: SIGNUP_FAILED, payload: error.response });
   }
 }
@@ -62,10 +72,15 @@ function* forgotPassword({ payload }) {
   try {
     const response = yield call(postForgotPassword, payload);
     yield put({ type: FORGOT_PASSWORD_RESPONSE, payload: response.data });
-  } catch (err) {
+  } catch (error) {
+    if (!error.response) {
+      return alert(
+        "We could not connect to the server. Please check your internet and try again"
+      );
+    }
     yield put({
       type: FORGOT_PASSWORD_RESPONSE,
-      payload: err.response.data
+      payload: error.response.data
     });
   }
 }

@@ -1,4 +1,4 @@
-import { takeLatest, put, race, take, call, select } from "redux-saga/effects";
+import { takeLatest, put, race, take, call } from "redux-saga/effects";
 import _ from "lodash";
 
 import { getUserBudgetAsync, mergeBudgetAsync } from "../../apis/server";
@@ -33,7 +33,12 @@ function* initUserBudget() {
       type: SET_INITIAL_BUDGET,
       payload: { ...response.data.budget }
     });
-  } catch (err) {
+  } catch (error) {
+    if (!error.response) {
+      return alert(
+        "We could not connect to the server. Please check your internet and try again"
+      );
+    }
     yield alert(
       "Looks like there was an error logging you in. Please log back in."
     );
@@ -108,8 +113,8 @@ function* mergeLocalStorageWithUserBudget(items, authString) {
       { ...items, incomeItems, expenseItems },
       authString
     );
-  } catch (err) {
-    console.log(err.response);
+  } catch (error) {
+    console.log(error.response);
   }
 }
 
