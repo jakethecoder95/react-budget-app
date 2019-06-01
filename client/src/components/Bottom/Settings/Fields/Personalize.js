@@ -18,6 +18,8 @@ const months = [
 const now = new Date();
 
 const Personalize = ({ from, to, onToChange, onFromChange }) => {
+  const currentMonth = now.getMonth();
+
   const renderMonthsOptions = () => {
     return months.map((el, i) => {
       return <option key={i}>{el}</option>;
@@ -37,6 +39,16 @@ const Personalize = ({ from, to, onToChange, onFromChange }) => {
     });
   };
 
+  from.month = !from.month
+    ? months[currentMonth > 0 ? currentMonth - 1 : 11]
+    : from.month;
+  to.month = !to.month
+    ? months[currentMonth > 0 ? currentMonth - 1 : 11]
+    : to.month;
+
+  from.year = !from.year ? now.getFullYear() : from.year;
+  to.year = !to.year ? now.getFullYear() : to.year;
+
   return (
     <div className="ui grid">
       <div className="eight wide column">
@@ -49,11 +61,11 @@ const Personalize = ({ from, to, onToChange, onFromChange }) => {
         <div className="ui inline fields">
           <div className="field">
             <label>Month</label>
-            <select>{renderMonthsOptions()}</select>
+            <select value={from.month}>{renderMonthsOptions()}</select>
           </div>
           <div className="field">
             <label>Year</label>
-            <select>{renderYearOptions()}</select>
+            <select value={from.year}>{renderYearOptions()}</select>
           </div>
         </div>
       </div>
@@ -64,11 +76,11 @@ const Personalize = ({ from, to, onToChange, onFromChange }) => {
         <div className="ui inline fields">
           <div className="field">
             <label>Month</label>
-            <select>{renderMonthsOptions()}</select>
+            <select value={to.month}>{renderMonthsOptions()}</select>
           </div>
           <div className="field">
             <label>Year</label>
-            <select>{renderYearOptions()}</select>
+            <select value={to.year}>{renderYearOptions()}</select>
           </div>
         </div>
       </div>
