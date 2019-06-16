@@ -7,6 +7,8 @@ import Fields from "./Fields";
 const Budget = props => {
   const [selectedType, setSelectedType] = useState(props.selectedType);
   const [months, setMonths] = useState(props.months);
+  const [from, setFrom] = useState(props.from);
+  const [to, setTo] = useState(props.to);
 
   const onSubmit = values => console.log(months);
 
@@ -25,6 +27,10 @@ const Budget = props => {
           setSelectedType={setSelectedType}
           months={months}
           setMonths={setMonths}
+          from={from}
+          setFrom={setFrom}
+          to={to}
+          setTo={setTo}
         />
         <button
           type="submit"
@@ -43,7 +49,9 @@ const Budget = props => {
 
 const mapStateToProps = ({ userSettings }) => ({
   selectedType: userSettings.budgetSettings.selectedType,
-  months: userSettings.budgetSettings.months
+  months: userSettings.budgetSettings.months,
+  from: userSettings.budgetSettings.from,
+  to: userSettings.budgetSettings.to
 });
 
 export default connect(mapStateToProps)(Budget);

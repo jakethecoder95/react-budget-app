@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 const months = [
   "January",
@@ -88,4 +89,9 @@ const Personalize = ({ from, to, onToChange, onFromChange }) => {
   );
 };
 
-export default Personalize;
+const mapStateToProps = ({ userSettings }) => ({
+  from: userSettings.budgetSettings.from,
+  to: userSettings.budgetSettings.to
+});
+
+export default connect(mapStateToProps)(Personalize);

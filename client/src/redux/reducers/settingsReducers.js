@@ -6,14 +6,24 @@ import {
   UPDATE_SETTINGS_RESET
 } from "../types";
 
-export default (state = {}, action) => {
+const initialValue = {
+  budgetSettings: {
+    from: {},
+    to: {}
+  }
+};
+
+export default (state = initialValue, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
         ...state,
         email: action.payload.email,
         username: action.payload.username,
-        budgetSettings: action.payload.budgetSettings
+        budgetSettings: {
+          ...state.budgetSettings,
+          ...action.payload.budgetSettings
+        }
       };
     case LOGOUT:
       return {};
