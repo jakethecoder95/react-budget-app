@@ -1,54 +1,36 @@
 import React from "react";
-import { connect } from "react-redux";
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
+import months from "../../../Util/months";
+import renderMonthsOptions from "./util/renderMonthsOptions";
+import renderYearOptions from "./util/renderYearOptions";
 
 const now = new Date();
+const currentMonth = now.getMonth();
 
-const Personalize = ({ from, to, onToChange, onFromChange }) => {
-  const currentMonth = now.getMonth();
+const Personalize = ({ from, to, setTo, setFrom }) => {
+  if (from.year > to.year) {
+    setTo({ ...to, year: from.year });
+  }
+  if (from.year === to.year && from.month > to.month) {
+    setTo({ ...to, month: from.month });
+  }
 
-  const renderMonthsOptions = () => {
-    return months.map((el, i) => {
-      return <option key={i}>{el}</option>;
-    });
-  };
+  from.month =
+    !from.month && from.month !== 0
+      ? currentMonth > 0
+        ? currentMonth
+        : 11
+      : from.month;
 
-  const renderYearOptions = () => {
-    const years = [];
-    const year = now.getFullYear();
+  to.month =
+    !to.month && to.month !== 0
+      ? currentMonth > 0
+        ? currentMonth
+        : 11
+      : to.month;
 
-    for (let i = 0; i < 50; i++) {
-      years[i] = year - i;
-    }
-
-    return years.map((el, i) => {
-      return <option key={i}>{el}</option>;
-    });
-  };
-
-  from.month = !from.month
-    ? months[currentMonth > 0 ? currentMonth - 1 : 11]
-    : from.month;
-  to.month = !to.month
-    ? months[currentMonth > 0 ? currentMonth - 1 : 11]
-    : to.month;
-
-  from.year = !from.year ? now.getFullYear() : from.year;
-  to.year = !to.year ? now.getFullYear() : to.year;
+  from.year = !from.year ? now.getFullYear().toString() : from.year;
+  to.year = !to.year ? now.getFullYear().toString() : to.year;
 
   return (
     <div className="ui grid">
@@ -62,11 +44,23 @@ const Personalize = ({ from, to, onToChange, onFromChange }) => {
         <div className="ui inline fields">
           <div className="field">
             <label>Month</label>
-            <select value={from.month}>{renderMonthsOptions()}</select>
+            <select
+              value={months[from.month]}
+              onChange={e =>
+                setFrom({ ...from, month: months.indexOf(e.target.value) })
+              }
+            >
+              {renderMonthsOptions("from", from, to)}
+            </select>
           </div>
           <div className="field">
             <label>Year</label>
-            <select value={from.year}>{renderYearOptions()}</select>
+            <select
+              value={from.year}
+              onChange={e => setFrom({ ...from, year: e.target.value })}
+            >
+              {renderYearOptions("from", from, to)}
+            </select>
           </div>
         </div>
       </div>
@@ -77,11 +71,23 @@ const Personalize = ({ from, to, onToChange, onFromChange }) => {
         <div className="ui inline fields">
           <div className="field">
             <label>Month</label>
-            <select value={to.month}>{renderMonthsOptions()}</select>
+            <select
+              value={months[to.month]}
+              onChange={e =>
+                setTo({ ...to, month: months.indexOf(e.target.value) })
+              }
+            >
+              {renderMonthsOptions("to", from, to)}
+            </select>
           </div>
           <div className="field">
             <label>Year</label>
-            <select value={to.year}>{renderYearOptions()}</select>
+            <select
+              value={to.year}
+              onChange={e => setTo({ ...to, year: e.target.value })}
+            >
+              {renderYearOptions("to", from, to)}
+            </select>
           </div>
         </div>
       </div>
@@ -89,9 +95,4 @@ const Personalize = ({ from, to, onToChange, onFromChange }) => {
   );
 };
 
-const mapStateToProps = ({ userSettings }) => ({
-  from: userSettings.budgetSettings.from,
-  to: userSettings.budgetSettings.to
-});
-
-export default connect(mapStateToProps)(Personalize);
+export default Personalize;
