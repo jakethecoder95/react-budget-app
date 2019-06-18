@@ -7,7 +7,10 @@ import {
   LOGOUT,
   UPDATE_USER_SETTINGS_SUCCESS
 } from "../types";
-import { postUpdateUserBio } from "../../apis/server";
+import {
+  postUpdateUserBioSettings,
+  postUpdateUserBudgetSettings
+} from "../../apis/server";
 import history from "../../history";
 
 // Payload will always be an object with email and username as values
@@ -22,7 +25,7 @@ function* updateUserBio({ payload }) {
   }
   const authString = `Bearer ${token}`;
   try {
-    const response = yield call(postUpdateUserBio, payload, authString);
+    const response = yield call(postUpdateUserBioSettings, payload, authString);
     yield put({
       type: UPDATE_USER_SETTINGS_SUCCESS,
       payload: { ...response.data.user }
@@ -38,8 +41,36 @@ function* updateUserBio({ payload }) {
   }
 }
 
+// Payload will always be an object with users new budget settings
 function* updateUserBudgetSettings({ payload }) {
-  yield console.log("working");
+  const token = store.get("token");
+  if (!token) {
+    yield alert(
+      "Oops! There was a problem there. Please log back in and try again"
+    );
+    yield put({ type: LOGOUT });
+    history.push("/login");
+  }
+  const authString = `Bearer ${token}`;
+  try {
+    const response = yield call(
+      postUpdateUserBudgetSettings,
+      payload,
+      authString
+    );
+    yield put({
+      type: UPDATE_USER_SETTINGS_SUCCESS,
+      payload: { ...response.data.user }
+    });
+  } catch (error) {
+    if (!error.response) {
+      return alert(
+        "We could not connect to the server. Please check your internet and try again"
+      );
+    }
+    console.log(error);
+    console.log(error.response);
+  }
 }
 
 export function createUpdateSettingsSaga() {

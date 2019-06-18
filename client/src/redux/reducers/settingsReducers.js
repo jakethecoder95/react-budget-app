@@ -1,7 +1,10 @@
+import _ from "lodash";
+
 import {
   LOGIN_SUCCESS,
   LOGOUT,
   UPDATE_USER_BIO,
+  UPDATE_USER_BUDGET_SETTINGS,
   UPDATE_USER_SETTINGS_SUCCESS,
   UPDATE_SETTINGS_RESET
 } from "../types";
@@ -16,6 +19,18 @@ const initialValue = {
 export default (state = initialValue, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
+      if (action.payload.budgetSettings.from) {
+        const fromArr = action.payload.budgetSettings.from.split(" ");
+        action.payload.budgetSettings.from = {
+          month: fromArr[0],
+          year: fromArr.year
+        };
+        const toArr = action.payload.budgetSettings.to.split(" ");
+        action.payload.budgetSettings.to = {
+          month: toArr[0],
+          year: toArr.year
+        };
+      }
       return {
         ...state,
         email: action.payload.email,
@@ -29,6 +44,8 @@ export default (state = initialValue, action) => {
       return {};
     case UPDATE_USER_BIO:
       return { ...state, updating: true };
+    case UPDATE_USER_BUDGET_SETTINGS:
+      return { ...state, updating: true };
     case UPDATE_USER_SETTINGS_SUCCESS:
       return {
         ...state,
@@ -38,10 +55,7 @@ export default (state = initialValue, action) => {
         updateSuccessfull: true
       };
     case UPDATE_SETTINGS_RESET:
-      return {
-        email: state.email,
-        username: state.username
-      };
+      return _.omit(state, ["updating", "updateSuccessfull"]);
     default:
       return state;
   }

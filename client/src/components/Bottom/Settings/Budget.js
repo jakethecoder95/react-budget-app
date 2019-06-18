@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 
 import RenderSuccessMessage from "./util/RenderSuccessMessage";
+import { UPDATE_USER_BUDGET_SETTINGS } from "../../../redux/types";
 import Fields from "./Fields";
 
 const Budget = props => {
@@ -10,17 +11,22 @@ const Budget = props => {
   const [from, setFrom] = useState(props.from);
   const [to, setTo] = useState(props.to);
 
-  const onSubmit = values => console.log(months);
+  const onSubmit = e => {
+    e.preventDefault();
+    props.updateBudgetSettings({ selectedType, months, from, to });
+  };
 
   const reset = values => {
     setSelectedType(props.selectedType);
     setMonths(props.months);
+    setFrom(props.from);
+    setTo(props.to);
   };
 
   return (
     <Fragment>
       <RenderSuccessMessage />
-      <div onSubmit={onSubmit} className="ui form">
+      <form onSubmit={onSubmit} className="ui form">
         <h3>Your Budget Settings</h3>
         <Fields
           selectedType={selectedType}
@@ -42,10 +48,15 @@ const Budget = props => {
         <div className="ui button" onClick={reset}>
           Reset
         </div>
-      </div>
+      </form>
     </Fragment>
   );
 };
+
+const mapDispatchToProps = dispatch => ({
+  updateBudgetSettings: values =>
+    dispatch({ type: UPDATE_USER_BUDGET_SETTINGS, payload: values })
+});
 
 const mapStateToProps = ({ userSettings }) => ({
   selectedType: userSettings.budgetSettings.selectedType,
@@ -54,4 +65,7 @@ const mapStateToProps = ({ userSettings }) => ({
   to: userSettings.budgetSettings.to
 });
 
-export default connect(mapStateToProps)(Budget);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Budget);

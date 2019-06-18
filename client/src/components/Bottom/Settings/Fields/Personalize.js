@@ -15,19 +15,8 @@ const Personalize = ({ from, to, setTo, setFrom }) => {
     setTo({ ...to, month: from.month });
   }
 
-  from.month =
-    !from.month && from.month !== 0
-      ? currentMonth > 0
-        ? currentMonth
-        : 11
-      : from.month;
-
-  to.month =
-    !to.month && to.month !== 0
-      ? currentMonth > 0
-        ? currentMonth
-        : 11
-      : to.month;
+  from.month = !from.month && from.month !== 0 ? currentMonth : from.month;
+  to.month = !to.month && to.month !== 0 ? currentMonth : to.month;
 
   from.year = !from.year ? now.getFullYear().toString() : from.year;
   to.year = !to.year ? now.getFullYear().toString() : to.year;
