@@ -12,7 +12,7 @@ const Personalize = ({ from, to, setTo, setFrom }) => {
     setTo({ ...to, year: from.year });
   }
   if (from.year === to.year && from.month > to.month) {
-    setTo({ ...to, month: from.month });
+    setFrom({ ...from, month: to.month });
   }
 
   from.month = !from.month && from.month !== 0 ? currentMonth : from.month;

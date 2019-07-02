@@ -9,7 +9,10 @@ const renderMonthsOptions = (type, from, to) => {
   if (type === "to" && parseInt(from.year) === parseInt(to.year)) {
     start = from.month;
   }
-  if (type === "to" && parseInt(to.year) === new Date().getFullYear()) {
+  if (
+    (type === "to" && parseInt(to.year) === new Date().getFullYear()) ||
+    (type === "from" && parseInt(from.year) === new Date().getFullYear())
+  ) {
     end = new Date().getMonth() + 1;
   }
 

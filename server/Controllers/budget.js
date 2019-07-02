@@ -3,6 +3,21 @@ const Item = require("../Models/Item");
 const Budget = require("../Models/Budget");
 
 exports.getUserBudget = async (req, res, next) => {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
   try {
     const user = await User.findById(req.userId).populate("items");
     if (!user) {
@@ -11,19 +26,45 @@ exports.getUserBudget = async (req, res, next) => {
       throw error;
     }
     const budget = new Budget();
-    const { all, from, to } = req.query;
-    const currentDate = new Date();
+    const date = new Date();
+
     user.items.forEach(item => {
-      // Get All
-      if (all === "true") return budget.addItem(item);
-      // Fetch only current month and persist.
-      const itemDate = new Date(item.date);
-      if (
-        item.persist ||
-        (itemDate.getMonth() === currentDate.getMonth() &&
-          itemDate.getFullYear() === currentDate.getFullYear())
-      ) {
+      // All persistant items
+      if (item.persist) {
         return budget.addItem(item);
+      }
+      // Get All
+      if (user.settings.selectedType === "all") {
+        return budget.addItem(item);
+      }
+      const itemDate = new Date(item.date);
+      // Get Month(s)
+      if (user.settings.selectedType === "month") {
+        const currentMonth = date.getMonth();
+        const currentYear = date.getFullYear();
+        const monthsAmt = user.settings.months - 1;
+
+        const beginMonth = months[currentMonth - (monthsAmt % currentMonth)];
+        const beginYear = currentYear - Math.floor(monthsAmt / 12);
+        const beginDateString = `${beginMonth} ${beginYear}`;
+        const beginDate = new Date(beginDateString);
+
+        if (itemDate >= beginDate) {
+          return budget.addItem(item);
+        }
+      }
+      // Get Personalized Dates
+      if (user.settings.selectedType === "personalize") {
+        const { from, to } = user.settings;
+        const fromArr = from.split(" ");
+        const toArr = to.split(" ");
+
+        const fromDate = new Date(`${fromArr[0]} ${fromArr[1]}`);
+        const toDate = new Date(`${toArr[0]} ${toArr[1]}`);
+
+        if (itemDate >= fromDate && itemDate <= toDate) {
+          return budget.addItem(item);
+        }
       }
     });
     res.status(200).json({
@@ -40,17 +81,6 @@ exports.getUserBudget = async (req, res, next) => {
     }
     next(err);
   }
-  // TODO: AFTER USER SETTINGS IS CREATED (or something like this)
-  // * Get users items based on date
-  //   - if req.date === "all"
-  //        return items = all user items
-  //   - let from, to;
-  //   - if date.from && !date.to
-  //        return all date.from to new Date();
-  //   - if date.from && date.to
-  // - Loop through all items
-  //        return all date between to and from
-  //  budget.addItem(foundItem)
 };
 
 exports.putItem = async (req, res, next) => {

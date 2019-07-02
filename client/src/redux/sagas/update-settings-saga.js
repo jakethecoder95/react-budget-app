@@ -5,7 +5,8 @@ import {
   UPDATE_USER_BIO,
   UPDATE_USER_BUDGET_SETTINGS,
   LOGOUT,
-  UPDATE_USER_SETTINGS_SUCCESS
+  UPDATE_USER_SETTINGS_SUCCESS,
+  INIT_USER_BUDGET
 } from "../types";
 import {
   postUpdateUserBioSettings,
@@ -73,9 +74,14 @@ function* updateUserBudgetSettings({ payload }) {
   }
 }
 
+function* updateUserSettingsSuccess() {
+  yield put({ type: INIT_USER_BUDGET });
+}
+
 export function createUpdateSettingsSaga() {
   return [
     takeLatest(UPDATE_USER_BIO, updateUserBio),
-    takeLatest(UPDATE_USER_BUDGET_SETTINGS, updateUserBudgetSettings)
+    takeLatest(UPDATE_USER_BUDGET_SETTINGS, updateUserBudgetSettings),
+    takeLatest(UPDATE_USER_SETTINGS_SUCCESS, updateUserSettingsSuccess)
   ];
 }
