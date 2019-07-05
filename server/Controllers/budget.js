@@ -42,10 +42,15 @@ exports.getUserBudget = async (req, res, next) => {
       if (user.settings.selectedType === "month") {
         const currentMonth = date.getMonth();
         const currentYear = date.getFullYear();
-        const monthsAmt = user.settings.months - 1;
+        const monthsAmt = (user.settings.months - 1) % currentMonth;
+        const beginYear = currentYear - Math.floor(user.settings.months / 12);
 
-        const beginMonth = months[currentMonth - (monthsAmt % currentMonth)];
-        const beginYear = currentYear - Math.floor(monthsAmt / 12);
+        const beginMonth =
+          months[
+            currentMonth >= monthsAmt
+              ? currentMonth - (monthsAmt % currentMonth)
+              : 12 - (monthsAmt - currentMonth)
+          ];
         const beginDateString = `${beginMonth} ${beginYear}`;
         const beginDate = new Date(beginDateString);
 
