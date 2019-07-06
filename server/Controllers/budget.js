@@ -27,14 +27,15 @@ exports.getUserBudget = async (req, res, next) => {
     }
     const budget = new Budget();
     const date = new Date();
+    let dateString;
 
     user.items.forEach(item => {
-      // All persistant items
-      if (item.persist) {
-        return budget.addItem(item);
-      }
       // Get All
       if (user.settings.selectedType === "all") {
+        dateString = dateString || "All of your available budget";
+        if (item.persist) {
+          return budget.addItem(item);
+        }
         return budget.addItem(item);
       }
       const itemDate = new Date(item.date);
@@ -42,30 +43,62 @@ exports.getUserBudget = async (req, res, next) => {
       if (user.settings.selectedType === "month") {
         const currentMonth = date.getMonth();
         const currentYear = date.getFullYear();
-        const monthsAmt = (user.settings.months - 1) % currentMonth;
-        const beginYear = currentYear - Math.floor(user.settings.months / 12);
 
-        const beginMonth =
-          months[
-            currentMonth >= monthsAmt
-              ? currentMonth - (monthsAmt % currentMonth)
-              : 12 - (monthsAmt - currentMonth)
-          ];
-        const beginDateString = `${beginMonth} ${beginYear}`;
+        let beginMonthInt = currentMonth,
+          beginYear = currentYear;
+        for (let i = user.settings.months - 1; i > 0; i--) {
+          if (beginMonthInt === 0) {
+            beginMonthInt = 11;
+            beginYear--;
+            continue;
+          }
+          beginMonthInt--;
+        }
+
+        const beginDateString = `${months[beginMonthInt]} ${beginYear}`;
         const beginDate = new Date(beginDateString);
 
+        dateString =
+          dateString ||
+          (user.settings.months === 1
+            ? `Your budget for ${beginDateString}`
+            : `Your budget for ${beginDateString} - ${
+                months[currentMonth]
+              } ${currentYear}`);
+
+        if (item.persist) {
+          item.value = item.value * user.settings.month;
+          return budget.addItem(item);
+        }
         if (itemDate >= beginDate) {
           return budget.addItem(item);
         }
       }
       // Get Personalized Dates
       if (user.settings.selectedType === "personalize") {
-        const { from, to } = user.settings;
-        const fromArr = from.split(" ");
-        const toArr = to.split(" ");
+        const { from, to } = user.settings,
+          fromArr = from.split(" "),
+          toArr = to.split(" "),
+          fromMonth = parseInt(fromArr[0]),
+          fromYear = parseInt(fromArr[1]),
+          toMonth = parseInt(toArr[0]),
+          toYear = parseInt(toArr[1]);
 
-        const fromDate = new Date(`${fromArr[0]} ${fromArr[1]}`);
-        const toDate = new Date(`${toArr[0]} ${toArr[1]}`);
+        dateString =
+          dateString ||
+          `Your budget for ${months[fromMonth]} ${fromYear} - ${
+            months[toMonth]
+          } ${toYear}`;
+
+        if (item.persist) {
+          const monthsDifference =
+            12 * (toYear - fromYear) + (toMonth - fromMonth);
+          item.value = item.value * monthsDifference;
+          return budget.addItem(item);
+        }
+
+        const fromDate = new Date(`${months[fromMonth]} ${fromYear}`);
+        const toDate = new Date(`${months[toMonth]} ${toYear}`);
 
         if (itemDate >= fromDate && itemDate <= toDate) {
           return budget.addItem(item);
@@ -77,7 +110,8 @@ exports.getUserBudget = async (req, res, next) => {
       userSettings: {
         username: user.username,
         email: user.email,
-        budgetSettings: user.settings
+        budgetSettings: user.settings,
+        dateString
       }
     });
   } catch (err) {

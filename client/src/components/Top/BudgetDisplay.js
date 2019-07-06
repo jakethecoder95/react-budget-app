@@ -1,5 +1,6 @@
 import "./BudgetDisplay.css";
 import React from "react";
+import { connect } from "react-redux";
 
 import AvailableBudget from "./AvailableBudget";
 import Income from "./Income";
@@ -27,7 +28,7 @@ class BudgetDisplay extends React.Component {
   render() {
     return (
       <div className="budget-display">
-        <h4>{`Available Budget in ${this.getDate()}:`}</h4>
+        <h4>{this.props.dateString}</h4>
         <AvailableBudget />
         <Income />
         <Expenses />
@@ -36,4 +37,8 @@ class BudgetDisplay extends React.Component {
   }
 }
 
-export default BudgetDisplay;
+const mapStateToProps = ({ userSettings }) => ({
+  dateString: userSettings.dateString
+});
+
+export default connect(mapStateToProps)(BudgetDisplay);

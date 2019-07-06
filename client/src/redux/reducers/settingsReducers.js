@@ -35,6 +35,7 @@ export default (state = initialValue, action) => {
         ...state,
         email: action.payload.email,
         username: action.payload.username,
+        dateString: action.payload.dateString,
         budgetSettings: {
           ...state.budgetSettings,
           ...action.payload.budgetSettings
