@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import DoughnutChart from "./DoughnutChart";
 
 const monthNames = [
@@ -32,4 +33,8 @@ const Left = props => {
   );
 };
 
-export default Left;
+const mapStateToProps = ({ userSettings }) => ({
+  dateString: userSettings.dateString
+});
+
+export default connect(mapStateToProps)(Left);

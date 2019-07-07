@@ -9,7 +9,23 @@ import {
   UPDATE_SETTINGS_RESET
 } from "../types";
 
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+const date = new Date();
 const initialValue = {
+  dateString: `${monthNames[date.getMonth()]} ${date.getFullYear()}`,
   budgetSettings: {
     from: {},
     to: {}
