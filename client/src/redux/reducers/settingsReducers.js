@@ -25,7 +25,9 @@ const monthNames = [
 ];
 const date = new Date();
 const initialValue = {
-  dateString: `${monthNames[date.getMonth()]} ${date.getFullYear()}`,
+  dateString: `Your budget for ${
+    monthNames[date.getMonth()]
+  } ${date.getFullYear()}`,
   budgetSettings: {
     from: {},
     to: {}
